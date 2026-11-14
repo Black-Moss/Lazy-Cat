@@ -1,5 +1,6 @@
 package com.blackmoss.lazycat.api.recipe;
 
+import com.blackmoss.lazycat.api.recipe.minecraft.CookingType;
 import com.blackmoss.lazycat.recipe.minecraft.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.CustomCraftingRecipeBuilder;

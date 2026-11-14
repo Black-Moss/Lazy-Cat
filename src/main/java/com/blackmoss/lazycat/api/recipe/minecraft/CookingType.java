@@ -1,4 +1,4 @@
-package com.blackmoss.lazycat.api.recipe;
+package com.blackmoss.lazycat.api.recipe.minecraft;
 
 import net.minecraft.data.recipes.RecipeCategory;
 
