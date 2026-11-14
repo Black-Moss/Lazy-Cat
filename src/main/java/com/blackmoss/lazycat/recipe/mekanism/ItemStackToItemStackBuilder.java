@@ -13,6 +13,7 @@ import java.util.Objects;
 public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBuilder<ItemStackToItemStackBuilder> {
     private Object input;
     private Mode mode;
+
     public ItemStackToItemStackBuilder(RecipeContext context, ItemLike result) {
         super(context, result);
     }
