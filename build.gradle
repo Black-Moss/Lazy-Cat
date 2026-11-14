@@ -90,6 +90,21 @@ dependencies {
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
     runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+
+    // Lithostitched
+    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-26.1"
+
+    // Curios
+    implementation "maven.modrinth:curios:${curios_version}+26.1.2"
+
+    // Thaumaturge
+    implementation "curse.maven:thaumaturge-1628024:${thaumaturge_id}"
+
+    // Re:Avaritia
+    implementation "maven.modrinth:re-avaritia:26.1.2-${re_avaritia_version}-release"
+
+    // Mekanism
+    implementation "curse.maven:mekanism-version-locked-1713956:${mekanism_id}"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
@@ -102,7 +117,10 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_license            : mod_license,
             mod_version            : mod_version,
             mod_authors            : mod_authors,
-            mod_description        : mod_description
+            mod_description        : mod_description,
+            re_avaritia_version    : re_avaritia_version,
+            thaumaturge_version    : thaumaturge_version,
+            mekanism_version       : mekanism_version
     ]
     inputs.properties replaceProperties
     expand replaceProperties
@@ -126,7 +144,7 @@ publishing {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' 
+    options.encoding = 'UTF-8'
 }
 
 idea {

@@ -23,3 +23,24 @@ type = "required"
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "thaumaturge"
+type = "optional"
+versionRange = "[${thaumaturge_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "avaritia"
+type = "optional"
+versionRange = "[${re_avaritia_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "mekanism"
+type = "optional"
+versionRange = "[${mekanism_version},)"
+ordering = "NONE"
+side = "BOTH"
