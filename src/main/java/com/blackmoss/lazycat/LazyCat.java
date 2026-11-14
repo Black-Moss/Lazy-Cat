@@ -1,14 +1,11 @@
 package com.blackmoss.lazycat;
 
-import com.blackmoss.lazycat.example.ExampleRecipeProvider;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
 
 @EventBusSubscriber(modid = LazyCat.MODID)
@@ -24,8 +21,8 @@ public class LazyCat {
         return Identifier.fromNamespaceAndPath(MODID, path);
     }
 
-    @SubscribeEvent
-    public static void onGatherData(GatherDataEvent.Client event) {
-        event.createProvider(ExampleRecipeProvider.Runner::new);
-    }
+//    @SubscribeEvent
+//    public static void onGatherData(GatherDataEvent.Client event) {
+//        event.createProvider(ExampleRecipeProvider.Runner::new);
+//    }
 }
