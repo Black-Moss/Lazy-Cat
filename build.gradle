@@ -33,6 +33,11 @@ repositories {
         name = 'Curse Maven'
         url = 'https://cursemaven.com'
     }
+
+    maven {
+        name = "Illusive Soulworks"
+        url = "https://maven.theillusivec4.top/"
+    }
 }
 
 base {
@@ -95,7 +100,8 @@ dependencies {
     implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-26.1"
 
     // Curios
-    implementation "maven.modrinth:curios:${curios_version}+26.1.2"
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}+26.1.2:api"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}+26.1.2"
 
     // Thaumaturge
     implementation "curse.maven:thaumaturge-1628024:${thaumaturge_id}"

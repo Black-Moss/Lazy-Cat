@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.Items;
+import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -17,7 +18,10 @@ public final class ExampleRecipeProvider extends LazyCatRecipeProvider {
 
     @Override
     protected void addRecipes() {
-        oneForm(Items.DIAMOND, Items.DIRT).save();
+        shapeless(Items.DIAMOND)
+                .requires("minecraft:dirt")
+                .id("diamond_from_string")
+                .save();
     }
 
     public static final class Runner extends RecipeProvider.Runner {
@@ -26,12 +30,12 @@ public final class ExampleRecipeProvider extends LazyCatRecipeProvider {
         }
 
         @Override
-        protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput output) {
+        protected @NonNull RecipeProvider createRecipeProvider(HolderLookup.@NonNull Provider provider, @NonNull RecipeOutput output) {
             return new ExampleRecipeProvider(provider, output, LazyCat.MODID);
         }
 
         @Override
-        public String getName() {
+        public @NonNull String getName() {
             return "Lazy Cat Example Recipes";
         }
     }
