@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public abstract class LazyCatRecipeProvider extends RecipeProvider {
-    private final RecipeContext context;
+    protected final RecipeContext context;
 
     protected LazyCatRecipeProvider(
             HolderLookup.Provider registries,
@@ -22,10 +22,6 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
             String namespace) {
         super(registries, output);
         context = RecipeContext.of(registries, output, namespace);
-    }
-
-    protected final RecipeContext recipes() {
-        return context;
     }
 
     protected final void contribute(RecipeContributor... contributors) {

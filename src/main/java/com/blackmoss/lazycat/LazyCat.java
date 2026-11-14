@@ -23,6 +23,10 @@ public class LazyCat {
 
 //    @SubscribeEvent
 //    public static void onGatherData(GatherDataEvent.Client event) {
+//        RegistrySetBuilder registries = new RegistrySetBuilder()
+//                .add(IAspect.REGISTRY_KEY, AspectBootstrap::bootstrap);
+//        event.createDatapackRegistryObjects(registries);
+//
 //        event.createProvider(ExampleRecipeProvider.Runner::new);
 //    }
 }

@@ -2,6 +2,8 @@
 //
 //import com.blackmoss.lazycat.LazyCat;
 //import com.blackmoss.lazycat.api.recipe.LazyCatRecipeProvider;
+//import com.blackmoss.lazycat.recipe.thaumaturge.ArcaneShapelessBuilder;
+//import com.leclowndu93150.thaumaturge.api.aspect.TTAspects;
 //import net.minecraft.core.HolderLookup;
 //import net.minecraft.data.PackOutput;
 //import net.minecraft.data.recipes.RecipeOutput;
@@ -18,9 +20,8 @@
 //
 //    @Override
 //    protected void addRecipes() {
-//        shapeless(Items.DIAMOND)
-//                .requires("minecraft:dirt")
-//                .id("diamond_from_string")
+//        new ArcaneShapelessBuilder(context, Items.DIAMOND, 10)
+//                .requires(Items.DIRT)
 //                .save();
 //    }
 //

@@ -35,7 +35,7 @@ public final class RecipeContext {
             HolderLookup.Provider registries,
             RecipeOutput output,
             String namespace) {
-        Objects.requireNonNull(registries, "registries");
+        Objects.requireNonNull(registries, "lookupProvide");
         Objects.requireNonNull(output, "output");
         Objects.requireNonNull(namespace, "namespace");
         if (namespace.isBlank()) {
@@ -48,7 +48,7 @@ public final class RecipeContext {
                 namespace);
     }
 
-    public HolderLookup.Provider registries() {
+    public HolderLookup.Provider lookupProvide() {
         return lookupProvide;
     }
 

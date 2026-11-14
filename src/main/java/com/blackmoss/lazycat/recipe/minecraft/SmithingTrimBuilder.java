@@ -91,7 +91,7 @@ public final class SmithingTrimBuilder extends AbstractRecipeBuilder<SmithingTri
         Objects.requireNonNull(source, "source");
         return switch (source) {
             case Holder<?> holder -> castHolder(holder);
-            case ResourceKey<?> key -> context().registries()
+            case ResourceKey<?> key -> context().lookupProvide()
                     .lookupOrThrow(Registries.TRIM_PATTERN)
                     .getOrThrow(castKey(key));
             default -> throw new IllegalArgumentException(
