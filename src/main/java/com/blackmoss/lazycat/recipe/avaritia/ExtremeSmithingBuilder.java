@@ -16,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class ExtremeSmithingBuilder extends AbstractRecipeBuilder<ExtremeSmithingBuilder> {
+    private final List<Ingredient> additions = new ArrayList<>();
     private Ingredient template;
     private Ingredient base;
-    private final List<Ingredient> additions = new ArrayList<>();
 
     public ExtremeSmithingBuilder(RecipeContext context, ItemLike result) {
         super(context, result);

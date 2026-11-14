@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Objects;
 
 public final class InfusionBuilder extends AbstractThaumaturgeRecipeBuilder<InfusionBuilder> {
-    private Ingredient catalyst;
     private final List<Ingredient> components = new ArrayList<>();
+    private Ingredient catalyst;
     private int instability;
 
     public InfusionBuilder(RecipeContext context, ItemLike result, Object catalyst) {

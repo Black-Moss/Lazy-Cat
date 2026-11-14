@@ -14,9 +14,9 @@ import net.minecraft.world.level.ItemLike;
 import java.util.Objects;
 
 public final class CompressorBuilder extends AbstractRecipeBuilder<CompressorBuilder> {
+    private final int timeCost;
     private Ingredient input;
     private int inputCount = 1000;
-    private final int timeCost;
 
     public CompressorBuilder(RecipeContext context, ItemLike result, Object input, int timeCost) {
         super(context, result);

@@ -35,6 +35,14 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
         this.result = result;
     }
 
+    protected static String sanitize(String value) {
+        Objects.requireNonNull(value, "value");
+        if (value.indexOf(':') >= 0) {
+            return Identifier.parse(value).getPath();
+        }
+        return value.replace(' ', '_');
+    }
+
     protected abstract B self();
 
     protected abstract void build(RecipeOutput output, ResourceKey<Recipe<?>> key);
@@ -230,13 +238,5 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
 
     protected Criterion<?> defaultCriterion() {
         return defaultUnlock != null ? context.has(defaultUnlock) : context.impossible();
-    }
-
-    protected static String sanitize(String value) {
-        Objects.requireNonNull(value, "value");
-        if (value.indexOf(':') >= 0) {
-            return Identifier.parse(value).getPath();
-        }
-        return value.replace(' ', '_');
     }
 }

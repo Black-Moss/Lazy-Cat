@@ -139,7 +139,7 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
                 shapeless(material).count(4).requires(storage).idForm(storage),
                 shaped(storage)
                         .pattern(
-                                "44", 
+                                "44",
                                 "44")
                         .define('4', material)
                         .idForm(material))
@@ -159,19 +159,19 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
         return new RecipeGroupBuilder(
                 shaped(helmet)
                         .pattern(
-                                "MMM", 
+                                "MMM",
                                 "M M")
                         .define('M', material),
                 shaped(chestplate)
                         .pattern(
-                                "M M", 
-                                "MMM", 
+                                "M M",
+                                "MMM",
                                 "MMM")
                         .define('M', material),
                 shaped(leggings)
                         .pattern(
-                                "MMM", 
-                                "M M", 
+                                "MMM",
+                                "M M",
                                 "M M")
                         .define('M', material),
                 shaped(boots)
@@ -191,32 +191,32 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
             ItemLike hoe) {
         return new RecipeGroupBuilder(
                 shaped(sword)
-                        .pattern("M", 
-                                "M", 
+                        .pattern("M",
+                                "M",
                                 "S")
                         .define('M', material)
                         .define('S', Items.STICK),
                 shaped(pickaxe)
-                        .pattern("MMM", 
-                                " S ", 
+                        .pattern("MMM",
+                                " S ",
                                 " S ")
                         .define('M', material)
                         .define('S', Items.STICK),
                 shaped(axe)
-                        .pattern("MM", 
-                                "MS", 
+                        .pattern("MM",
+                                "MS",
                                 " S")
                         .define('M', material)
                         .define('S', Items.STICK),
                 shaped(shovel)
-                        .pattern("M", 
-                                "S", 
+                        .pattern("M",
+                                "S",
                                 "S")
                         .define('M', material)
                         .define('S', Items.STICK),
                 shaped(hoe)
-                        .pattern("MM", 
-                                " S", 
+                        .pattern("MM",
+                                " S",
                                 " S")
                         .define('M', material)
                         .define('S', Items.STICK))
@@ -225,8 +225,8 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
 
     protected ShapedBuilder tree(ItemLike leaves, ItemLike sapling) {
         return shaped(leaves)
-                .pattern("LBL", 
-                                " D ")
+                .pattern("LBL",
+                        " D ")
                 .define('L', sapling)
                 .define('B', Items.BONE_MEAL)
                 .define('D', Items.DEAD_BUSH);
@@ -234,8 +234,8 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
 
     protected ShapedBuilder minecart(ItemLike minecartItem, ItemLike material) {
         return shaped(minecartItem)
-                .pattern("IMI", 
-                                "III")
+                .pattern("IMI",
+                        "III")
                 .define('I', Items.IRON_INGOT)
                 .define('M', material)
                 .category(RecipeCategory.TRANSPORTATION);

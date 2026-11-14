@@ -12,11 +12,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.level.ItemLike;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public final class ExtremeCraftingShapedBuilder extends AbstractRecipeBuilder<ExtremeCraftingShapedBuilder> {
     private final Map<Character, RecipeIngredient> definitions = new LinkedHashMap<>();

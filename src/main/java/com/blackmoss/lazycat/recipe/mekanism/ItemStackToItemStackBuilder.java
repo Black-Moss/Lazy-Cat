@@ -11,15 +11,8 @@ import net.minecraft.world.level.ItemLike;
 import java.util.Objects;
 
 public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBuilder<ItemStackToItemStackBuilder> {
-    public enum Mode {
-        CRUSHING,
-        ENRICHING,
-        SMELTING
-    }
-
     private Object input;
     private Mode mode;
-
     public ItemStackToItemStackBuilder(RecipeContext context, ItemLike result) {
         super(context, result);
     }
@@ -64,5 +57,11 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
             case SMELTING -> ItemStackToItemStackRecipeBuilder.smelting(itemIngredient(input), result());
         };
         builder.save(output, key.identifier());
+    }
+
+    public enum Mode {
+        CRUSHING,
+        ENRICHING,
+        SMELTING
     }
 }

@@ -30,6 +30,22 @@ public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumat
         this.aspects = context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
     }
 
+    @SuppressWarnings("unchecked")
+    public static Holder<IAspect> resolveAspect(HolderGetter<IAspect> getter, Object source, int amount) {
+        Objects.requireNonNull(source, "source");
+        if (amount < 1) {
+            throw new IllegalArgumentException("aspect amount must be positive, was " + amount);
+        }
+        return switch (source) {
+            case Holder<?> h -> (Holder<IAspect>) h;
+            case ResourceKey<?> k -> getter.getOrThrow((ResourceKey<IAspect>) k);
+            case String s -> getter.getOrThrow(ResourceKey.create(IAspect.REGISTRY_KEY, Identifier.parse(s)));
+            case AspectInstance instance -> instance.aspect();
+            default -> throw new IllegalArgumentException(
+                    "Unsupported aspect source: " + source.getClass().getName());
+        };
+    }
+
     protected final HolderGetter<IAspect> aspects() {
         return aspects;
     }
@@ -59,22 +75,6 @@ public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumat
     public B aspect(Object source, int amount) {
         entries.add(new AspectInstance(resolveAspect(aspects, source, amount), amount));
         return self();
-    }
-
-    @SuppressWarnings("unchecked")
-    public static Holder<IAspect> resolveAspect(HolderGetter<IAspect> getter, Object source, int amount) {
-        Objects.requireNonNull(source, "source");
-        if (amount < 1) {
-            throw new IllegalArgumentException("aspect amount must be positive, was " + amount);
-        }
-        return switch (source) {
-            case Holder<?> h -> (Holder<IAspect>) h;
-            case ResourceKey<?> k -> getter.getOrThrow((ResourceKey<IAspect>) k);
-            case String s -> getter.getOrThrow(ResourceKey.create(IAspect.REGISTRY_KEY, Identifier.parse(s)));
-            case AspectInstance instance -> instance.aspect();
-            default -> throw new IllegalArgumentException(
-                    "Unsupported aspect source: " + source.getClass().getName());
-        };
     }
 
     public B gate(ResearchGate gate) {

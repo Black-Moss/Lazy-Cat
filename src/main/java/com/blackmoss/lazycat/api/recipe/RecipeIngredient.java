@@ -108,6 +108,11 @@ public final class RecipeIngredient {
                 label);
     }
 
+    public static String itemPath(ItemLike item) {
+        Objects.requireNonNull(item, "item");
+        return BuiltInRegistries.ITEM.getKey(item.asItem()).getPath();
+    }
+
     public Ingredient resolve(HolderGetter<Item> items) {
         Objects.requireNonNull(items, "items");
         return Objects.requireNonNull(resolver.apply(items), "resolved ingredient");
@@ -115,10 +120,5 @@ public final class RecipeIngredient {
 
     public String label() {
         return label;
-    }
-
-    public static String itemPath(ItemLike item) {
-        Objects.requireNonNull(item, "item");
-        return BuiltInRegistries.ITEM.getKey(item.asItem()).getPath();
     }
 }
