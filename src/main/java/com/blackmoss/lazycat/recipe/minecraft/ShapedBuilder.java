@@ -26,7 +26,16 @@ public final class ShapedBuilder extends AbstractRecipeBuilder<ShapedBuilder> {
     }
 
     public ShapedBuilder define(char symbol, Object source) {
-        return define0(symbol, RecipeIngredient.from(source));
+        var ingredient = RecipeIngredient.from(source);
+        if (symbol == ' ') {
+            throw new IllegalArgumentException("Symbol ' ' is reserved");
+        }
+        if (definitions.containsKey(symbol)) {
+            throw new IllegalArgumentException("Symbol '" + symbol + "' is already defined");
+        }
+        definitions.put(symbol, Objects.requireNonNull(ingredient, "ingredient"));
+        defaultUnlock(ingredient);
+        return this;
     }
 
     public ShapedBuilder pattern(String... rows) {
@@ -47,7 +56,7 @@ public final class ShapedBuilder extends AbstractRecipeBuilder<ShapedBuilder> {
         if (patterns.isEmpty()) {
             throw new IllegalStateException("Shaped recipe %s has no pattern".formatted(defaultIdPath()));
         }
-        int width = patterns.get(0).length();
+        int width = patterns.getFirst().length();
         for (String row : patterns) {
             if (row.length() != width) {
                 throw new IllegalStateException("Shaped recipe %s has rows of different width".formatted(defaultIdPath()));
@@ -74,17 +83,5 @@ public final class ShapedBuilder extends AbstractRecipeBuilder<ShapedBuilder> {
         builder.showNotification(showNotification);
         applyCriteria(builder::unlockedBy);
         builder.save(output, key);
-    }
-
-    private ShapedBuilder define0(char symbol, RecipeIngredient ingredient) {
-        if (symbol == ' ') {
-            throw new IllegalArgumentException("Symbol ' ' is reserved");
-        }
-        if (definitions.containsKey(symbol)) {
-            throw new IllegalArgumentException("Symbol '" + symbol + "' is already defined");
-        }
-        definitions.put(symbol, Objects.requireNonNull(ingredient, "ingredient"));
-        defaultUnlock(ingredient);
-        return this;
     }
 }
