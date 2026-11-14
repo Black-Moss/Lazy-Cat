@@ -103,6 +103,9 @@ dependencies {
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}+26.1.2:api"
     runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}+26.1.2"
 
+    // GuideME
+    implementation "maven.modrinth:guideme:${guideme_version}"
+
     // Thaumaturge
     implementation "curse.maven:thaumaturge-1628024:${thaumaturge_id}"
 
@@ -114,6 +117,9 @@ dependencies {
 
     // Farmer's Delight
     implementation "curse.maven:farmers-delight-26-neo-ver-1699768:${farmers_delight_id}"
+
+    // Applied Energistics 2
+    implementation "maven.modrinth:ae2:${ae2_version}"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
@@ -130,7 +136,8 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             thaumaturge_version    : thaumaturge_version,
             re_avaritia_version    : re_avaritia_version,
             mekanism_version       : mekanism_version,
-            farmers_delight_version: farmers_delight_version
+            farmers_delight_version: farmers_delight_version,
+            ae2_version            : ae2_version
     ]
     inputs.properties replaceProperties
     expand replaceProperties
