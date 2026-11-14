@@ -44,3 +44,10 @@ type = "optional"
 versionRange = "[${mekanism_version},)"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "farmers_delight"
+type = "optional"
+versionRange = "[${farmers_delight_version},)"
+ordering = "NONE"
+side = "BOTH"

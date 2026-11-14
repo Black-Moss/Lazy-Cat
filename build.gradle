@@ -111,6 +111,9 @@ dependencies {
 
     // Mekanism
     implementation "curse.maven:mekanism-version-locked-1713956:${mekanism_id}"
+
+    // Farmer's Delight
+    implementation "curse.maven:farmers-delight-26-neo-ver-1699768:${farmers_delight_id}"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
@@ -124,9 +127,10 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_version            : mod_version,
             mod_authors            : mod_authors,
             mod_description        : mod_description,
-            re_avaritia_version    : re_avaritia_version,
             thaumaturge_version    : thaumaturge_version,
-            mekanism_version       : mekanism_version
+            re_avaritia_version    : re_avaritia_version,
+            mekanism_version       : mekanism_version,
+            farmers_delight_version: farmers_delight_version
     ]
     inputs.properties replaceProperties
     expand replaceProperties
