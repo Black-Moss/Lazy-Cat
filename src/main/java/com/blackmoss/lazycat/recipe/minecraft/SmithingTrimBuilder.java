@@ -24,6 +24,16 @@ public final class SmithingTrimBuilder extends AbstractRecipeBuilder<SmithingTri
         this.pattern = resolvePattern(pattern);
     }
 
+    @SuppressWarnings("unchecked")
+    private static Holder<TrimPattern> castHolder(Holder<?> holder) {
+        return (Holder<TrimPattern>) holder;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static ResourceKey<TrimPattern> castKey(ResourceKey<?> key) {
+        return (ResourceKey<TrimPattern>) key;
+    }
+
     @Override
     protected SmithingTrimBuilder self() {
         return this;
@@ -87,15 +97,5 @@ public final class SmithingTrimBuilder extends AbstractRecipeBuilder<SmithingTri
             default -> throw new IllegalArgumentException(
                     "Unsupported trim pattern: " + source.getClass().getName());
         };
-    }
-
-    @SuppressWarnings("unchecked")
-    private static Holder<TrimPattern> castHolder(Holder<?> holder) {
-        return (Holder<TrimPattern>) holder;
-    }
-
-    @SuppressWarnings("unchecked")
-    private static ResourceKey<TrimPattern> castKey(ResourceKey<?> key) {
-        return (ResourceKey<TrimPattern>) key;
     }
 }

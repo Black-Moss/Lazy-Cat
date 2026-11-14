@@ -34,6 +34,14 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
         defaultUnlock(this.input);
     }
 
+    private static CookingBookCategory toBookCategory(RecipeCategory category) {
+        return switch (category) {
+            case FOOD -> CookingBookCategory.FOOD;
+            case DECORATIONS, BUILDING_BLOCKS -> CookingBookCategory.BLOCKS;
+            default -> CookingBookCategory.MISC;
+        };
+    }
+
     @Override
     protected CookingBuilder self() {
         return this;
@@ -144,13 +152,5 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
         return ResourceKey.create(
                 Registries.RECIPE,
                 Identifier.fromNamespaceAndPath(namespace, path));
-    }
-
-    private static CookingBookCategory toBookCategory(RecipeCategory category) {
-        return switch (category) {
-            case FOOD -> CookingBookCategory.FOOD;
-            case DECORATIONS, BUILDING_BLOCKS -> CookingBookCategory.BLOCKS;
-            default -> CookingBookCategory.MISC;
-        };
     }
 }

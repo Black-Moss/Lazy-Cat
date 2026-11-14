@@ -1,7 +1,5 @@
 package com.blackmoss.lazycat.api.recipe;
 
-import com.blackmoss.lazycat.recipe.minecraft.*;
-
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.criterion.ImpossibleTrigger;
@@ -10,17 +8,11 @@ import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.recipes.CustomCraftingRecipeBuilder;
-import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
-import java.util.function.Supplier;
 
 public final class RecipeContext {
     private final HolderLookup.Provider lookupProvide;

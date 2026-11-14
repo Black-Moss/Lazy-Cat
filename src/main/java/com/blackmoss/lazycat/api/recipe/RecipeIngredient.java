@@ -4,6 +4,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -65,6 +67,7 @@ public final class RecipeIngredient {
             case TagKey<?> tag -> tag.cast(Registries.ITEM)
                     .map(RecipeIngredient::of)
                     .orElseThrow(() -> new IllegalArgumentException("Not an item tag: " + tag));
+            case String text -> fromItemId(text);
             case ItemLike item -> of(item);
             case ItemLike[] items -> of(items);
             case Iterable<?> elements -> fromArray(toArray(elements));
@@ -72,6 +75,18 @@ public final class RecipeIngredient {
             default -> throw new IllegalArgumentException(
                     "Unsupported recipe ingredient: " + source.getClass().getName());
         };
+    }
+
+    private static RecipeIngredient fromItemId(String text) {
+        Objects.requireNonNull(text, "text");
+        if (text.isBlank()) {
+            throw new IllegalArgumentException("item id must not be blank");
+        }
+        Identifier identifier = Identifier.parse(text);
+        ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, identifier);
+        return new RecipeIngredient(
+                getter -> Ingredient.of(getter.getOrThrow(key).value()),
+                identifier.getPath());
     }
 
     private static Object[] toArray(Iterable<?> elements) {
