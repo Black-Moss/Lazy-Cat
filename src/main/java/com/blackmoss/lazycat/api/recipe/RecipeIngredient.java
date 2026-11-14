@@ -59,6 +59,12 @@ public final class RecipeIngredient {
         return new RecipeIngredient(getter -> ingredient, label);
     }
 
+    public static RecipeIngredient of(Holder<?> holder) {
+        Objects.requireNonNull(holder, "holder");
+        ItemLike item = (ItemLike) holder.value();
+        return new RecipeIngredient(getter -> Ingredient.of(item), itemPath(item));
+    }
+
     public static RecipeIngredient from(Object source) {
         Objects.requireNonNull(source, "source");
         return switch (source) {
@@ -67,6 +73,13 @@ public final class RecipeIngredient {
             case TagKey<?> tag -> tag.cast(Registries.ITEM)
                     .map(RecipeIngredient::of)
                     .orElseThrow(() -> new IllegalArgumentException("Not an item tag: " + tag));
+            case Holder<?> holder -> of(holder);
+            case ResourceKey<?> key -> {
+                ResourceKey<Item> itemKey = (ResourceKey<Item>) key;
+                yield new RecipeIngredient(
+                        getter -> Ingredient.of(getter.getOrThrow(itemKey).value()),
+                        itemKey.toString());
+            }
             case String text -> fromItemId(text);
             case ItemLike item -> of(item);
             case ItemLike[] items -> of(items);
