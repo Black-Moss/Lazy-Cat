@@ -68,7 +68,7 @@ public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBui
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         NonNullList<Ingredient> inputs = NonNullList.create();
         for (Object source : ingredients) {
-            inputs.add(ingredient(source));
+            inputs.add(toIngredient(source));
         }
         ItemStack containerStack = container != null ? new ItemStack(container.asItem()) : ItemStack.EMPTY;
         String grp = group() != null ? group() : "";

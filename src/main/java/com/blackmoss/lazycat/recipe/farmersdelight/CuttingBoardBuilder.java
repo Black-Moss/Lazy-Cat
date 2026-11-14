@@ -85,7 +85,7 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
         Optional<SoundEvent> soundEvent = sound != null ? Optional.of(sound) : Optional.empty();
         String grp = group() != null ? group() : "";
         CuttingBoardRecipe recipe = new CuttingBoardRecipe(
-                grp, ingredient(primarySource), ingredient(toolSource), results, soundEvent);
+                grp, toIngredient(primarySource), toIngredient(toolSource), results, soundEvent);
         output.accept(key, recipe, null);
     }
 

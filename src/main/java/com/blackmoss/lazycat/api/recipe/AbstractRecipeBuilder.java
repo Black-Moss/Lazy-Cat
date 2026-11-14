@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.conditions.ICondition;
@@ -79,6 +80,11 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
 
     protected final RecipeContext context() {
         return context;
+    }
+
+    protected final Ingredient toIngredient(Object source) {
+        Objects.requireNonNull(source, "source");
+        return context().ingredient(source).resolve(context().items());
     }
 
     protected final RecipeCategory category() {
