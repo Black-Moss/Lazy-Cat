@@ -13,7 +13,7 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
     private Object input;
     private Object output;
     private int outputAmount = 1;
-    private Mode mode = Mode.OXIDIZING;
+    private Mode mode;
     public ItemStackToChemicalBuilder(RecipeContext context) {
         super(context, null);
     }

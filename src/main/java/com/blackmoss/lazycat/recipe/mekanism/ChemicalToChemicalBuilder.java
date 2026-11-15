@@ -13,7 +13,7 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
     private Object input;
     private Object output;
     private int outputAmount = 1;
-    private Mode mode = Mode.ACTIVATING;
+    private Mode mode;
     public ChemicalToChemicalBuilder(RecipeContext context) {
         super(context, null);
     }

@@ -15,7 +15,7 @@ public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismR
     private Object chemical;
     private int chemicalAmount = 1;
     private boolean perTick;
-    private Mode mode = Mode.METALLURGIC_INFUSING;
+    private Mode mode;
     public ItemStackChemicalToItemStackBuilder(RecipeContext context, ItemLike result) {
         super(context, result);
     }
