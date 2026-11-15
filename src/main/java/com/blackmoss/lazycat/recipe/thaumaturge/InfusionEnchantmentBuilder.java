@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.thaumaturge;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import com.blackmoss.lazycat.api.recipe.thaumaturge.AbstractThaumaturgeRecipeBuilder;
 import com.leclowndu93150.thaumaturge.api.aspect.AspectInstance;
 import com.leclowndu93150.thaumaturge.api.aspect.AspectList;
@@ -35,7 +35,7 @@ public final class InfusionEnchantmentBuilder extends AbstractRecipeBuilder<Infu
         super(context, null);
         this.aspects = context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
         this.enchantment = Objects.requireNonNull(enchantment, "enchantment");
-        this.displayCatalyst = RecipeIngredient.from(Objects.requireNonNull(displayCatalyst, "displayCatalyst"))
+        this.displayCatalyst = LazyIngredient.from(Objects.requireNonNull(displayCatalyst, "displayCatalyst"))
                 .resolve(context.items());
         id("infusion_enchantment/" + enchantment.getSerializedName());
     }
@@ -51,7 +51,7 @@ public final class InfusionEnchantmentBuilder extends AbstractRecipeBuilder<Infu
 
     public InfusionEnchantmentBuilder component(Object source, int count) {
         for (int i = 0; i < count; i++) {
-            components.add(RecipeIngredient.from(source).resolve(context().items()));
+            components.add(LazyIngredient.from(source).resolve(context().items()));
         }
         return this;
     }

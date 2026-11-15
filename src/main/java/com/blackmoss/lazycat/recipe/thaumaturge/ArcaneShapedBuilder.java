@@ -1,7 +1,7 @@
 package com.blackmoss.lazycat.recipe.thaumaturge;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import com.blackmoss.lazycat.api.recipe.thaumaturge.AbstractThaumaturgeRecipeBuilder;
 import com.leclowndu93150.thaumaturge.api.aspect.IAspect;
 import com.leclowndu93150.thaumaturge.content.recipe.workbench.ArcaneShapedCraftingRecipe;
@@ -58,8 +58,8 @@ public final class ArcaneShapedBuilder extends AbstractThaumaturgeRecipeBuilder<
         if (symbol == ' ') {
             throw new IllegalArgumentException("Symbol ' ' (whitespace) is reserved");
         }
-        key.put(symbol, RecipeIngredient.from(source).resolve(context().items()));
-        defaultUnlock(RecipeIngredient.from(source));
+        key.put(symbol, LazyIngredient.from(source).resolve(context().items()));
+        defaultUnlock(LazyIngredient.from(source));
         return this;
     }
 

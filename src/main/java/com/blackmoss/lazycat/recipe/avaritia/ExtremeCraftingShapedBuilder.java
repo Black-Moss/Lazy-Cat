@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.avaritia;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import committee.nova.mods.avaritia.common.crafting.recipe.ShapedTableCraftingRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.ItemLike;
 import java.util.*;
 
 public final class ExtremeCraftingShapedBuilder extends AbstractRecipeBuilder<ExtremeCraftingShapedBuilder> {
-    private final Map<Character, RecipeIngredient> definitions = new LinkedHashMap<>();
+    private final Map<Character, LazyIngredient> definitions = new LinkedHashMap<>();
     private final List<String> patterns = new ArrayList<>();
     private int tier;
     private boolean compatible;
@@ -30,7 +30,7 @@ public final class ExtremeCraftingShapedBuilder extends AbstractRecipeBuilder<Ex
     }
 
     public ExtremeCraftingShapedBuilder define(Character symbol, Object source) {
-        var ingredient = RecipeIngredient.from(source);
+        var ingredient = LazyIngredient.from(source);
         if (symbol == ' ') {
             throw new IllegalArgumentException("Symbol ' ' is reserved");
         }
@@ -81,7 +81,7 @@ public final class ExtremeCraftingShapedBuilder extends AbstractRecipeBuilder<Ex
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         Map<Character, Ingredient> ingredientKey = new LinkedHashMap<>();
-        for (Map.Entry<Character, RecipeIngredient> entry : definitions.entrySet()) {
+        for (Map.Entry<Character, LazyIngredient> entry : definitions.entrySet()) {
             ingredientKey.put(entry.getKey(), entry.getValue().resolve(context().items()));
         }
         ShapedRecipePattern pattern = ShapedRecipePattern.of(ingredientKey, patterns);

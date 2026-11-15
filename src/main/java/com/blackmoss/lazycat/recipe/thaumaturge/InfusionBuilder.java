@@ -1,7 +1,7 @@
 package com.blackmoss.lazycat.recipe.thaumaturge;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import com.blackmoss.lazycat.api.recipe.thaumaturge.AbstractThaumaturgeRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.thaumaturge.InstabilityType;
 import com.leclowndu93150.thaumaturge.content.infusion.InfusionRecipe;
@@ -23,7 +23,7 @@ public final class InfusionBuilder extends AbstractThaumaturgeRecipeBuilder<Infu
 
     public InfusionBuilder(RecipeContext context, ItemLike result, Object catalyst) {
         super(context, result);
-        RecipeIngredient catalystIngredient = RecipeIngredient.from(Objects.requireNonNull(catalyst, "catalyst"));
+        LazyIngredient catalystIngredient = LazyIngredient.from(Objects.requireNonNull(catalyst, "catalyst"));
         this.catalyst = catalystIngredient.resolve(context.items());
         defaultUnlock(catalystIngredient);
     }
@@ -34,7 +34,7 @@ public final class InfusionBuilder extends AbstractThaumaturgeRecipeBuilder<Infu
     }
 
     public InfusionBuilder catalyst(Object source) {
-        this.catalyst = RecipeIngredient.from(source).resolve(context().items());
+        this.catalyst = LazyIngredient.from(source).resolve(context().items());
         return this;
     }
 
@@ -44,7 +44,7 @@ public final class InfusionBuilder extends AbstractThaumaturgeRecipeBuilder<Infu
 
     public InfusionBuilder component(Object source, int count) {
         for (int i = 0; i < count; i++) {
-            components.add(RecipeIngredient.from(source).resolve(context().items()));
+            components.add(LazyIngredient.from(source).resolve(context().items()));
         }
         return this;
     }

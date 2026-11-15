@@ -1,5 +1,6 @@
 package com.blackmoss.lazycat.api.recipe;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -28,7 +29,7 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     private Identifier id;
     private String folder;
     private String suffix;
-    private RecipeIngredient defaultUnlock;
+    private LazyIngredient defaultUnlock;
     private boolean allowEmptyAdvancement;
 
     protected AbstractRecipeBuilder(RecipeContext context, ItemLike result) {
@@ -52,7 +53,7 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     }
 
     protected String defaultIdPath() {
-        return RecipeIngredient.itemPath(resultItem());
+        return LazyIngredient.itemPath(resultItem());
     }
 
     public B count(int count) {
@@ -99,7 +100,7 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
         return id;
     }
 
-    protected final void defaultUnlock(RecipeIngredient ingredient) {
+    protected final void defaultUnlock(LazyIngredient ingredient) {
         if (defaultUnlock == null) {
             defaultUnlock = Objects.requireNonNull(ingredient, "ingredient");
         }
@@ -146,7 +147,7 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
 
     public B idForm(Object form) {
         Objects.requireNonNull(form, "form");
-        String label = form instanceof String text ? text : RecipeIngredient.from(form).label();
+        String label = form instanceof String text ? text : LazyIngredient.from(form).label();
         return id(defaultIdPath() + "_from_" + sanitize(label));
     }
 
@@ -158,7 +159,7 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
 
     public B unlock(Object source) {
         Objects.requireNonNull(source, "source");
-        RecipeIngredient ingredient = RecipeIngredient.from(source);
+        LazyIngredient ingredient = LazyIngredient.from(source);
         return unlockedBy("has_" + ingredient.label(), context.has(source));
     }
 

@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.minecraft;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceKey;
@@ -15,7 +15,7 @@ import java.util.List;
 public final class ShapelessBuilder extends AbstractRecipeBuilder<ShapelessBuilder> {
     private static final int MAX_INGREDIENTS = 9;
 
-    private final List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+    private final List<LazyIngredient> recipeIngredients = new ArrayList<>();
 
     public ShapelessBuilder(RecipeContext context, ItemLike result) {
         super(context, result);
@@ -34,7 +34,7 @@ public final class ShapelessBuilder extends AbstractRecipeBuilder<ShapelessBuild
         if (count < 1) {
             throw new IllegalArgumentException("count must be positive");
         }
-        RecipeIngredient ingredient = RecipeIngredient.from(source);
+        LazyIngredient ingredient = LazyIngredient.from(source);
         for (int i = 0; i < count; i++) {
             recipeIngredients.add(ingredient);
         }
@@ -57,7 +57,7 @@ public final class ShapelessBuilder extends AbstractRecipeBuilder<ShapelessBuild
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(
                 context().items(), category(), result());
-        for (RecipeIngredient ingredient : recipeIngredients) {
+        for (LazyIngredient ingredient : recipeIngredients) {
             builder.requires(ingredient.resolve(context().items()));
         }
         builder.group(group());

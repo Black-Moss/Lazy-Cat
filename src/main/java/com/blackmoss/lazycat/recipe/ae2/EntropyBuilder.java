@@ -1,5 +1,8 @@
 package com.blackmoss.lazycat.recipe.ae2;
 
+import appeng.recipes.entropy.EntropyMode;
+import appeng.recipes.entropy.EntropyRecipeBuilder;
+import appeng.recipes.entropy.PropertyValueMatcher;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -8,9 +11,6 @@ import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
-import appeng.recipes.entropy.EntropyMode;
-import appeng.recipes.entropy.EntropyRecipeBuilder;
-import appeng.recipes.entropy.PropertyValueMatcher;
 
 import java.util.Objects;
 

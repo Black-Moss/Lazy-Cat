@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.minecraft;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import com.blackmoss.lazycat.api.recipe.minecraft.CookingType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -20,7 +20,7 @@ import java.util.Objects;
 
 public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> {
     private final EnumSet<CookingType> types;
-    private RecipeIngredient input;
+    private LazyIngredient input;
     private Float experience;
     private Integer time;
     private CookingBookCategory bookCategory;
@@ -29,7 +29,7 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
     public CookingBuilder(RecipeContext context, ItemLike result, Object input, CookingType type) {
         super(context, result);
         types = EnumSet.of(Objects.requireNonNull(type, "type"));
-        this.input = RecipeIngredient.from(input);
+        this.input = LazyIngredient.from(input);
         category(type.defaultCategory());
         defaultUnlock(this.input);
     }
@@ -48,7 +48,7 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
     }
 
     public CookingBuilder input(Object source) {
-        input = RecipeIngredient.from(source);
+        input = LazyIngredient.from(source);
         return this;
     }
 

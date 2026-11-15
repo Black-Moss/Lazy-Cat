@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.avaritia;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import committee.nova.mods.avaritia.common.crafting.recipe.CompressorRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
@@ -20,9 +20,9 @@ public final class CompressorBuilder extends AbstractRecipeBuilder<CompressorBui
 
     public CompressorBuilder(RecipeContext context, ItemLike result, Object input, int timeCost) {
         super(context, result);
-        this.input = RecipeIngredient.from(Objects.requireNonNull(input, "input")).resolve(context.items());
+        this.input = LazyIngredient.from(Objects.requireNonNull(input, "input")).resolve(context.items());
         this.timeCost = timeCost;
-        defaultUnlock(RecipeIngredient.from(input));
+        defaultUnlock(LazyIngredient.from(input));
     }
 
     @Override
@@ -31,7 +31,7 @@ public final class CompressorBuilder extends AbstractRecipeBuilder<CompressorBui
     }
 
     public CompressorBuilder input(Object source) {
-        this.input = RecipeIngredient.from(source).resolve(context().items());
+        this.input = LazyIngredient.from(source).resolve(context().items());
         return this;
     }
 

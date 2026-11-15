@@ -1,12 +1,12 @@
 package com.blackmoss.lazycat.recipe.ae2;
 
+import appeng.recipes.handlers.ChargerRecipe;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
-import appeng.recipes.handlers.ChargerRecipe;
 
 import java.util.Objects;
 

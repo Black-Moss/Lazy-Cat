@@ -15,6 +15,7 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
     private Object output;
     private int outputAmount = 1;
     private Mode mode = Mode.CHEMICAL_INFUSING;
+
     public ChemicalInfuserBuilder(RecipeContext context) {
         super(context, null);
     }

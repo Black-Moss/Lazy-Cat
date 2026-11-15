@@ -1,7 +1,7 @@
 package com.blackmoss.lazycat.recipe.thaumaturge;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import com.blackmoss.lazycat.api.recipe.thaumaturge.AbstractThaumaturgeRecipeBuilder;
 import com.leclowndu93150.thaumaturge.content.recipe.crucible.CrucibleRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -18,7 +18,7 @@ public final class CrucibleBuilder extends AbstractThaumaturgeRecipeBuilder<Cruc
 
     public CrucibleBuilder(RecipeContext context, ItemLike result, Object catalyst) {
         super(context, result);
-        RecipeIngredient catalystIngredient = RecipeIngredient.from(Objects.requireNonNull(catalyst, "catalyst"));
+        LazyIngredient catalystIngredient = LazyIngredient.from(Objects.requireNonNull(catalyst, "catalyst"));
         this.catalyst = catalystIngredient.resolve(context.items());
         defaultUnlock(catalystIngredient);
     }
@@ -29,7 +29,7 @@ public final class CrucibleBuilder extends AbstractThaumaturgeRecipeBuilder<Cruc
     }
 
     public CrucibleBuilder catalyst(Object source) {
-        this.catalyst = RecipeIngredient.from(source).resolve(context().items());
+        this.catalyst = LazyIngredient.from(source).resolve(context().items());
         return this;
     }
 

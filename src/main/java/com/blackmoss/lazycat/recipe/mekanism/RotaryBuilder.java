@@ -17,6 +17,7 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
     private int chemicalOutputAmount = 1;
     private Object fluidOutput;
     private int fluidOutputAmount = 1;
+
     public RotaryBuilder(RecipeContext context) {
         super(context, null);
     }

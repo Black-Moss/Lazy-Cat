@@ -13,7 +13,9 @@
 | So basically there are no docs	              | How did you know                                                           |
 | So you're saying it's for development only? | 	Yep                                                                        |
 
-## Supported Modules
+## Supported Mods
+
+### Recipe:
 
 - Applied Energistics 2
     - Charger
@@ -73,6 +75,10 @@
     - Infusion
     - Infusion Enchantment
 
+### Research (for Thaumaturge)
+
+- Research Entry
+- Research Category
 ## Real Lazy Cat
 
 ![ITS SO CUTE!!!](CUTE_BOY.jpg)

@@ -14,6 +14,7 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
     private Object output;
     private int outputAmount = 1;
     private Mode mode;
+
     public ItemStackToChemicalBuilder(RecipeContext context) {
         super(context, null);
     }

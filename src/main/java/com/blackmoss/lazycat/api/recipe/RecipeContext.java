@@ -1,5 +1,6 @@
 package com.blackmoss.lazycat.api.recipe;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.criterion.ImpossibleTrigger;
@@ -64,12 +65,12 @@ public final class RecipeContext {
         return space;
     }
 
-    public RecipeIngredient ingredient(Object source) {
-        return RecipeIngredient.from(source);
+    public LazyIngredient ingredient(Object source) {
+        return LazyIngredient.from(source);
     }
 
     public String id(Object source) {
-        return RecipeIngredient.from(source).label();
+        return LazyIngredient.from(source).label();
     }
 
     public Criterion<?> has(Object source) {
@@ -81,7 +82,7 @@ public final class RecipeContext {
                     .orElseThrow(() -> new IllegalArgumentException("Not an item tag: " + tag));
         }
         //noinspection deprecation
-        var first = RecipeIngredient.from(source).resolve(items).items().findFirst();
+        var first = LazyIngredient.from(source).resolve(items).items().findFirst();
         if (first.isPresent()) {
             return InventoryChangeTrigger.TriggerInstance.hasItems(
                     ItemPredicate.Builder.item().of(items, first.get().value()));

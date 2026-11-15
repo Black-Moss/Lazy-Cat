@@ -20,9 +20,9 @@ import java.util.Objects;
 public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBuilder> {
     private final int cookingTime;
     private final float experience;
+    private final List<Object> ingredients = new ArrayList<>();
     private ItemLike container;
     private CookingPotRecipeBookTab recipeBookTab;
-    private final List<Object> ingredients = new ArrayList<>();
 
     public CookingPotBuilder(RecipeContext context, ItemLike result, int cookingTime, float experience) {
         super(context, result);

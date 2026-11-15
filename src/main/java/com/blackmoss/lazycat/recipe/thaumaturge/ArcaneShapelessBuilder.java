@@ -1,7 +1,7 @@
 package com.blackmoss.lazycat.recipe.thaumaturge;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import com.blackmoss.lazycat.api.recipe.thaumaturge.AbstractThaumaturgeRecipeBuilder;
 import com.leclowndu93150.thaumaturge.api.aspect.IAspect;
 import com.leclowndu93150.thaumaturge.content.recipe.workbench.ArcaneShapelessCraftingRecipe;
@@ -47,9 +47,9 @@ public final class ArcaneShapelessBuilder extends AbstractThaumaturgeRecipeBuild
 
     public ArcaneShapelessBuilder requires(Object source, int count) {
         for (int i = 0; i < count; i++) {
-            ingredients.add(RecipeIngredient.from(source).resolve(context().items()));
+            ingredients.add(LazyIngredient.from(source).resolve(context().items()));
         }
-        defaultUnlock(RecipeIngredient.from(source));
+        defaultUnlock(LazyIngredient.from(source));
         return this;
     }
 

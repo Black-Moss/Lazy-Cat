@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.minecraft;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.TransmuteRecipeBuilder;
@@ -13,8 +13,8 @@ import net.minecraft.world.level.ItemLike;
 import java.util.Objects;
 
 public final class TransmuteBuilder extends AbstractRecipeBuilder<TransmuteBuilder> {
-    private RecipeIngredient input;
-    private RecipeIngredient material;
+    private LazyIngredient input;
+    private LazyIngredient material;
     private MinMaxBounds.Ints materialCount;
     private boolean addMaterialCountToOutput;
 
@@ -28,13 +28,13 @@ public final class TransmuteBuilder extends AbstractRecipeBuilder<TransmuteBuild
     }
 
     public TransmuteBuilder input(Object source) {
-        input = RecipeIngredient.from(source);
+        input = LazyIngredient.from(source);
         defaultUnlock(input);
         return this;
     }
 
     public TransmuteBuilder material(Object source) {
-        material = RecipeIngredient.from(source);
+        material = LazyIngredient.from(source);
         return this;
     }
 

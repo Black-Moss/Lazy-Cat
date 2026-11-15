@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.avaritia;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import committee.nova.mods.avaritia.common.crafting.recipe.ShapelessTableCraftingRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -34,9 +34,9 @@ public final class ExtremeCraftingShapelessBuilder extends AbstractRecipeBuilder
 
     public ExtremeCraftingShapelessBuilder requires(Object source, int count) {
         for (int i = 0; i < count; i++) {
-            ingredients.add(RecipeIngredient.from(source).resolve(context().items()));
+            ingredients.add(LazyIngredient.from(source).resolve(context().items()));
         }
-        defaultUnlock(RecipeIngredient.from(source));
+        defaultUnlock(LazyIngredient.from(source));
         return this;
     }
 

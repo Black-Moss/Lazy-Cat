@@ -18,10 +18,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoardBuilder> {
+    private final List<Extra> extras = new ArrayList<>();
     private Object primarySource;
     private Object toolSource;
     private SoundEvent sound;
-    private final List<Extra> extras = new ArrayList<>();
 
     public CuttingBoardBuilder(RecipeContext context, ItemLike result) {
         super(context, result);

@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.minecraft;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -15,9 +15,9 @@ import java.util.Objects;
 
 public final class SmithingTrimBuilder extends AbstractRecipeBuilder<SmithingTrimBuilder> {
     private Holder<TrimPattern> pattern;
-    private RecipeIngredient template;
-    private RecipeIngredient base;
-    private RecipeIngredient addition;
+    private LazyIngredient template;
+    private LazyIngredient base;
+    private LazyIngredient addition;
 
     public SmithingTrimBuilder(RecipeContext context, Object pattern) {
         super(context, null);
@@ -53,18 +53,18 @@ public final class SmithingTrimBuilder extends AbstractRecipeBuilder<SmithingTri
     }
 
     public SmithingTrimBuilder template(Object source) {
-        template = RecipeIngredient.from(source);
+        template = LazyIngredient.from(source);
         return this;
     }
 
     public SmithingTrimBuilder base(Object source) {
-        base = RecipeIngredient.from(source);
+        base = LazyIngredient.from(source);
         defaultUnlock(base);
         return this;
     }
 
     public SmithingTrimBuilder addition(Object source) {
-        addition = RecipeIngredient.from(source);
+        addition = LazyIngredient.from(source);
         return this;
     }
 

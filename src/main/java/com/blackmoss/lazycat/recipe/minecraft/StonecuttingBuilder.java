@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.minecraft;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.Objects;
 
 public final class StonecuttingBuilder extends AbstractRecipeBuilder<StonecuttingBuilder> {
-    private final List<RecipeIngredient> inputs = new ArrayList<>();
-    private RecipeIngredient currentInput;
+    private final List<LazyIngredient> inputs = new ArrayList<>();
+    private LazyIngredient currentInput;
 
     public StonecuttingBuilder(RecipeContext context, ItemLike result, Object input) {
         super(context, result);
-        RecipeIngredient ingredient = RecipeIngredient.from(input);
+        LazyIngredient ingredient = LazyIngredient.from(input);
         inputs.add(ingredient);
         defaultUnlock(ingredient);
     }
@@ -42,20 +42,20 @@ public final class StonecuttingBuilder extends AbstractRecipeBuilder<Stonecuttin
         }
         inputs.clear();
         for (Object source : sources) {
-            inputs.add(RecipeIngredient.from(source));
+            inputs.add(LazyIngredient.from(source));
         }
         return this;
     }
 
     public StonecuttingBuilder and(Object source) {
-        inputs.add(RecipeIngredient.from(source));
+        inputs.add(LazyIngredient.from(source));
         return this;
     }
 
     @Override
     public void save() {
         boolean multiple = inputs.size() > 1;
-        for (RecipeIngredient input : inputs) {
+        for (LazyIngredient input : inputs) {
             currentInput = input;
             emit(keyFor(input, multiple));
         }
@@ -83,7 +83,7 @@ public final class StonecuttingBuilder extends AbstractRecipeBuilder<Stonecuttin
 
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
-        RecipeIngredient input = currentInput != null ? currentInput : inputs.getFirst();
+        LazyIngredient input = currentInput != null ? currentInput : inputs.getFirst();
         SingleItemRecipeBuilder builder = SingleItemRecipeBuilder.stonecutting(
                 input.resolve(context().items()),
                 category(),
@@ -94,7 +94,7 @@ public final class StonecuttingBuilder extends AbstractRecipeBuilder<Stonecuttin
         builder.save(output, key);
     }
 
-    private ResourceKey<Recipe<?>> keyFor(RecipeIngredient input, boolean multiple) {
+    private ResourceKey<Recipe<?>> keyFor(LazyIngredient input, boolean multiple) {
         Identifier explicit = explicitId();
         String namespace = explicit != null ? explicit.getNamespace() : context().namespace();
         String base = explicit != null ? explicit.getPath() : decoratePath(defaultIdPath());

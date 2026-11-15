@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.minecraft;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import net.minecraft.data.recipes.CustomCraftingRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
@@ -20,7 +20,7 @@ public final class CustomCraftingBuilder extends AbstractRecipeBuilder<CustomCra
             CustomCraftingRecipeBuilder.Factory factory) {
         super(context, result);
         this.factory = Objects.requireNonNull(factory, "factory");
-        defaultUnlock(RecipeIngredient.of(result));
+        defaultUnlock(LazyIngredient.of(result));
     }
 
     @Override

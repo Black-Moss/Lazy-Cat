@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.recipe.avaritia;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.recipe.RecipeIngredient;
 import committee.nova.mods.avaritia.common.crafting.recipe.ExtremeSmithingRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
@@ -30,13 +30,13 @@ public final class ExtremeSmithingBuilder extends AbstractRecipeBuilder<ExtremeS
     }
 
     public ExtremeSmithingBuilder template(Object source) {
-        this.template = RecipeIngredient.from(source).resolve(context().items());
-        defaultUnlock(RecipeIngredient.from(source));
+        this.template = LazyIngredient.from(source).resolve(context().items());
+        defaultUnlock(LazyIngredient.from(source));
         return this;
     }
 
     public ExtremeSmithingBuilder base(Object source) {
-        this.base = RecipeIngredient.from(source).resolve(context().items());
+        this.base = LazyIngredient.from(source).resolve(context().items());
         return this;
     }
 
@@ -46,7 +46,7 @@ public final class ExtremeSmithingBuilder extends AbstractRecipeBuilder<ExtremeS
 
     public ExtremeSmithingBuilder addition(Object source, int count) {
         for (int i = 0; i < count; i++) {
-            additions.add(RecipeIngredient.from(source).resolve(context().items()));
+            additions.add(LazyIngredient.from(source).resolve(context().items()));
         }
         return this;
     }
