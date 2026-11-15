@@ -13,14 +13,15 @@
 | So basically there are no docs	              | How did you know                                                           |
 | So you're saying it's for development only? | 	Yep                                                                        |
 
-## Supported Mods
+## Supported Modules
 
-### Recipe:
+### Recipe
 
 - Applied Energistics 2
     - Charger
     - Entropy
     - Inscriber
+
 - Re:Avaritia
     - Compressor
     - Extreme Crafting:
@@ -28,47 +29,59 @@
         - Nether
         - End
         - Extreme
+
 - Farmer's Delight 26 Neo Ver
     - Cooking Pot
     - Cutting Board
+
 - Mekanism
-    - Activating
-    - Centrifuging
-    - Chemical Crystallizer
-    - Chemical Conversion
-    - Chemical Dissolution
-    - Chemical Infuser
-    - Combiner
-    - Compressing
-    - Crushing
-    - Electrolysis
-    - Energy Conversion
-    - Enriching
+    - Chemical to Chemical:
+        - Activating
+        - Centrifuging
+    - Chemical Chemical to Chemical:
+        - Chemical Infusing
+        - Pigment Mixing
+    - Combining
+    - Crystallizing
+    - Dissolution
     - Evaporating
-    - Injecting
-    - Metallurgic Infusing
+    - ItemStack Chemical to ItemStack:
+        - Metallurgic Infusing
+        - Compressing
+        - Purifying
+        - Injecting
+        - Painting
+    - ItemStack to Chemical:
+        - Chemical Conversion
+        - Oxidizing
+        - Pigment Extracting
+    - ItemStack to ItemStack:
+        - Crushing
+        - Enriching
+        - Smelting
     - Nucleosynthesizing
-    - Oxidizing
-    - Painting
-    - Pigment Extracting
-    - Pressurized Reaction
-    - Purifying
-    - Rotary
-    - Sawmill
-    - Smelting
+    - Energy Conversion
+    - Reaction
+    - Rotary:
+        - Fluid to Chemical
+        - Chemical to Fluid
+    - Separating
+    - Sawing
     - Washing
+
 - Minecraft
     - Blasting
     - Campfire Cooking
     - Custom Crafting
     - Smelting
     - Smoking
-    - Workerbench
+    - Workbench
     - Smithing Transform Build
     - Smithing Trim
     - Special
     - Stonecutter
     - Transmute
+
 - Thaumaturge
     - Arcane Workbench
     - Crucible
@@ -79,6 +92,7 @@
 
 - Research Entry
 - Research Category
+
 ## Real Lazy Cat
 
 ![ITS SO CUTE!!!](CUTE_BOY.jpg)
