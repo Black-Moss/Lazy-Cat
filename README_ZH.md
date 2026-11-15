@@ -1,77 +1,97 @@
 # 懒猫
 
-**我现在用最直白最直接最不绕弯子最一针见血的方式给你来套Q&A**
+**我现在用最直白、最不绕弯子、一针见血的方式，给你来一套 Q&A**
 
-| 问题                     | 答案                           |
-|--------------------------|--------------------------------|
-| 这是啥？                 | 一个专门负责Datagen的前置模组  |
-| 怎么做到的               | 我喜欢Builder                  |
-| 可以做什么？             | 快捷生成数据内容               |
-| 和我有关系吗？           | 通常来说没有                   |
-| 你为什么要做这个项目     | 因为我懒。                     |
-| 怎么用？                 | 设计理念就是不看文档都可以上手 |
-| 实际上就是没文档呗       | 你怎么知道                     |
-| 意思就是说仅供于开发的？ | 兑                             |
+| 问题                   | 答案                              |
+|------------------------|-----------------------------------|
+| 这是啥？               | 一个专门为 Datagen 而生的前置模组 |
+| 怎么做到的？           | 因为我喜欢 Builder                |
+| 可以做什么？           | 快捷生成数据内容                  |
+| 和我有关系吗？         | 通常来说，没有                    |
+| 你为什么要做这个项目？ | 因为我懒。                        |
+| 怎么用？               | 设计理念就是不看文档也能上手      |
+| 也就是说其实没文档？   | 你怎么知道                        |
+| 那就是说仅供开发使用？ | 兑                                |
 
-## Supported Modules
+## 支持模块
 
-- 应用能源2
+### 配方
+
+- 应用能源 2（Applied Energistics 2）
     - 充能器
     - 熵变
-    - 压印
-- 无尽贪婪：重生
-    - Compressor
-    - Extreme Crafting:
-        - Sculk
-        - Nether
-        - End
-        - Extreme
-- Farmer's Delight 26 Neo Ver
-    - Cooking Pot
-    - Cutting Board
-- Mekanism
-    - Activating
-    - Centrifuging
-    - Chemical Crystallizer
-    - Chemical Conversion
-    - Chemical Dissolution
-    - Chemical Infuser
-    - Combiner
-    - Compressing
-    - Crushing
-    - Electrolysis
-    - Energy Conversion
-    - Enriching
-    - Evaporating
-    - Injecting
-    - Metallurgic Infusing
-    - Nucleosynthesizing
-    - Oxidizing
-    - Painting
-    - Pigment Extracting
-    - Pressurized Reaction
-    - Purifying
-    - Rotary
-    - Sawmill
-    - Smelting
-    - Washing
-- Minecraft
-    - Blasting
-    - Campfire Cooking
-    - Custom Crafting
-    - Smelting
-    - Smoking
-    - Workerbench
-    - Smithing Transform Build
-    - Smithing Trim
-    - Special
-    - Stonecutter
-    - Transmute
+    - 压印器
+
+- 无尽贪婪：重生（Re:Avaritia）
+    - 压缩机
+    - 极限合成：
+        - 幽匿
+        - 下界
+        - 末地
+        - 极限
+
+- 农夫乐事（Farmer's Delight 26 Neo Ver）
+    - 厨锅
+    - 砧板
+
+- 通用机械（Mekanism）
+    - 化学→化学：
+        - 太阳能中子活化
+        - 同位素离心
+    - 两种化学物→化学：
+        - 化学灌注
+        - 颜料混合
+    - 融合
+    - 化学结晶
+    - 化学溶解
+    - 化学蒸发
+    - 物品＋化学→物品：
+        - 冶金灌注
+        - 压缩
+        - 提纯
+        - 压射
+        - 上色
+    - 物品→化学：
+        - 化学转化
+        - 氧化
+        - 颜料提取
+    - 物品→物品：
+        - 粉碎
+        - 富集
+        - 熔炼
+    - 反质子核合成
+    - 能量转换
+    - 加压反应
+    - 回旋式气液转换：
+        - 流体→化学
+        - 化学→流体
+    - 电解分离
+    - 锯木
+    - 化学清洗
+
+- 原版（Minecraft）
+    - 高炉
+    - 营火
+    - 自定义合成
+    - 熔炉
+    - 烟熏
+    - 工作台
+    - 锻造升级（变换）
+    - 锻造纹饰
+    - 特殊合成
+    - 切石
+    - 转化
+
 - Thaumaturge
-    - Arcane Workbench
-    - Crucible
-    - Infusion
-    - Infusion Enchantment
+    - 奥术合成
+    - 坩埚
+    - 注魔
+    - 注魔附魔
+
+### 研究（Thaumaturge）
+
+- 研究条目
+- 研究分类
 
 ## 真·懒猫
 

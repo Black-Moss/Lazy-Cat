@@ -30,7 +30,7 @@
         - End
         - Extreme
 
-- Farmer's Delight 26 Neo Ver
+- Farmer's Delight
     - Cooking Pot
     - Cutting Board
 
@@ -83,12 +83,12 @@
     - Transmute
 
 - Thaumaturge
-    - Arcane Workbench
+    - Arcane Craft
     - Crucible
     - Infusion
     - Infusion Enchantment
 
-### Research (for Thaumaturge)
+### Research (Thaumaturge)
 
 - Research Entry
 - Research Category
