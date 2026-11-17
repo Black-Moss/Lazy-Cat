@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.api.thaumaturge.research;
 
 import com.blackmoss.lazycat.api.LazyIngredient;
-import com.blackmoss.lazycat.compat.thaumaturge.research.ResearchCategoryBuilder;
-import com.blackmoss.lazycat.compat.thaumaturge.research.ResearchEntryBuilder;
+import com.blackmoss.lazycat.thaumaturge.research.ResearchCategoryBuilder;
+import com.blackmoss.lazycat.thaumaturge.research.ResearchEntryBuilder;
 import com.google.gson.JsonObject;
 import com.leclowndu93150.thaumaturge.api.research.IResearchCategory;
 import com.leclowndu93150.thaumaturge.api.research.ResearchIcon;
