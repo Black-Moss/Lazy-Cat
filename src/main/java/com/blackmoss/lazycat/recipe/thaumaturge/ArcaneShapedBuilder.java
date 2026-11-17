@@ -17,6 +17,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.*;
 
+@SuppressWarnings("unused")
 public final class ArcaneShapedBuilder extends AbstractThaumaturgeRecipeBuilder<ArcaneShapedBuilder> {
     private final List<String> rows = new ArrayList<>();
     private final Map<Character, Ingredient> key = new LinkedHashMap<>();

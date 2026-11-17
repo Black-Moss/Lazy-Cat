@@ -17,6 +17,7 @@ import net.minecraft.world.level.ItemLike;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public final class ArcaneShapelessBuilder extends AbstractThaumaturgeRecipeBuilder<ArcaneShapelessBuilder> {
     private final List<Ingredient> ingredients = new ArrayList<>();
     private final int vis;

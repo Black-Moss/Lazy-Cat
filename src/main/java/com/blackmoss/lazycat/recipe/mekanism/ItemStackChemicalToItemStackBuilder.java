@@ -10,6 +10,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismRecipeBuilder<ItemStackChemicalToItemStackBuilder> {
     private Object mainItem;
     private Object chemical;

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class InfusionBuilder extends AbstractThaumaturgeRecipeBuilder<InfusionBuilder> {
     private final List<Ingredient> components = new ArrayList<>();
     private Ingredient catalyst;
