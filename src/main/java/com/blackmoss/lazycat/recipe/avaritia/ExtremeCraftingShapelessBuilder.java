@@ -29,6 +29,11 @@ public final class ExtremeCraftingShapelessBuilder extends AbstractRecipeBuilder
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "extreme_crafting";
+    }
+
     public ExtremeCraftingShapelessBuilder requires(Object source) {
         return requires(source, 1);
     }

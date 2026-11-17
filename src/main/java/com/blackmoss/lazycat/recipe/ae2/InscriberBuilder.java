@@ -30,6 +30,11 @@ public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuild
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "inscriber";
+    }
+
     public InscriberBuilder middle(Object source) {
         this.middle = Objects.requireNonNull(source, "middle");
         return this;

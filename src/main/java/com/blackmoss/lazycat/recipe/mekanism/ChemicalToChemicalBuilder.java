@@ -24,6 +24,11 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return folderOf(mode);
+    }
+
     public ChemicalToChemicalBuilder input(Object source) {
         this.input = Objects.requireNonNull(source, "input");
         return this;

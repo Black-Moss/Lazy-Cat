@@ -30,6 +30,11 @@ public final class ExtremeCraftingShapedBuilder extends AbstractRecipeBuilder<Ex
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "extreme_crafting";
+    }
+
     public ExtremeCraftingShapedBuilder define(Character symbol, Object source) {
         var ingredient = LazyIngredient.from(source);
         if (symbol == ' ') {

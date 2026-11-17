@@ -23,6 +23,11 @@ public final class ChemicalCrystallizerBuilder extends AbstractMekanismRecipeBui
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "crystallizing";
+    }
+
     public ChemicalCrystallizerBuilder input(Object source) {
         return input(source, chemicalAmount);
     }

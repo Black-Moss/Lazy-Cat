@@ -30,6 +30,11 @@ public final class ExtremeSmithingBuilder extends AbstractRecipeBuilder<ExtremeS
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "extreme_smithing";
+    }
+
     public ExtremeSmithingBuilder template(Object source) {
         this.template = LazyIngredient.from(source).resolve(context().items());
         defaultUnlock(LazyIngredient.from(source));

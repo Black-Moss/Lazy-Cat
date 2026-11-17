@@ -152,6 +152,6 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
         }
         return ResourceKey.create(
                 Registries.RECIPE,
-                Identifier.fromNamespaceAndPath(namespace, path));
+                withFolder(Identifier.fromNamespaceAndPath(namespace, path)));
     }
 }

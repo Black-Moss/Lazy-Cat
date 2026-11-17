@@ -33,6 +33,11 @@ public final class InfusionBuilder extends AbstractThaumaturgeRecipeBuilder<Infu
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "infusion";
+    }
+
     public InfusionBuilder catalyst(Object source) {
         this.catalyst = LazyIngredient.from(source).resolve(context().items());
         return this;

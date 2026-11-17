@@ -102,6 +102,6 @@ public final class StonecuttingBuilder extends AbstractRecipeBuilder<Stonecuttin
         String path = multiple ? "%s_from_%s".formatted(base, sanitize(input.label())) : base;
         return ResourceKey.create(
                 Registries.RECIPE,
-                Identifier.fromNamespaceAndPath(namespace, path));
+                withFolder(Identifier.fromNamespaceAndPath(namespace, path)));
     }
 }

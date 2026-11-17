@@ -24,6 +24,11 @@ public final class SawmillBuilder extends AbstractMekanismRecipeBuilder<SawmillB
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "sawing";
+    }
+
     public SawmillBuilder input(Object source) {
         this.input = Objects.requireNonNull(source, "input");
         return this;

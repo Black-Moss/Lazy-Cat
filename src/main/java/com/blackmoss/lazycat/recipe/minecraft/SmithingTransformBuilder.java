@@ -28,6 +28,11 @@ public final class SmithingTransformBuilder extends AbstractRecipeBuilder<Smithi
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "smithing";
+    }
+
     public SmithingTransformBuilder template(Object source) {
         template = LazyIngredient.from(source);
         return this;

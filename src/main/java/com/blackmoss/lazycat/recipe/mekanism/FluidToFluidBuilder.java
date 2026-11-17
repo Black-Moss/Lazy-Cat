@@ -23,6 +23,11 @@ public final class FluidToFluidBuilder extends AbstractMekanismRecipeBuilder<Flu
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "evaporating";
+    }
+
     public FluidToFluidBuilder input(Object source) {
         this.input = Objects.requireNonNull(source, "input");
         return this;

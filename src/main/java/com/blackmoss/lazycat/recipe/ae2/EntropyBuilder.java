@@ -17,10 +17,13 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public final class EntropyBuilder extends AbstractRecipeBuilder<EntropyBuilder> {
     private final EntropyRecipeBuilder delegate;
+    private final EntropyMode mode;
 
     public EntropyBuilder(RecipeContext context, EntropyMode mode) {
         super(context, null);
-        this.delegate = new EntropyRecipeBuilder().setMode(Objects.requireNonNull(mode, "mode"));
+        Objects.requireNonNull(mode, "mode");
+        this.mode = mode;
+        this.delegate = new EntropyRecipeBuilder().setMode(mode);
     }
 
     public static EntropyBuilder cool(RecipeContext context) {
@@ -34,6 +37,11 @@ public final class EntropyBuilder extends AbstractRecipeBuilder<EntropyBuilder> 
     @Override
     protected EntropyBuilder self() {
         return this;
+    }
+
+    @Override
+    protected String defaultFolder() {
+        return "entropy/" + folderOf(mode);
     }
 
     public EntropyBuilder inputBlock(Block block) {

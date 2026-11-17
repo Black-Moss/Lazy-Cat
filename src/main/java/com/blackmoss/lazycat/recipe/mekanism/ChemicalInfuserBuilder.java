@@ -14,7 +14,7 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
     private Object right;
     private Object output;
     private int outputAmount = 1;
-    private Mode mode = Mode.CHEMICAL_INFUSING;
+    private Mode mode;
 
     public ChemicalInfuserBuilder(RecipeContext context) {
         super(context, null);
@@ -23,6 +23,11 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
     @Override
     protected ChemicalInfuserBuilder self() {
         return this;
+    }
+
+    @Override
+    protected String defaultFolder() {
+        return folderOf(mode);
     }
 
     public ChemicalInfuserBuilder left(Object source) {

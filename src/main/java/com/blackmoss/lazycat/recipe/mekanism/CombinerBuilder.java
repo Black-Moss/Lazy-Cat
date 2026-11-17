@@ -23,6 +23,11 @@ public final class CombinerBuilder extends AbstractMekanismRecipeBuilder<Combine
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "combining";
+    }
+
     public CombinerBuilder mainItem(Object source) {
         this.mainItem = Objects.requireNonNull(source, "mainItem");
         return this;

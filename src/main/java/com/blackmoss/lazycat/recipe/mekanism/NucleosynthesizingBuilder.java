@@ -26,6 +26,11 @@ public final class NucleosynthesizingBuilder extends AbstractMekanismRecipeBuild
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "nucleosynthesizing";
+    }
+
     public NucleosynthesizingBuilder input(Object source) {
         this.input = Objects.requireNonNull(source, "input");
         return this;

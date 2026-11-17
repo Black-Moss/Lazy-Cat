@@ -27,6 +27,11 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "rotary";
+    }
+
     public RotaryBuilder fluidToChemical() {
         this.mode = Mode.FLUID_TO_CHEMICAL;
         return this;

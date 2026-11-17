@@ -36,6 +36,11 @@ public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBui
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "cooking";
+    }
+
     public CookingPotBuilder container(ItemLike container) {
         this.container = container;
         return this;

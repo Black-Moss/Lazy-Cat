@@ -28,6 +28,11 @@ public final class CrucibleBuilder extends AbstractThaumaturgeRecipeBuilder<Cruc
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "crucible";
+    }
+
     public CrucibleBuilder catalyst(Object source) {
         this.catalyst = LazyIngredient.from(source).resolve(context().items());
         return this;

@@ -33,6 +33,11 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "cutting";
+    }
+
     public CuttingBoardBuilder input(Object source) {
         this.primarySource = Objects.requireNonNull(source, "ingredient");
         return this;

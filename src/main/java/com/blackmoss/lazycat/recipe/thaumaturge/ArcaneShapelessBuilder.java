@@ -32,6 +32,11 @@ public final class ArcaneShapelessBuilder extends AbstractThaumaturgeRecipeBuild
     }
 
     @Override
+    protected String defaultFolder() {
+        return "arcane_workbench";
+    }
+
+    @Override
     public ArcaneShapelessBuilder aspect(Object source, int amount) {
         Holder<IAspect> holder = resolveAspect(aspects(), source, amount);
         if (!holder.value().isPrimal()) {

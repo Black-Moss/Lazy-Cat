@@ -41,6 +41,11 @@ public final class SmithingTrimBuilder extends AbstractRecipeBuilder<SmithingTri
     }
 
     @Override
+    protected String defaultFolder() {
+        return "smithing";
+    }
+
+    @Override
     protected String defaultIdPath() {
         return pattern.unwrapKey()
                 .map(key -> "%s_smithing_trim".formatted(key.identifier().getPath()))

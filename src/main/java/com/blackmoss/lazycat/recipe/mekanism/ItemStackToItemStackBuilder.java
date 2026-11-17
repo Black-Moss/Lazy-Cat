@@ -23,6 +23,11 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return folderOf(mode);
+    }
+
     public ItemStackToItemStackBuilder input(Object source) {
         this.input = Objects.requireNonNull(source, "input");
         return this;

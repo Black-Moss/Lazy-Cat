@@ -25,6 +25,11 @@ public final class ElectrolysisBuilder extends AbstractMekanismRecipeBuilder<Ele
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "separator";
+    }
+
     public ElectrolysisBuilder fluidInput(Object source) {
         this.fluidInput = Objects.requireNonNull(source, "fluidInput");
         return this;

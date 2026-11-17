@@ -26,6 +26,11 @@ public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismR
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return folderOf(mode);
+    }
+
     public ItemStackChemicalToItemStackBuilder mainItem(Object source) {
         this.mainItem = Objects.requireNonNull(source, "mainItem");
         return this;

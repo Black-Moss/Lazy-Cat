@@ -62,12 +62,6 @@ public abstract class LazyCatModelProvider extends ModelProvider {
         itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getBlockModelId(block)));
     }
 
-    protected void itemFlat(ItemModelGenerators itemModels, Item item) {
-        Identifier modelId = getItemModelId(item);
-        ModelTemplates.FLAT_ITEM.create(modelId, TextureMapping.layer0(item), itemModels.modelOutput);
-        itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(modelId));
-    }
-
     protected void blockObj(BlockModelGenerators blockModels, ItemModelGenerators itemModels, Block block) {
         Identifier modelId = getBlockModelId(block);
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(modelId)));

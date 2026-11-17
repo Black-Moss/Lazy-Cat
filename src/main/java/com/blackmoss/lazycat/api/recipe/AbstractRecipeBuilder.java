@@ -47,6 +47,10 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
         return value.replace(' ', '_');
     }
 
+    protected static String folderOf(Enum<?> mode)l {
+        return mode == null ? "" : mode.name().toLowerCase(Locale.ROOT);
+    }
+
     protected abstract B self();
 
     protected abstract void build(RecipeOutput output, ResourceKey<Recipe<?>> key);
@@ -56,6 +60,10 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
 
     protected String defaultIdPath() {
         return LazyIdentifier.getItemPath(resultItem());
+    }
+
+    protected String defaultFolder() {
+        return "";
     }
 
     public B count(int count) {
@@ -204,13 +212,19 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     }
 
     protected final ResourceKey<Recipe<?>> resolveKey() {
-        if (id != null) {
-            return ResourceKey.create(Registries.RECIPE, id);
+        Identifier target = id != null
+                ? id
+                : Identifier.fromNamespaceAndPath(context.namespace(), decoratePath(defaultIdPath()));
+        return ResourceKey.create(Registries.RECIPE, withFolder(target));
+    }
+
+    protected final Identifier withFolder(Identifier target) {
+        Objects.requireNonNull(target, "target");
+        String folder = defaultFolder();
+        if (folder.isEmpty() || target.getPath().startsWith(folder + "/")) {
+            return target;
         }
-        String path = decoratePath(defaultIdPath());
-        return ResourceKey.create(
-                Registries.RECIPE,
-                Identifier.fromNamespaceAndPath(context.namespace(), path));
+        return Identifier.fromNamespaceAndPath(target.getNamespace(), folder + "/" + target.getPath());
     }
 
     protected final String decoratePath(String path) {

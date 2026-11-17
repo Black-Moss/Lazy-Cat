@@ -24,6 +24,11 @@ public final class FluidChemicalToChemicalBuilder extends AbstractMekanismRecipe
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "processing";
+    }
+
     public FluidChemicalToChemicalBuilder fluidInput(Object source) {
         this.fluidInput = Objects.requireNonNull(source, "fluidInput");
         return this;

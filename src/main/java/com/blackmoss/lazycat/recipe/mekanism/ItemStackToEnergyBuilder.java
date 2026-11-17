@@ -22,6 +22,11 @@ public final class ItemStackToEnergyBuilder extends AbstractMekanismRecipeBuilde
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "energy_conversion";
+    }
+
     public ItemStackToEnergyBuilder input(Object source) {
         this.input = Objects.requireNonNull(source, "input");
         return this;

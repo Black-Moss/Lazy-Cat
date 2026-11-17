@@ -26,6 +26,11 @@ public final class ChemicalDissolutionBuilder extends AbstractMekanismRecipeBuil
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "processing";
+    }
+
     public ChemicalDissolutionBuilder itemInput(Object source) {
         this.itemInput = Objects.requireNonNull(source, "itemInput");
         return this;

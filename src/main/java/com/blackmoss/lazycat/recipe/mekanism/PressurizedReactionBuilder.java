@@ -35,6 +35,11 @@ public final class PressurizedReactionBuilder extends AbstractMekanismRecipeBuil
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "reaction";
+    }
+
     public PressurizedReactionBuilder solid(Object source) {
         this.solid = Objects.requireNonNull(source, "solid");
         return this;

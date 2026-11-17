@@ -24,6 +24,11 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return folderOf(mode);
+    }
+
     public ItemStackToChemicalBuilder input(Object source) {
         this.input = Objects.requireNonNull(source, "input");
         return this;

@@ -23,6 +23,11 @@ public final class ChargerBuilder extends AbstractRecipeBuilder<ChargerBuilder> 
         return this;
     }
 
+    @Override
+    protected String defaultFolder() {
+        return "charger";
+    }
+
     public ChargerBuilder input(Object source) {
         this.input = Objects.requireNonNull(source, "ingredient");
         return this;
