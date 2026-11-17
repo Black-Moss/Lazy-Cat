@@ -10,12 +10,17 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
+@SuppressWarnings("unused")
 public final class ThaumaturgeUtils {
     public static Ingredient aspectItem(HolderLookup.Provider registries, ResourceKey<IAspect> aspect, ItemLike item) {
         return DataComponentIngredient.of(
                 TTDataComponents.CRYSTAL_ASPECT.get(),
                 new AspectInstance(registries.lookupOrThrow(IAspect.REGISTRY_KEY).getOrThrow(aspect), 1),
                 item);
+    }
+
+    public static Ingredient crystal(HolderLookup.Provider registries, ResourceKey<IAspect> aspect) {
+        return aspectItem(registries, aspect, TTItems.ESSENTIA_CRYSTAL.get());
     }
 
     public static Ingredient manaBean(HolderLookup.Provider registries, ResourceKey<IAspect> aspect) {
