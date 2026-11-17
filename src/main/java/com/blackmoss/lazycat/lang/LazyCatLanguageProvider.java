@@ -4,7 +4,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+
+import java.util.function.Supplier;
 
 @SuppressWarnings("unused")
 public abstract class LazyCatLanguageProvider extends LanguageProvider {
@@ -15,8 +18,8 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
         MODID = modid;
     }
 
-    protected void addCreativeModeTab(CreativeModeTab tab, String translations) {
-        Identifier key = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
+    protected void addCreativeModeTab(Supplier<? extends CreativeModeTab> tab, String translations) {
+        Identifier key = BuiltInRegistries.CREATIVE_MODE_TAB.getKey((CreativeModeTab) tab);
         if (key != null) {
             add(key.toLanguageKey(), translations);
         }
