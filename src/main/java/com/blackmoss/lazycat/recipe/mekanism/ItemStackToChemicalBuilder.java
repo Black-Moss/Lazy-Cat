@@ -14,10 +14,11 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
     private Object input;
     private Object output;
     private int outputAmount = 1;
-    private Mode mode;
+    private final Mode mode;
 
-    public ItemStackToChemicalBuilder(RecipeContext context) {
+    public ItemStackToChemicalBuilder(RecipeContext context, Mode mode) {
         super(context, null);
+        this.mode = mode;
     }
 
     @Override
@@ -42,21 +43,6 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
     public ItemStackToChemicalBuilder output(Object source, int amount) {
         this.output = Objects.requireNonNull(source, "output");
         this.outputAmount = amount;
-        return this;
-    }
-
-    public ItemStackToChemicalBuilder chemicalConversion() {
-        this.mode = Mode.CHEMICAL_CONVERSION;
-        return this;
-    }
-
-    public ItemStackToChemicalBuilder oxidizing() {
-        this.mode = Mode.OXIDIZING;
-        return this;
-    }
-
-    public ItemStackToChemicalBuilder pigmentExtracting() {
-        this.mode = Mode.PIGMENT_EXTRACTING;
         return this;
     }
 

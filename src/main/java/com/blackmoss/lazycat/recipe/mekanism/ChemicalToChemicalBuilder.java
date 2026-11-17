@@ -14,10 +14,11 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
     private Object input;
     private Object output;
     private int outputAmount = 1;
-    private Mode mode;
+    private final Mode mode;
 
-    public ChemicalToChemicalBuilder(RecipeContext context) {
+    public ChemicalToChemicalBuilder(RecipeContext context, Mode mode) {
         super(context, null);
+        this.mode = mode;
     }
 
     @Override
@@ -45,15 +46,6 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
         return this;
     }
 
-    public ChemicalToChemicalBuilder activating() {
-        this.mode = Mode.ACTIVATING;
-        return this;
-    }
-
-    public ChemicalToChemicalBuilder centrifuging() {
-        this.mode = Mode.CENTRIFUGING;
-        return this;
-    }
 
     @Override
     protected void validate() {

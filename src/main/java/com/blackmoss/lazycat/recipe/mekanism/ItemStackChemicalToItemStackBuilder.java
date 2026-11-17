@@ -15,10 +15,11 @@ public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismR
     private Object chemical;
     private int chemicalAmount = 1;
     private boolean perTick;
-    private Mode mode;
+    private final Mode mode;
 
-    public ItemStackChemicalToItemStackBuilder(RecipeContext context, Object result) {
+    public ItemStackChemicalToItemStackBuilder(RecipeContext context, Object result, Mode mode) {
         super(context, result);
+        this.mode = mode;
     }
 
     @Override
@@ -48,31 +49,6 @@ public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismR
 
     public ItemStackChemicalToItemStackBuilder perTick(boolean value) {
         this.perTick = value;
-        return this;
-    }
-
-    public ItemStackChemicalToItemStackBuilder metallurgicInfusing() {
-        this.mode = Mode.METALLURGIC_INFUSING;
-        return this;
-    }
-
-    public ItemStackChemicalToItemStackBuilder compressing() {
-        this.mode = Mode.COMPRESSING;
-        return this;
-    }
-
-    public ItemStackChemicalToItemStackBuilder purifying() {
-        this.mode = Mode.PURIFYING;
-        return this;
-    }
-
-    public ItemStackChemicalToItemStackBuilder injecting() {
-        this.mode = Mode.INJECTING;
-        return this;
-    }
-
-    public ItemStackChemicalToItemStackBuilder painting() {
-        this.mode = Mode.PAINTING;
         return this;
     }
 

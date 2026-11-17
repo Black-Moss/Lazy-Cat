@@ -14,8 +14,9 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
     private Object input;
     private Mode mode;
 
-    public ItemStackToItemStackBuilder(RecipeContext context, Object result) {
+    public ItemStackToItemStackBuilder(RecipeContext context, Object result, Mode mode) {
         super(context, result);
+        this.mode = mode;
     }
 
     @Override
@@ -30,21 +31,6 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
 
     public ItemStackToItemStackBuilder input(Object source) {
         this.input = Objects.requireNonNull(source, "input");
-        return this;
-    }
-
-    public ItemStackToItemStackBuilder crushing() {
-        this.mode = Mode.CRUSHING;
-        return this;
-    }
-
-    public ItemStackToItemStackBuilder enriching() {
-        this.mode = Mode.ENRICHING;
-        return this;
-    }
-
-    public ItemStackToItemStackBuilder smelting() {
-        this.mode = Mode.SMELTING;
         return this;
     }
 

@@ -15,10 +15,11 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
     private Object right;
     private Object output;
     private int outputAmount = 1;
-    private Mode mode;
+    private final Mode mode;
 
-    public ChemicalInfuserBuilder(RecipeContext context) {
+    public ChemicalInfuserBuilder(RecipeContext context, Mode mode) {
         super(context, null);
+        this.mode = mode;
     }
 
     @Override
@@ -48,16 +49,6 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
     public ChemicalInfuserBuilder output(Object source, int amount) {
         this.output = Objects.requireNonNull(source, "output");
         this.outputAmount = amount;
-        return this;
-    }
-
-    public ChemicalInfuserBuilder chemicalInfusing() {
-        this.mode = Mode.CHEMICAL_INFUSING;
-        return this;
-    }
-
-    public ChemicalInfuserBuilder pigmentMixing() {
-        this.mode = Mode.PIGMENT_MIXING;
         return this;
     }
 

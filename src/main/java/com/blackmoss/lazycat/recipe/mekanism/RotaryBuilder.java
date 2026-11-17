@@ -11,16 +11,18 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBuilder> {
-    private Mode mode;
     private Object fluidInput;
     private Object chemicalInput;
     private Object chemicalOutput;
     private int chemicalOutputAmount = 1;
     private Object fluidOutput;
     private int fluidOutputAmount = 1;
+    private final Mode mode;
 
-    public RotaryBuilder(RecipeContext context) {
+
+    public RotaryBuilder(RecipeContext context, Mode mode) {
         super(context, null);
+        this.mode = mode;
     }
 
     @Override
@@ -31,16 +33,6 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
     @Override
     protected String defaultFolder() {
         return "rotary";
-    }
-
-    public RotaryBuilder fluidToChemical() {
-        this.mode = Mode.FLUID_TO_CHEMICAL;
-        return this;
-    }
-
-    public RotaryBuilder chemicalToFluid() {
-        this.mode = Mode.CHEMICAL_TO_FLUID;
-        return this;
     }
 
     public RotaryBuilder fluidInput(Object source) {
