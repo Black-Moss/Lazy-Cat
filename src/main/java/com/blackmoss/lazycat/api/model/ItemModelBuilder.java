@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class ItemModelBuilder extends AbstractModelBuilder<ItemModelBuilder> {
     private final Item item;
     private Identifier model;

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public abstract class AbstractAvaritiaModelBuilder<B extends AbstractAvaritiaModelBuilder<B>>
         extends AbstractModelBuilder<B> {
     protected final Item item;

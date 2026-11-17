@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class BlockModelBuilder extends AbstractModelBuilder<BlockModelBuilder> {
     private final Block block;
     private Identifier model;
