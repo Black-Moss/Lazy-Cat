@@ -1,6 +1,7 @@
 package com.blackmoss.lazycat.model;
 
 import com.blackmoss.lazycat.api.LazyIdentifier;
+import com.blackmoss.lazycat.api.model.ModelContext;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
@@ -17,49 +18,63 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 
+@SuppressWarnings("unused")
 public abstract class LazyCatModelProvider extends ModelProvider {
     protected final String MODID;
+    private ModelContext context;
 
     public LazyCatModelProvider(PackOutput output, String modid) {
         super(output, modid);
-        MODID = modid;
+        this.MODID = modid;
     }
 
-    protected void blockCubeAll(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels, @NonNull Block block) {
+    @Override
+    protected final void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
+        this.context = new ModelContext(itemModels, blockModels);
+        addModels(this.context);
+    }
+
+    protected abstract void addModels(ModelContext context);
+
+    protected final ModelContext context() {
+        return this.context;
+    }
+
+    protected void blockCubeAll(BlockModelGenerators blockModels, ItemModelGenerators itemModels, Block block) {
         Identifier modelId = getBlockModelId(block);
         ModelTemplates.CUBE_ALL.create(modelId, TextureMapping.cube(block), blockModels.modelOutput);
         blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, BlockModelGenerators.plainVariant(modelId)));
         itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(modelId));
     }
 
-    protected void blockCustom(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels, @NonNull Block block) {
+    protected void blockCustom(BlockModelGenerators blockModels, ItemModelGenerators itemModels, Block block) {
         Identifier modelId = getBlockModelId(block);
         MultiVariant variant = new MultiVariant(WeightedList.of(new Variant(modelId)));
         blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant));
         itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(modelId));
     }
 
-    protected void onlyBlockState(@NonNull BlockModelGenerators blockModels, @NonNull Block block) {
+    protected void onlyBlockState(BlockModelGenerators blockModels, Block block) {
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(getBlockModelId(block))));
     }
 
-    protected void onlyItemModel(@NonNull ItemModelGenerators itemModels, @NonNull Block block) {
+    protected void onlyItemModel(ItemModelGenerators itemModels, Block block) {
         itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getBlockModelId(block)));
     }
 
-    protected void itemFlat(@NonNull ItemModelGenerators itemModels, @NonNull Item item) {
+    protected void itemFlat(ItemModelGenerators itemModels, Item item) {
         Identifier modelId = getItemModelId(item);
         ModelTemplates.FLAT_ITEM.create(modelId, TextureMapping.layer0(item), itemModels.modelOutput);
         itemModels.itemModelOutput.accept(item, ItemModelUtils.plainModel(modelId));
     }
 
-    protected void blockObj(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels, @NonNull Block block) {
+    protected void blockObj(BlockModelGenerators blockModels, ItemModelGenerators itemModels, Block block) {
         Identifier modelId = getBlockModelId(block);
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(modelId)));
         itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(modelId));
     }
 
-    protected void blockFacing(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels, @NonNull Block block) {
+    protected void blockFacing(BlockModelGenerators blockModels, ItemModelGenerators itemModels, Block block) {
         Identifier modelId = getBlockModelId(block);
         MultiVariant variant = new MultiVariant(WeightedList.of(new Variant(modelId)));
 
