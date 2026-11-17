@@ -13,7 +13,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.EnumSet;
 import java.util.Objects;
@@ -27,7 +26,7 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
     private CookingBookCategory bookCategory;
     private CookingType cookingType;
 
-    public CookingBuilder(RecipeContext context, ItemLike result, Object input, CookingType type) {
+    public CookingBuilder(RecipeContext context, Object result, Object input, CookingType type) {
         super(context, result);
         types = EnumSet.of(Objects.requireNonNull(type, "type"));
         this.input = LazyIngredient.from(input);

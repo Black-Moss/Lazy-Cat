@@ -6,7 +6,6 @@ import mekanism.api.datagen.recipe.builder.SawmillRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
@@ -16,7 +15,7 @@ public final class SawmillBuilder extends AbstractMekanismRecipeBuilder<SawmillB
     private Object secondary;
     private double secondaryChance = 1.0;
 
-    public SawmillBuilder(RecipeContext context, ItemLike result) {
+    public SawmillBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

@@ -9,7 +9,6 @@ import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public final class ExtremeSmithingBuilder extends AbstractRecipeBuilder<ExtremeS
     private Ingredient template;
     private Ingredient base;
 
-    public ExtremeSmithingBuilder(RecipeContext context, ItemLike result) {
+    public ExtremeSmithingBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

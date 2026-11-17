@@ -1,6 +1,5 @@
 package com.blackmoss.lazycat.api.recipe;
 
-import com.blackmoss.lazycat.api.LazyIdentifier;
 import com.blackmoss.lazycat.api.LazyIngredient;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.registries.Registries;
@@ -18,15 +17,15 @@ import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import java.util.*;
 import java.util.function.BiConsumer;
 
-@SuppressWarnings({"UnusedReturnValue", "SameParameterValue"})
+@SuppressWarnings({"UnusedReturnValue", "SameParameterValue", "unused"})
 public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> {
     private final RecipeContext context;
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
     private final List<ICondition> conditions = new ArrayList<>();
-    private final ItemLike result;
+    private final LazyIngredient result;
 
     private RecipeCategory category = RecipeCategory.MISC;
-    private int count = 1;
+    private Integer count;
     private String group;
     private Identifier id;
     private String folder;
@@ -34,9 +33,9 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     private LazyIngredient defaultUnlock;
     private boolean allowEmptyAdvancement;
 
-    protected AbstractRecipeBuilder(RecipeContext context, ItemLike result) {
+    protected AbstractRecipeBuilder(RecipeContext context, Object result) {
         this.context = Objects.requireNonNull(context, "context");
-        this.result = result;
+        this.result = result == null ? null : LazyIngredient.from(result);
     }
 
     protected static String sanitize(String value) {
@@ -59,7 +58,7 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     }
 
     protected String defaultIdPath() {
-        return LazyIdentifier.getItemPath(resultItem());
+        return resultIngredient().label();
     }
 
     protected String defaultFolder() {
@@ -67,26 +66,31 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     }
 
     public B count(int count) {
-        if (count < 1 || count > 64) {
-            throw new IllegalArgumentException("count must be between 1 and 64");
+        if (count < 1 || count > 99) {
+            throw new IllegalArgumentException("count must be between 1 and 99");
         }
         this.count = count;
         return self();
     }
 
     protected final int count() {
-        return count;
+        return count != null ? count : resultIngredient().template(context().items()).count();
     }
 
-    protected final ItemLike resultItem() {
+    protected final LazyIngredient resultIngredient() {
         if (result == null) {
             throw new IllegalStateException("This recipe has no result item");
         }
         return result;
     }
 
+    protected final ItemLike resultItem() {
+        return resultIngredient().template(context().items()).item().value();
+    }
+
     protected final ItemStackTemplate result() {
-        return new ItemStackTemplate(resultItem().asItem(), count);
+        LazyIngredient ingredient = count == null ? resultIngredient() : resultIngredient().count(count);
+        return ingredient.template(context().items());
     }
 
     protected final RecipeContext context() {

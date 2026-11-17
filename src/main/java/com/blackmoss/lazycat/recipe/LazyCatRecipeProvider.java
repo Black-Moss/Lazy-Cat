@@ -44,27 +44,27 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
 
     protected abstract void addRecipes();
 
-    protected CookingBuilder smelting(ItemLike result, Object input) {
+    protected CookingBuilder smelting(Object result, Object input) {
         return cooking(result, input, CookingType.SMELTING);
     }
 
-    protected CookingBuilder blasting(ItemLike result, Object input) {
+    protected CookingBuilder blasting(Object result, Object input) {
         return cooking(result, input, CookingType.BLASTING);
     }
 
-    protected CookingBuilder smoking(ItemLike result, Object input) {
+    protected CookingBuilder smoking(Object result, Object input) {
         return cooking(result, input, CookingType.SMOKING);
     }
 
-    protected CookingBuilder campfireCooking(ItemLike result, Object input) {
+    protected CookingBuilder campfireCooking(Object result, Object input) {
         return cooking(result, input, CookingType.CAMPFIRE);
     }
 
-    protected CookingBuilder cooking(ItemLike result, Object input) {
+    protected CookingBuilder cooking(Object result, Object input) {
         return cooking(result, input, CookingType.SMELTING);
     }
 
-    protected CookingBuilder cooking(ItemLike result, Object input, CookingType type) {
+    protected CookingBuilder cooking(Object result, Object input, CookingType type) {
         return new CookingBuilder(
                 context,
                 Objects.requireNonNull(result, "result"),
@@ -72,31 +72,31 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
                 Objects.requireNonNull(type, "type"));
     }
 
-    protected CookingBuilder ore(ItemLike result, Object input) {
+    protected CookingBuilder ore(Object result, Object input) {
         return cooking(result, input).types(CookingType.SMELTING, CookingType.BLASTING);
     }
 
-    protected CookingBuilder food(ItemLike result, Object input) {
+    protected CookingBuilder food(Object result, Object input) {
         return cooking(result, input).types(
                 CookingType.SMELTING, CookingType.SMOKING, CookingType.CAMPFIRE);
     }
 
-    protected ShapedBuilder shaped(ItemLike result) {
+    protected ShapedBuilder shaped(Object result) {
         return new ShapedBuilder(context, Objects.requireNonNull(result, "result"));
     }
 
-    protected ShapelessBuilder shapeless(ItemLike result) {
+    protected ShapelessBuilder shapeless(Object result) {
         return new ShapelessBuilder(context, Objects.requireNonNull(result, "result"));
     }
 
-    protected StonecuttingBuilder stonecutting(ItemLike result, Object input) {
+    protected StonecuttingBuilder stonecutting(Object result, Object input) {
         return new StonecuttingBuilder(
                 context,
                 Objects.requireNonNull(result, "result"),
                 Objects.requireNonNull(input, "input"));
     }
 
-    protected SmithingTransformBuilder smithing(ItemLike result) {
+    protected SmithingTransformBuilder smithing(Object result) {
         return new SmithingTransformBuilder(context, Objects.requireNonNull(result, "result"));
     }
 
@@ -104,12 +104,12 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
         return new SmithingTrimBuilder(context, Objects.requireNonNull(pattern, "pattern"));
     }
 
-    protected TransmuteBuilder transmute(ItemLike result) {
+    protected TransmuteBuilder transmute(Object result) {
         return new TransmuteBuilder(context, Objects.requireNonNull(result, "result"));
     }
 
     protected CustomCraftingBuilder customCrafting(
-            ItemLike result,
+            Object result,
             CustomCraftingRecipeBuilder.Factory factory) {
         return new CustomCraftingBuilder(
                 context,

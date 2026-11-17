@@ -6,7 +6,6 @@ import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
@@ -14,7 +13,7 @@ import java.util.Objects;
 public final class ChargerBuilder extends AbstractRecipeBuilder<ChargerBuilder> {
     private Object input;
 
-    public ChargerBuilder(RecipeContext context, ItemLike result) {
+    public ChargerBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

@@ -12,7 +12,6 @@ import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public final class ArcaneShapelessBuilder extends AbstractThaumaturgeRecipeBuild
     private final List<Ingredient> ingredients = new ArrayList<>();
     private final int vis;
 
-    public ArcaneShapelessBuilder(RecipeContext context, ItemLike result, int vis) {
+    public ArcaneShapelessBuilder(RecipeContext context, Object result, int vis) {
         super(context, result);
         this.vis = vis;
     }

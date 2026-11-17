@@ -12,7 +12,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
@@ -27,7 +26,7 @@ public final class PressurizedReactionBuilder extends AbstractMekanismRecipeBuil
     private Object chemicalOutput;
     private int chemicalOutputAmount = 1;
 
-    public PressurizedReactionBuilder(RecipeContext context, ItemLike result) {
+    public PressurizedReactionBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

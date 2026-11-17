@@ -6,7 +6,6 @@ import mekanism.api.datagen.recipe.builder.ChemicalCrystallizerRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
@@ -15,7 +14,7 @@ public final class ChemicalCrystallizerBuilder extends AbstractMekanismRecipeBui
     private Object chemical;
     private int chemicalAmount = 1;
 
-    public ChemicalCrystallizerBuilder(RecipeContext context, ItemLike result) {
+    public ChemicalCrystallizerBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

@@ -6,7 +6,6 @@ import mekanism.api.datagen.recipe.builder.CombinerRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
@@ -15,7 +14,7 @@ public final class CombinerBuilder extends AbstractMekanismRecipeBuilder<Combine
     private Object mainItem;
     private Object extra;
 
-    public CombinerBuilder(RecipeContext context, ItemLike result) {
+    public CombinerBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

@@ -1,5 +1,6 @@
 package com.blackmoss.lazycat.api.recipe.mekanism;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import mekanism.api.MekanismAPI;
@@ -15,9 +16,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStackTemplate;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStackTemplate;
 
@@ -27,28 +26,13 @@ import java.util.Objects;
 public abstract class AbstractMekanismRecipeBuilder<B extends AbstractMekanismRecipeBuilder<B>>
         extends AbstractRecipeBuilder<B> {
 
-    protected AbstractMekanismRecipeBuilder(RecipeContext context, ItemLike result) {
-        super(context, result);
+    protected AbstractMekanismRecipeBuilder(RecipeContext context, Object result) {
+        super(context, result == null ? null : com.blackmoss.lazycat.api.LazyIngredient.from(result));
     }
 
     protected ItemStackIngredient itemIngredient(Object source) {
         Objects.requireNonNull(source, "item source");
-        HolderGetter<Item> items = context().lookupProvide().lookupOrThrow(Registries.ITEM);
-        switch (source) {
-            case ItemLike item -> {
-                return IngredientCreatorAccess.item().from(item);
-            }
-            case TagKey<?> tag -> {
-                return IngredientCreatorAccess.item().from(items, (TagKey<Item>) tag);
-            }
-            case String s -> {
-                ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Identifier.parse(s));
-                return IngredientCreatorAccess.item().from(items.getOrThrow(key).value());
-            }
-            default -> {
-            }
-        }
-        throw new IllegalArgumentException("Unsupported Mekanism item source: " + source.getClass().getName());
+        return IngredientCreatorAccess.item().from(LazyIngredient.from(source).resolve(context().items()));
     }
 
     protected ChemicalStackIngredient chemicalIngredient(Object source, int amount) {
@@ -89,15 +73,9 @@ public abstract class AbstractMekanismRecipeBuilder<B extends AbstractMekanismRe
     }
 
     protected ItemStackTemplate itemTemplate(Object source, int count) {
-        Objects.requireNonNull(source, "item source");
-        if (source instanceof ItemLike item) {
-            return new ItemStackTemplate(item.asItem(), count);
-        }
-        if (source instanceof String s) {
-            ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Identifier.parse(s));
-            return new ItemStackTemplate(context().lookupProvide().lookupOrThrow(Registries.ITEM).getOrThrow(key).value(), count);
-        }
-        throw new IllegalArgumentException("Unsupported Mekanism item template source: " + source.getClass().getName());
+        return com.blackmoss.lazycat.api.LazyIngredient.from(source)
+                .count(count)
+                .template(context().lookupProvide().lookupOrThrow(Registries.ITEM));
     }
 
     protected ChemicalStackTemplate chemicalTemplate(Object source, int amount) {

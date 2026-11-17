@@ -6,7 +6,6 @@ import mekanism.api.datagen.recipe.builder.NucleosynthesizingRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
@@ -18,7 +17,7 @@ public final class NucleosynthesizingBuilder extends AbstractMekanismRecipeBuild
     private int duration = 100;
     private boolean perTick;
 
-    public NucleosynthesizingBuilder(RecipeContext context, ItemLike result) {
+    public NucleosynthesizingBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

@@ -6,7 +6,6 @@ import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
@@ -15,7 +14,7 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
     private Object input;
     private Mode mode;
 
-    public ItemStackToItemStackBuilder(RecipeContext context, ItemLike result) {
+    public ItemStackToItemStackBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

@@ -10,7 +10,6 @@ import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ public final class ExtremeCraftingShapelessBuilder extends AbstractRecipeBuilder
     private final List<Ingredient> ingredients = new ArrayList<>();
     private int tier;
 
-    public ExtremeCraftingShapelessBuilder(RecipeContext context, ItemLike result) {
+    public ExtremeCraftingShapelessBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

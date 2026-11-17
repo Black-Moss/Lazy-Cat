@@ -7,7 +7,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.*;
 
@@ -17,7 +16,7 @@ public final class ShapedBuilder extends AbstractRecipeBuilder<ShapedBuilder> {
     private final List<String> patterns = new ArrayList<>();
     private boolean showNotification = true;
 
-    public ShapedBuilder(RecipeContext context, ItemLike result) {
+    public ShapedBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

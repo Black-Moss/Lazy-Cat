@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.SmithingTransformRecipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ public final class SmithingTransformBuilder extends AbstractRecipeBuilder<Smithi
     private LazyIngredient base;
     private LazyIngredient addition;
 
-    public SmithingTransformBuilder(RecipeContext context, ItemLike result) {
+    public SmithingTransformBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

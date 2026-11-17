@@ -9,7 +9,6 @@ import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
@@ -19,7 +18,7 @@ public final class CompressorBuilder extends AbstractRecipeBuilder<CompressorBui
     private Ingredient input;
     private int inputCount = 1000;
 
-    public CompressorBuilder(RecipeContext context, ItemLike result, Object input, int timeCost) {
+    public CompressorBuilder(RecipeContext context, Object result, Object input, int timeCost) {
         super(context, result);
         this.input = LazyIngredient.from(Objects.requireNonNull(input, "input")).resolve(context.items());
         this.timeCost = timeCost;

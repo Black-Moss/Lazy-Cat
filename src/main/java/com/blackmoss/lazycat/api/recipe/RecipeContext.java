@@ -10,7 +10,6 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 import java.util.Objects;
@@ -75,14 +74,13 @@ public final class RecipeContext {
 
     public Criterion<?> has(Object source) {
         Objects.requireNonNull(source, "source");
-        if (source instanceof TagKey<?> tag) {
-            return tag.cast(Registries.ITEM)
-                    .map(itemTag -> InventoryChangeTrigger.TriggerInstance.hasItems(
-                            ItemPredicate.Builder.item().of(items, itemTag)))
-                    .orElseThrow(() -> new IllegalArgumentException("Not an item tag: " + tag));
+        LazyIngredient ingredient = LazyIngredient.from(source);
+        if (ingredient.tag().isPresent()) {
+            return InventoryChangeTrigger.TriggerInstance.hasItems(
+                    ItemPredicate.Builder.item().of(items, ingredient.tag().get()));
         }
         //noinspection deprecation
-        var first = LazyIngredient.from(source).resolve(items).items().findFirst();
+        var first = ingredient.resolve(items).items().findFirst();
         if (first.isPresent()) {
             return InventoryChangeTrigger.TriggerInstance.hasItems(
                     ItemPredicate.Builder.item().of(items, first.get().value()));

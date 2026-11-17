@@ -30,7 +30,7 @@ public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumat
     private final List<AspectInstance> entries = new ArrayList<>();
     private @Nullable ResearchGate gate;
 
-    protected AbstractThaumaturgeRecipeBuilder(RecipeContext context, ItemLike result) {
+    protected AbstractThaumaturgeRecipeBuilder(RecipeContext context, Object result) {
         super(context, result);
         this.aspects = context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
     }

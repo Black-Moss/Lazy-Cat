@@ -13,7 +13,6 @@ import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.*;
 
@@ -23,7 +22,7 @@ public final class ArcaneShapedBuilder extends AbstractThaumaturgeRecipeBuilder<
     private final Map<Character, Ingredient> key = new LinkedHashMap<>();
     private final int vis;
 
-    public ArcaneShapedBuilder(RecipeContext context, ItemLike result, int vis) {
+    public ArcaneShapedBuilder(RecipeContext context, Object result, int vis) {
         super(context, result);
         this.vis = vis;
     }

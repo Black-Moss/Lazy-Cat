@@ -8,7 +8,6 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -20,7 +19,7 @@ public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuild
     private Object top;
     private Object bottom;
 
-    public InscriberBuilder(RecipeContext context, ItemLike result, InscriberProcessType mode) {
+    public InscriberBuilder(RecipeContext context, Object result, InscriberProcessType mode) {
         super(context, result);
         this.mode = Objects.requireNonNull(mode, "mode");
     }

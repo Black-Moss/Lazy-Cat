@@ -10,7 +10,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.*;
 
@@ -21,7 +20,7 @@ public final class ExtremeCraftingShapedBuilder extends AbstractRecipeBuilder<Ex
     private int tier;
     private boolean compatible;
 
-    public ExtremeCraftingShapedBuilder(RecipeContext context, ItemLike result) {
+    public ExtremeCraftingShapedBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

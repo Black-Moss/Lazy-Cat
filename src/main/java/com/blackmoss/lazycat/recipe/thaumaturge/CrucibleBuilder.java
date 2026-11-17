@@ -9,7 +9,6 @@ import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
@@ -17,7 +16,7 @@ import java.util.Objects;
 public final class CrucibleBuilder extends AbstractThaumaturgeRecipeBuilder<CrucibleBuilder> {
     private Ingredient catalyst;
 
-    public CrucibleBuilder(RecipeContext context, ItemLike result, Object catalyst) {
+    public CrucibleBuilder(RecipeContext context, Object result, Object catalyst) {
         super(context, result);
         LazyIngredient catalystIngredient = LazyIngredient.from(Objects.requireNonNull(catalyst, "catalyst"));
         this.catalyst = catalystIngredient.resolve(context.items());

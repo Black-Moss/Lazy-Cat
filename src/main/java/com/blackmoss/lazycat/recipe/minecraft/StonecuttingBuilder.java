@@ -9,7 +9,6 @@ import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ public final class StonecuttingBuilder extends AbstractRecipeBuilder<Stonecuttin
     private final List<LazyIngredient> inputs = new ArrayList<>();
     private LazyIngredient currentInput;
 
-    public StonecuttingBuilder(RecipeContext context, ItemLike result, Object input) {
+    public StonecuttingBuilder(RecipeContext context, Object result, Object input) {
         super(context, result);
         LazyIngredient ingredient = LazyIngredient.from(input);
         inputs.add(ingredient);
@@ -88,8 +87,8 @@ public final class StonecuttingBuilder extends AbstractRecipeBuilder<Stonecuttin
         SingleItemRecipeBuilder builder = SingleItemRecipeBuilder.stonecutting(
                 input.resolve(context().items()),
                 category(),
-                resultItem().asItem(),
-                count());
+                result().item().value(),
+                result().count());
         builder.group(group());
         applyCriteria(builder::unlockedBy);
         builder.save(output, key);

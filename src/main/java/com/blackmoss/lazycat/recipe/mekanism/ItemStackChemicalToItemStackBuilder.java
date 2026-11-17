@@ -6,7 +6,6 @@ import mekanism.api.datagen.recipe.builder.ItemStackChemicalToItemStackRecipeBui
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
@@ -18,7 +17,7 @@ public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismR
     private boolean perTick;
     private Mode mode;
 
-    public ItemStackChemicalToItemStackBuilder(RecipeContext context, ItemLike result) {
+    public ItemStackChemicalToItemStackBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 

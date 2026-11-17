@@ -10,7 +10,6 @@ import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public final class InfusionBuilder extends AbstractThaumaturgeRecipeBuilder<Infu
     private Ingredient catalyst;
     private int instability;
 
-    public InfusionBuilder(RecipeContext context, ItemLike result, Object catalyst) {
+    public InfusionBuilder(RecipeContext context, Object result, Object catalyst) {
         super(context, result);
         LazyIngredient catalystIngredient = LazyIngredient.from(Objects.requireNonNull(catalyst, "catalyst"));
         this.catalyst = catalystIngredient.resolve(context.items());

@@ -1,14 +1,13 @@
 package com.blackmoss.lazycat.recipe.farmersdelight;
 
+import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
 
@@ -24,7 +23,7 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
     private Object toolSource;
     private SoundEvent sound;
 
-    public CuttingBoardBuilder(RecipeContext context, ItemLike result) {
+    public CuttingBoardBuilder(RecipeContext context, Object result) {
         super(context, result);
     }
 
@@ -48,21 +47,21 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
         return this;
     }
 
-    public CuttingBoardBuilder addResult(ItemLike result) {
+    public CuttingBoardBuilder addResult(Object result) {
         return addResult(result, 1);
     }
 
-    public CuttingBoardBuilder addResult(ItemLike result, int count) {
-        extras.add(new Extra(result, count, 1f));
+    public CuttingBoardBuilder addResult(Object result, int count) {
+        extras.add(new Extra(LazyIngredient.from(result), count, 1f));
         return this;
     }
 
-    public CuttingBoardBuilder addResultWithChance(ItemLike result, float chance) {
+    public CuttingBoardBuilder addResultWithChance(Object result, float chance) {
         return addResultWithChance(result, chance, 1);
     }
 
-    public CuttingBoardBuilder addResultWithChance(ItemLike result, float chance, int count) {
-        extras.add(new Extra(result, count, chance));
+    public CuttingBoardBuilder addResultWithChance(Object result, float chance, int count) {
+        extras.add(new Extra(LazyIngredient.from(result), count, chance));
         return this;
     }
 
@@ -84,9 +83,10 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         NonNullList<ChanceResult> results = NonNullList.create();
-        results.add(new ChanceResult(new ItemStack(resultItem(), count()), 1f));
+        results.add(new ChanceResult(resultIngredient().stack(context().items()), 1f));
         for (Extra extra : extras) {
-            results.add(new ChanceResult(new ItemStack(extra.item(), extra.count()), extra.chance()));
+            results.add(new ChanceResult(
+                    extra.item().count(extra.count()).stack(context().items()), extra.chance()));
         }
         Optional<SoundEvent> soundEvent = sound != null ? Optional.of(sound) : Optional.empty();
         String grp = group() != null ? group() : "";
@@ -95,6 +95,6 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
         output.accept(key, recipe, null);
     }
 
-    private record Extra(ItemLike item, int count, float chance) {
+    private record Extra(com.blackmoss.lazycat.api.LazyIngredient item, int count, float chance) {
     }
 }
