@@ -14,6 +14,7 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import org.jetbrains.annotations.Nullable;
@@ -32,13 +33,37 @@ public final class InfusionEnchantmentBuilder extends AbstractRecipeBuilder<Infu
     private final Ingredient displayCatalyst;
     private @Nullable ResearchGate gate;
 
-    public InfusionEnchantmentBuilder(RecipeContext context, InfusionEnchantment enchantment, Object displayCatalyst) {
+    public InfusionEnchantmentBuilder(RecipeContext context, Object enchantment, Object displayCatalyst) {
         super(context, null);
         this.aspects = context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
-        this.enchantment = Objects.requireNonNull(enchantment, "enchantment");
+        this.enchantment = resolveEnchantment(enchantment);
         this.displayCatalyst = LazyIngredient.from(Objects.requireNonNull(displayCatalyst, "displayCatalyst"))
                 .resolve(context.items());
-        id("infusion_enchantment/" + enchantment.getSerializedName());
+        id("infusion_enchantment/" + this.enchantment.getSerializedName());
+    }
+
+    private static InfusionEnchantment resolveEnchantment(Object source) {
+        Objects.requireNonNull(source, "enchantment");
+        return switch (source) {
+            case InfusionEnchantment enchantment -> enchantment;
+            case StringRepresentable representable -> bySerializedName(representable.getSerializedName());
+            case Identifier identifier -> bySerializedName(identifier.getPath());
+            case ResourceKey<?> key -> bySerializedName(key.identifier().getPath());
+            case String text -> bySerializedName(text);
+            default -> throw new IllegalArgumentException(
+                    "Unsupported infusion enchantment: " + source.getClass().getName());
+        };
+    }
+
+    private static InfusionEnchantment bySerializedName(String name) {
+        Objects.requireNonNull(name, "name");
+        String normalized = name.indexOf(':') >= 0 ? Identifier.parse(name).getPath() : name;
+        for (InfusionEnchantment enchantment : InfusionEnchantment.values()) {
+            if (enchantment.getSerializedName().equals(normalized)) {
+                return enchantment;
+            }
+        }
+        throw new IllegalArgumentException("Unknown infusion enchantment: " + name);
     }
 
     @Override
