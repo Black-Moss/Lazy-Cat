@@ -1,3 +1,7 @@
+![CurseForge Downloads](https://img.shields.io/curseforge/dt/1806291?style=for-the-badge&logo=curseforge)
+![Modrinth Downloads](https://img.shields.io/modrinth/dt/EXgu3Zk0?style=for-the-badge&logo=modrinth)
+![GitHub last commit](https://img.shields.io/github/last-commit/Black-Moss/Lazy-Cat?style=for-the-badge&logo=github)
+
 # Lazy Cat
 
 **Alright, let’s do this Q&A in the most straight-talking, no-nonsense, cut-to-the-chase way possible.**
@@ -21,7 +25,6 @@
     - Charger
     - Entropy
     - Inscriber
-
 - Re:Avaritia
     - Compressor
     - Extreme Crafting:
@@ -29,11 +32,9 @@
         - Nether
         - End
         - Extreme
-
 - Farmer's Delight
     - Cooking Pot
     - Cutting Board
-
 - Mekanism
     - Chemical to Chemical:
         - Activating
@@ -68,7 +69,6 @@
     - Separating
     - Sawing
     - Washing
-
 - Minecraft
     - Blasting
     - Campfire Cooking
@@ -81,12 +81,31 @@
     - Special
     - Stonecutter
     - Transmute
-
 - Thaumaturge
     - Arcane Craft
     - Crucible
     - Infusion
     - Infusion Enchantment
+
+### Model
+
+- Avaritia
+    - Cosmic
+    - Cosmic Arc
+    - Eternal
+    - Halo
+    - Halo Cosmic
+    - Halo Eternal
+    - Hell
+    - Unstable
+- Minecraft
+    - Block:
+        - Custom
+        - Cube All
+        - Facing
+        - Only Block State
+        - Only Item Model
+        - OBJ
 
 ### Research (Thaumaturge)
 

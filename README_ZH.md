@@ -1,3 +1,7 @@
+![CurseForge 下载](https://img.shields.io/curseforge/dt/1806291?style=for-the-badge&logo=curseforge)
+![Modrinth 下载](https://img.shields.io/modrinth/dt/EXgu3Zk0?style=for-the-badge&logo=modrinth)
+![GitHub最后提交](https://img.shields.io/github/last-commit/Black-Moss/Lazy-Cat?style=for-the-badge&logo=github)
+
 # 懒猫
 
 **我现在用最直白、最不绕弯子、一针见血的方式，给你来一套 Q&A**
@@ -17,24 +21,21 @@
 
 ### 配方
 
-- 应用能源 2（Applied Energistics 2）
+- 应用能源 2
     - 充能器
     - 熵变
     - 压印器
-
-- 无尽贪婪：重生（Re:Avaritia）
+- 无尽贪婪：重生
     - 压缩机
     - 极限合成：
         - 幽匿
         - 下界
         - 末地
         - 极限
-
-- 农夫乐事（Farmer's Delight 26 Neo Ver）
+- 农夫乐事
     - 厨锅
     - 砧板
-
-- 通用机械（Mekanism）
+- 通用机械
     - 化学→化学：
         - 太阳能中子活化
         - 同位素离心
@@ -68,8 +69,7 @@
     - 电解分离
     - 锯木
     - 化学清洗
-
-- 原版（Minecraft）
+- 原版
     - 高炉
     - 营火
     - 自定义合成
@@ -81,12 +81,31 @@
     - 特殊合成
     - 切石
     - 转化
-
 - Thaumaturge
     - 奥术合成
     - 坩埚
     - 注魔
     - 注魔附魔
+
+### 模型
+
+- 无尽贪婪
+    - Cosmic
+    - Cosmic Arc
+    - Eternal
+    - Halo
+    - Halo Cosmic
+    - Halo Eternal
+    - Hell
+    - Unstable
+- 原版
+    - Block:
+        - Custom
+        - Cube All
+        - Facing
+        - Only Block State
+        - Only Item Model
+        - OBJ
 
 ### 研究（Thaumaturge）
 
