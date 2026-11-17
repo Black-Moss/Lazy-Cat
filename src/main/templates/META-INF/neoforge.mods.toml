@@ -1,7 +1,7 @@
 modLoader = "javafml"
 loaderVersion = "${loader_version_range}"
 license = "${mod_license}"
-issueTrackerURL = "https://github.com/Black-Moss/Moss-Mod-Template/issues"
+issueTrackerURL = "https://github.com/Black-Moss/Lazy-Cat/issues"
 
 [[mods]]
 modId = "${mod_id}"
@@ -10,10 +10,7 @@ displayName = "${mod_name}"
 logoFile = "logo.png"
 authors = "${mod_authors}"
 description = "${mod_description}"
-displayURL = "https://www.curseforge.com/minecraft/mc-mods/Moss-Mod-Template"
-
-[[mixins]]
-config = "${mod_id}.mixins.json"
+displayURL = "https://www.curseforge.com/minecraft/mc-mods/lazy-cat"
 
 [[dependencies.${ mod_id }]]
 modId = "neoforge"
@@ -26,5 +23,40 @@ side = "BOTH"
 modId = "minecraft"
 type = "required"
 versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "thaumaturge"
+type = "optional"
+versionRange = "[${thaumaturge_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "avaritia"
+type = "optional"
+versionRange = "[${re_avaritia_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "mekanism"
+type = "optional"
+versionRange = "[10.7.19,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "farmers_delight"
+type = "optional"
+versionRange = "[${farmers_delight_version},)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.${ mod_id }]]
+modId = "ae2"
+type = "optional"
+versionRange = "[${ae2_version},)"
 ordering = "NONE"
 side = "BOTH"

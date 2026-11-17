@@ -33,6 +33,12 @@ repositories {
         name = 'Curse Maven'
         url = 'https://cursemaven.com'
     }
+
+
+    maven {
+        name = "Illusive Soulworks"
+        url = "https://maven.theillusivec4.top/"
+    }
 }
 
 base {
@@ -95,6 +101,31 @@ dependencies {
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
     runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+
+    // Lithostitched
+    implementation "maven.modrinth:lithostitched:${lithostitched_version}-neoforge-21.1"
+
+    // Curios
+    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}+1.21.1:api"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}+1.21.1"
+
+    // GuiME
+    implementation "maven.modrinth:guideme:${guideme_version}"
+
+    // Thaumaturge
+    implementation "curse.maven:thaumaturge-1628024:${thaumaturge_id}"
+
+    // Re:Avaritia
+    implementation "maven.modrinth:re-avaritia:1.21.1-${re_avaritia_version}-release"
+
+    // Mekanism
+    implementation "maven.modrinth:mekanism:${mekanism_version}"
+
+    // Farmer's Delight
+    implementation "maven.modrinth:farmers-delight:1.21.1-${farmers_delight_version}"
+
+    // Applied Energistics 2
+    implementation "maven.modrinth:ae2:${ae2_version}"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
@@ -108,7 +139,12 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_license            : mod_license,
             mod_version            : mod_version,
             mod_authors            : mod_authors,
-            mod_description        : mod_description
+            mod_description        : mod_description,
+            thaumaturge_version    : thaumaturge_version,
+            re_avaritia_version    : re_avaritia_version,
+            mekanism_version       : mekanism_version,
+            farmers_delight_version: farmers_delight_version,
+            ae2_version            : ae2_version
     ]
     inputs.properties replaceProperties
     expand replaceProperties
