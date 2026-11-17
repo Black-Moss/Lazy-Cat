@@ -19,20 +19,28 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBuilder> {
-    private final int cookingTime;
-    private final float experience;
     private final List<Object> ingredients = new ArrayList<>();
+    private Float experience;
+    private Integer time;
     private ItemLike container;
     private CookingPotRecipeBookTab recipeBookTab;
 
-    public CookingPotBuilder(RecipeContext context, ItemLike result, int cookingTime, float experience) {
+    public CookingPotBuilder(RecipeContext context, ItemLike result) {
         super(context, result);
-        this.cookingTime = cookingTime;
-        this.experience = experience;
     }
 
     @Override
     protected CookingPotBuilder self() {
+        return this;
+    }
+
+    public CookingPotBuilder exp(float experience) {
+        this.experience = experience;
+        return this;
+    }
+
+    public CookingPotBuilder time(int time) {
+        this.time = time;
         return this;
     }
 
@@ -68,6 +76,12 @@ public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBui
         if (ingredients.isEmpty()) {
             throw new IllegalStateException("Cooking pot recipe requires at least one ingredient");
         }
+        if (experience != null && experience < 0.0f) {
+            throw new IllegalArgumentException("experience must not be negative");
+        }
+        if (time != null && time <= 0) {
+            throw new IllegalArgumentException("time must be positive");
+        }
     }
 
     @Override
@@ -79,7 +93,7 @@ public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBui
         ItemStack containerStack = container != null ? new ItemStack(container.asItem()) : ItemStack.EMPTY;
         String grp = group() != null ? group() : "";
         CookingPotRecipe recipe = new CookingPotRecipe(
-                grp, recipeBookTab, inputs, new ItemStack(resultItem(), count()), containerStack, experience, cookingTime);
+                grp, recipeBookTab, inputs, new ItemStack(resultItem(), count()), containerStack, experience, time);
         RecipeUnlockAdvancementBuilder advancement = new RecipeUnlockAdvancementBuilder();
         applyCriteria(advancement::unlockedBy);
         output.accept(key, recipe, advancement.build(output, key, category()));
