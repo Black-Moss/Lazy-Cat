@@ -47,7 +47,7 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
         return value.replace(' ', '_');
     }
 
-    protected static String folderOf(Enum<?> mode)l {
+    protected static String folderOf(Enum<?> mode) {
         return mode == null ? "" : mode.name().toLowerCase(Locale.ROOT);
     }
 

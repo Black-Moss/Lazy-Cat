@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class ChemicalDissolutionBuilder extends AbstractMekanismRecipeBuilder<ChemicalDissolutionBuilder> {
     private Object itemInput;
     private Object chemicalInput;

@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class ElectrolysisBuilder extends AbstractMekanismRecipeBuilder<ElectrolysisBuilder> {
     private Object fluidInput;
     private Object leftOutput;

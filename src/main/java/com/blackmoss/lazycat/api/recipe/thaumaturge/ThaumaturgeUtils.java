@@ -10,7 +10,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 
-public class ThaumaturgeUtils {
+public final class ThaumaturgeUtils {
     public static Ingredient aspectItem(HolderLookup.Provider registries, ResourceKey<IAspect> aspect, ItemLike item) {
         return DataComponentIngredient.of(
                 TTDataComponents.CRYSTAL_ASPECT.get(),

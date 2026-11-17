@@ -16,6 +16,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class PressurizedReactionBuilder extends AbstractMekanismRecipeBuilder<PressurizedReactionBuilder> {
     private Object solid;
     private Object fluid;

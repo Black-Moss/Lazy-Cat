@@ -10,6 +10,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class SawmillBuilder extends AbstractMekanismRecipeBuilder<SawmillBuilder> {
     private Object input;
     private Object secondary;

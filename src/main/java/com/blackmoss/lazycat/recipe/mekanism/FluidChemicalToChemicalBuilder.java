@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class FluidChemicalToChemicalBuilder extends AbstractMekanismRecipeBuilder<FluidChemicalToChemicalBuilder> {
     private Object fluidInput;
     private Object chemicalInput;

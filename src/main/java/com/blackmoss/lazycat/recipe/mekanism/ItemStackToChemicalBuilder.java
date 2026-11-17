@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuilder<ItemStackToChemicalBuilder> {
     private Object input;
     private Object output;

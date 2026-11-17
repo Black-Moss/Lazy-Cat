@@ -47,6 +47,7 @@ public final class ArcaneShapedBuilder extends AbstractThaumaturgeRecipeBuilder<
         return this;
     }
 
+    @SuppressWarnings("unused")
     public ArcaneShapedBuilder pattern(String row) {
         if (!rows.isEmpty() && row.length() != rows.getFirst().length()) {
             throw new IllegalArgumentException("Pattern must be the same width on every line");

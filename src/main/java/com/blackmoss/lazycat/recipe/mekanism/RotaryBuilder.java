@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBuilder> {
     private Mode mode;
     private Object fluidInput;

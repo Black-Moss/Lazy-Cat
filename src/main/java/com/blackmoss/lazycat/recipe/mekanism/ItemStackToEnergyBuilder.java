@@ -9,6 +9,7 @@ import net.minecraft.world.item.crafting.Recipe;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class ItemStackToEnergyBuilder extends AbstractMekanismRecipeBuilder<ItemStackToEnergyBuilder> {
     private Object input;
     private int energyOutput;

@@ -10,6 +10,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class ChemicalCrystallizerBuilder extends AbstractMekanismRecipeBuilder<ChemicalCrystallizerBuilder> {
     private Object chemical;
     private int chemicalAmount = 1;
