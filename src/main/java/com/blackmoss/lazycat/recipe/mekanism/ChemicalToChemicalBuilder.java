@@ -27,6 +27,11 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
     }
 
     @Override
+    protected String defaultIdPath() {
+        return sourcePath(output, "output");
+    }
+
+    @Override
     protected String defaultFolder() {
         return folderOf(mode);
     }
@@ -61,9 +66,9 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         ChemicalToChemicalRecipeBuilder builder = switch (mode) {
             case ACTIVATING ->
-                    ChemicalToChemicalRecipeBuilder.activating(chemicalIngredient(input, 1), chemicalTemplate(output, outputAmount));
+                    ChemicalToChemicalRecipeBuilder.activating(chemicalIngredient(input, 1), chemicalTemplate(this.output, outputAmount));
             case CENTRIFUGING ->
-                    ChemicalToChemicalRecipeBuilder.centrifuging(chemicalIngredient(input, 1), chemicalTemplate(output, outputAmount));
+                    ChemicalToChemicalRecipeBuilder.centrifuging(chemicalIngredient(input, 1), chemicalTemplate(this.output, outputAmount));
         };
         builder.save(output, key.identifier());
     }

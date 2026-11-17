@@ -27,6 +27,11 @@ public final class ElectrolysisBuilder extends AbstractMekanismRecipeBuilder<Ele
     }
 
     @Override
+    protected String defaultIdPath() {
+        return sourcePath(fluidInput, "fluidInput");
+    }
+
+    @Override
     protected String defaultFolder() {
         return "separator";
     }

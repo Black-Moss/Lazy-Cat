@@ -28,6 +28,11 @@ public final class ChemicalDissolutionBuilder extends AbstractMekanismRecipeBuil
     }
 
     @Override
+    protected String defaultIdPath() {
+        return sourcePath(output, "output");
+    }
+
+    @Override
     protected String defaultFolder() {
         return "processing";
     }
@@ -79,7 +84,7 @@ public final class ChemicalDissolutionBuilder extends AbstractMekanismRecipeBuil
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         ChemicalDissolutionRecipeBuilder.dissolution(
                         itemIngredient(itemInput), chemicalIngredient(chemicalInput, chemicalInputAmount),
-                        chemicalTemplate(output, outputAmount), perTick)
+                        chemicalTemplate(this.output, outputAmount), perTick)
                 .save(output, key.identifier());
     }
 }

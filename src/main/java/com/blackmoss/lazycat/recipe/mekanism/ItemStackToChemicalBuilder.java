@@ -27,6 +27,11 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
     }
 
     @Override
+    protected String defaultIdPath() {
+        return sourcePath(output, "output");
+    }
+
+    @Override
     protected String defaultFolder() {
         return folderOf(mode);
     }
@@ -60,11 +65,11 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         ItemStackToChemicalRecipeBuilder builder = switch (mode) {
             case CHEMICAL_CONVERSION ->
-                    ItemStackToChemicalRecipeBuilder.chemicalConversion(itemIngredient(input), chemicalTemplate(output, outputAmount));
+                    ItemStackToChemicalRecipeBuilder.chemicalConversion(itemIngredient(input), chemicalTemplate(this.output, outputAmount));
             case OXIDIZING ->
-                    ItemStackToChemicalRecipeBuilder.oxidizing(itemIngredient(input), chemicalTemplate(output, outputAmount));
+                    ItemStackToChemicalRecipeBuilder.oxidizing(itemIngredient(input), chemicalTemplate(this.output, outputAmount));
             case PIGMENT_EXTRACTING ->
-                    ItemStackToChemicalRecipeBuilder.pigmentExtracting(itemIngredient(input), chemicalTemplate(output, outputAmount));
+                    ItemStackToChemicalRecipeBuilder.pigmentExtracting(itemIngredient(input), chemicalTemplate(this.output, outputAmount));
         };
         builder.save(output, key.identifier());
     }

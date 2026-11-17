@@ -24,6 +24,11 @@ public final class ItemStackToEnergyBuilder extends AbstractMekanismRecipeBuilde
     }
 
     @Override
+    protected String defaultIdPath() {
+        return sourcePath(input, "input");
+    }
+
+    @Override
     protected String defaultFolder() {
         return "energy_conversion";
     }

@@ -28,6 +28,11 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
     }
 
     @Override
+    protected String defaultIdPath() {
+        return sourcePath(output, "output");
+    }
+
+    @Override
     protected String defaultFolder() {
         return folderOf(mode);
     }
@@ -69,9 +74,9 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         ChemicalChemicalToChemicalRecipeBuilder builder = switch (mode) {
             case CHEMICAL_INFUSING -> ChemicalChemicalToChemicalRecipeBuilder.chemicalInfusing(
-                    chemicalIngredient(left, 1), chemicalIngredient(right, 1), chemicalTemplate(output, outputAmount));
+                    chemicalIngredient(left, 1), chemicalIngredient(right, 1), chemicalTemplate(this.output, outputAmount));
             case PIGMENT_MIXING -> ChemicalChemicalToChemicalRecipeBuilder.pigmentMixing(
-                    chemicalIngredient(left, 1), chemicalIngredient(right, 1), chemicalTemplate(output, outputAmount));
+                    chemicalIngredient(left, 1), chemicalIngredient(right, 1), chemicalTemplate(this.output, outputAmount));
         };
         builder.save(output, key.identifier());
     }

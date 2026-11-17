@@ -26,6 +26,11 @@ public final class FluidChemicalToChemicalBuilder extends AbstractMekanismRecipe
     }
 
     @Override
+    protected String defaultIdPath() {
+        return sourcePath(output, "output");
+    }
+
+    @Override
     protected String defaultFolder() {
         return "processing";
     }
@@ -66,7 +71,7 @@ public final class FluidChemicalToChemicalBuilder extends AbstractMekanismRecipe
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         FluidChemicalToChemicalRecipeBuilder.washing(
-                        fluidIngredient(fluidInput, 1), chemicalIngredient(chemicalInput, 1), chemicalTemplate(output, outputAmount))
+                        fluidIngredient(fluidInput, 1), chemicalIngredient(chemicalInput, 1), chemicalTemplate(this.output, outputAmount))
                 .save(output, key.identifier());
     }
 }

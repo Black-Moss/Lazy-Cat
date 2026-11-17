@@ -18,7 +18,7 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
     protected void addCreativeModeTab(CreativeModeTab tab, String translations) {
         Identifier key = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
         if (key != null) {
-            add(key.toLanguageKey(), translations);
+            add("itemGroup." + key.toLanguageKey(), translations);
         }
     }
 

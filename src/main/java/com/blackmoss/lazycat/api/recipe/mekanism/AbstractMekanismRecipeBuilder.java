@@ -30,6 +30,26 @@ public abstract class AbstractMekanismRecipeBuilder<B extends AbstractMekanismRe
         super(context, result == null ? null : com.blackmoss.lazycat.api.LazyIngredient.from(result));
     }
 
+    protected final String sourcePath(Object source, String field) {
+        Objects.requireNonNull(source, field);
+        String path = switch (source) {
+            case String text -> sanitize(text);
+            case Identifier identifier -> identifier.getPath();
+            case ResourceKey<?> key -> sanitize(key.identifier().toString());
+            case TagKey<?> tag -> sanitize(tag.location().toString());
+            case Holder<?> holder -> holder.unwrapKey()
+                    .map(key -> sanitize(key.identifier().toString()))
+                    .orElseThrow(() -> new IllegalStateException(field + " holder has no registry key"));
+            case net.minecraft.world.level.ItemLike item -> LazyIngredient.from(item).label();
+            default -> throw new IllegalArgumentException(
+                    "Unsupported " + field + " source: " + source.getClass().getName());
+        };
+        if (path.isBlank()) {
+            throw new IllegalStateException(field + " has an empty id path");
+        }
+        return path;
+    }
+
     protected ItemStackIngredient itemIngredient(Object source) {
         Objects.requireNonNull(source, "item source");
         return IngredientCreatorAccess.item().from(LazyIngredient.from(source).resolve(context().items()));

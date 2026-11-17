@@ -31,6 +31,14 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
     }
 
     @Override
+    protected String defaultIdPath() {
+        return switch (mode) {
+            case FLUID_TO_CHEMICAL -> sourcePath(chemicalOutput, "chemicalOutput");
+            case CHEMICAL_TO_FLUID -> sourcePath(fluidOutput, "fluidOutput");
+        };
+    }
+
+    @Override
     protected String defaultFolder() {
         return "rotary";
     }
