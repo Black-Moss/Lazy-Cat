@@ -15,6 +15,7 @@ import net.minecraft.world.level.ItemLike;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public final class ExtremeCraftingShapelessBuilder extends AbstractRecipeBuilder<ExtremeCraftingShapelessBuilder> {
     private final List<Ingredient> ingredients = new ArrayList<>();
     private int tier;

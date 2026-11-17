@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 
 @EventBusSubscriber(modid = LazyCat.MODID)
 @Mod(LazyCat.MODID)
+@SuppressWarnings("unused")
 public class LazyCat {
     public static final String MODID = "lazycat";
     public static final Logger LOGGER = LogUtils.getLogger();

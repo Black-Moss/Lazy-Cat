@@ -13,6 +13,7 @@ import net.minecraft.world.item.equipment.trim.TrimPattern;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class SmithingTrimBuilder extends AbstractRecipeBuilder<SmithingTrimBuilder> {
     private Holder<TrimPattern> pattern;
     private LazyIngredient template;

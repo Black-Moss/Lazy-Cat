@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceKey;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("unused")
 public final class ResearchContext {
     private static final String CATEGORY_DIRECTORY = "thaumaturge/research_category";
     private static final String ENTRY_DIRECTORY = "thaumaturge/research_entry";

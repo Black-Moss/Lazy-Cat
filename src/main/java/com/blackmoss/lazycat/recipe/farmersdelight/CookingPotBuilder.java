@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBuilder> {
     private final int cookingTime;
     private final float experience;

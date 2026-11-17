@@ -15,6 +15,7 @@ import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public final class ExtremeSmithingBuilder extends AbstractRecipeBuilder<ExtremeSmithingBuilder> {
     private final List<Ingredient> additions = new ArrayList<>();
     private Ingredient template;
