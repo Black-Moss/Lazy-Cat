@@ -29,6 +29,10 @@ public final class BlockModelBuilder extends AbstractModelBuilder<BlockModelBuil
         this.model = defaultModel(block);
     }
 
+    private static Identifier defaultModel(Block block) {
+        return Identifier.fromNamespaceAndPath(LazyIdentifier.getBlockSpace(block), "block/" + LazyIdentifier.getBlockPath(block));
+    }
+
     @Override
     protected BlockModelBuilder self() {
         return this;
@@ -81,9 +85,5 @@ public final class BlockModelBuilder extends AbstractModelBuilder<BlockModelBuil
             this.context().blockModels().itemModelOutput.accept(
                     this.block.asItem(), ItemModelUtils.plainModel(this.model));
         }
-    }
-
-    private static Identifier defaultModel(Block block) {
-        return Identifier.fromNamespaceAndPath(LazyIdentifier.getBlockSpace(block), "block/" + LazyIdentifier.getBlockPath(block));
     }
 }

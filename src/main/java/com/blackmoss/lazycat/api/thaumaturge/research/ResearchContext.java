@@ -97,8 +97,7 @@ public final class ResearchContext {
             case ResourceKey<?> key -> key.identifier();
             case String text ->
                     text.contains(":") ? Identifier.parse(text) : Identifier.fromNamespaceAndPath(this.namespace, text);
-            default ->
-                    throw new IllegalArgumentException("Unsupported lazyCat source: " + source.getClass().getName());
+            default -> throw new IllegalArgumentException("Unsupported lazyCat source: " + source.getClass().getName());
         };
     }
 

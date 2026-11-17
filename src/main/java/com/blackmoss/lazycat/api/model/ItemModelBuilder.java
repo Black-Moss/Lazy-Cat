@@ -21,6 +21,10 @@ public final class ItemModelBuilder extends AbstractModelBuilder<ItemModelBuilde
         this.model = defaultModel(item);
     }
 
+    private static Identifier defaultModel(Item item) {
+        return Identifier.fromNamespaceAndPath(LazyIdentifier.getItemSpace(item), "item/" + LazyIdentifier.getItemPath(item));
+    }
+
     @Override
     protected ItemModelBuilder self() {
         return this;
@@ -43,9 +47,5 @@ public final class ItemModelBuilder extends AbstractModelBuilder<ItemModelBuilde
             this.unbaked = ItemModelUtils.plainModel(this.model);
         }
         this.context().itemModels().itemModelOutput.accept(this.item, this.unbaked);
-    }
-
-    private static Identifier defaultModel(Item item) {
-        return Identifier.fromNamespaceAndPath(LazyIdentifier.getItemSpace(item), "item/" + LazyIdentifier.getItemPath(item));
     }
 }

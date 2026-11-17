@@ -30,6 +30,10 @@ public abstract class AbstractAvaritiaModelBuilder<B extends AbstractAvaritiaMod
         this.model = defaultModel(item);
     }
 
+    private static Identifier defaultModel(Item item) {
+        return Identifier.fromNamespaceAndPath(LazyIdentifier.getItemSpace(item), "item/" + LazyIdentifier.getItemPath(item));
+    }
+
     public B model(Identifier model) {
         this.model = Objects.requireNonNull(model, "model");
         return self();
@@ -87,10 +91,5 @@ public abstract class AbstractAvaritiaModelBuilder<B extends AbstractAvaritiaMod
 
     protected final int haloColor() {
         return -this.color;
-    }
-
-    private static Identifier defaultModel(Item item) {
-        Identifier id = LazyIdentifier.getItemIdentifier(item);
-        return Identifier.fromNamespaceAndPath(id.getNamespace(), "item/" + id.getPath());
     }
 }

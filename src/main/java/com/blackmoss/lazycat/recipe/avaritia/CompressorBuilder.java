@@ -35,6 +35,7 @@ public final class CompressorBuilder extends AbstractRecipeBuilder<CompressorBui
     protected String defaultFolder() {
         return "compressor";
     }
+
     public CompressorBuilder input(Object source) {
         this.input = LazyIngredient.from(source).resolve(context().items());
         return this;
