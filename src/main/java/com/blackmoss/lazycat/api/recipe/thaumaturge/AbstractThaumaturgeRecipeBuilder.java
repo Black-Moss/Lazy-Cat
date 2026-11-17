@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-
+@SuppressWarnings("unused")
 public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumaturgeRecipeBuilder<B>>
         extends AbstractRecipeBuilder<B> {
     private final HolderGetter<IAspect> aspects;

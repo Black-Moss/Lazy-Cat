@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class StonecuttingBuilder extends AbstractRecipeBuilder<StonecuttingBuilder> {
     private final List<LazyIngredient> inputs = new ArrayList<>();
     private LazyIngredient currentInput;

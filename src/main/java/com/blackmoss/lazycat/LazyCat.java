@@ -1,7 +1,6 @@
 package com.blackmoss.lazycat;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;

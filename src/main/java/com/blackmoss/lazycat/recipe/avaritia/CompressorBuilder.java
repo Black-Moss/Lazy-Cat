@@ -13,6 +13,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class CompressorBuilder extends AbstractRecipeBuilder<CompressorBuilder> {
     private final int timeCost;
     private Ingredient input;

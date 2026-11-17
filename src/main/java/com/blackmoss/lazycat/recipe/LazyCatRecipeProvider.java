@@ -17,6 +17,7 @@ import net.minecraft.world.level.ItemLike;
 import java.util.Objects;
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public abstract class LazyCatRecipeProvider extends RecipeProvider {
     protected final RecipeContext context;
 

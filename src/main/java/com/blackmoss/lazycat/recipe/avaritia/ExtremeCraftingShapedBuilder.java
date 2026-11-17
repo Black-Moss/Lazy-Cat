@@ -14,6 +14,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.*;
 
+@SuppressWarnings("unused")
 public final class ExtremeCraftingShapedBuilder extends AbstractRecipeBuilder<ExtremeCraftingShapedBuilder> {
     private final Map<Character, LazyIngredient> definitions = new LinkedHashMap<>();
     private final List<String> patterns = new ArrayList<>();

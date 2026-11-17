@@ -9,6 +9,7 @@ import org.jspecify.annotations.NonNull;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("unused")
 public abstract class ThaumaturgeResearchProvider implements DataProvider {
     private final ResearchContext context;
 

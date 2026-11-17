@@ -32,7 +32,7 @@ public final class LazyIngredient {
 
     public static LazyIngredient of(ItemLike item) {
         Objects.requireNonNull(item, "item");
-        return new LazyIngredient(getter ->
+        return new LazyIngredient(_ ->
                 Ingredient.of(item), LazyIdentifier.getItemPath(item), LazyIdentifier.getItemId(item));
     }
 
@@ -45,7 +45,7 @@ public final class LazyIngredient {
         for (ItemLike item : copy) {
             Objects.requireNonNull(item, "items contains null");
         }
-        return new LazyIngredient(getter ->
+        return new LazyIngredient(_ ->
                 Ingredient.of(copy), LazyIdentifier.getItemPath(copy[0]));
     }
 
@@ -64,13 +64,13 @@ public final class LazyIngredient {
                 .findFirst()
                 .map(holder -> LazyIdentifier.getItemPath(holder.value()))
                 .orElse("ingredient");
-        return new LazyIngredient(getter -> ingredient, label);
+        return new LazyIngredient(_ -> ingredient, label);
     }
 
     public static LazyIngredient of(Holder<?> holder) {
         Objects.requireNonNull(holder, "holder");
         ItemLike item = (ItemLike) holder.value();
-        return new LazyIngredient(getter ->
+        return new LazyIngredient(_ ->
                 Ingredient.of(item), LazyIdentifier.getItemPath(item), LazyIdentifier.getItemId(item));
     }
 

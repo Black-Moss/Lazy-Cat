@@ -14,6 +14,7 @@ import net.minecraft.world.level.material.Fluid;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class EntropyBuilder extends AbstractRecipeBuilder<EntropyBuilder> {
     private final EntropyRecipeBuilder delegate;
 

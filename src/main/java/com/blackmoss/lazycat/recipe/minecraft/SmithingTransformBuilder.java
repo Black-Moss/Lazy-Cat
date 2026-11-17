@@ -13,6 +13,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 public final class SmithingTransformBuilder extends AbstractRecipeBuilder<SmithingTransformBuilder> {
     private LazyIngredient template;
     private LazyIngredient base;

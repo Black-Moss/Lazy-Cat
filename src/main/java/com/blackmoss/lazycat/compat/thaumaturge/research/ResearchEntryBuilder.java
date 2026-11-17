@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+@SuppressWarnings("unused")
 public final class ResearchEntryBuilder {
     private final ResearchContext context;
     private final String category;

@@ -10,6 +10,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class ChargerBuilder extends AbstractRecipeBuilder<ChargerBuilder> {
     private Object input;
 

@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class LazyIdentifier {
     public static Identifier lazyCat(String path) {
         return Identifier.fromNamespaceAndPath(LazyCat.MODID, path);

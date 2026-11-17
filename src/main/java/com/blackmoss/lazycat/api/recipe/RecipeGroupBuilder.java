@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+@SuppressWarnings("unused")
 public final class RecipeGroupBuilder {
     private final List<AbstractRecipeBuilder<?>> builders = new ArrayList<>();
 

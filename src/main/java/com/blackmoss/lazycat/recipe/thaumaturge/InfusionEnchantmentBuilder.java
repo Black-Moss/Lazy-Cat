@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 public final class InfusionEnchantmentBuilder extends AbstractRecipeBuilder<InfusionEnchantmentBuilder> {
     private final HolderGetter<IAspect> aspects;
     private final InfusionEnchantment enchantment;

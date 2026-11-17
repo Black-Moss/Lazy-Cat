@@ -18,6 +18,7 @@ import net.minecraft.world.level.ItemLike;
 import java.util.EnumSet;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> {
     private final EnumSet<CookingType> types;
     private LazyIngredient input;

@@ -13,6 +13,7 @@ import net.minecraft.world.level.ItemLike;
 import java.util.Objects;
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuilder> {
     private final InscriberProcessType mode;
     private Object middle;

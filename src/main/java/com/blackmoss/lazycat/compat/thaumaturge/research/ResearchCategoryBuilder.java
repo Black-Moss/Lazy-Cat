@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class ResearchCategoryBuilder {
     private final ResearchContext context;
     private final Identifier id;

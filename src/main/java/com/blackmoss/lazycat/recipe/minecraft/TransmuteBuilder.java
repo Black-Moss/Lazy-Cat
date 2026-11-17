@@ -12,6 +12,7 @@ import net.minecraft.world.level.ItemLike;
 
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 public final class TransmuteBuilder extends AbstractRecipeBuilder<TransmuteBuilder> {
     private LazyIngredient input;
     private LazyIngredient material;
