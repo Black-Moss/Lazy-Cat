@@ -1,6 +1,5 @@
 package com.blackmoss.lazycat.api.recipe;
 
-import com.blackmoss.lazycat.api.recipe.minecraft.AbstractRecipeBuilder;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.neoforged.neoforge.common.conditions.ICondition;

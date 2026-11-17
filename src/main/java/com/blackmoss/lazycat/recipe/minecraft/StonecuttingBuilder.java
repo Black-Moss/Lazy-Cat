@@ -1,7 +1,7 @@
 package com.blackmoss.lazycat.recipe.minecraft;
 
 import com.blackmoss.lazycat.api.LazyIngredient;
-import com.blackmoss.lazycat.api.recipe.minecraft.AbstractRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;

@@ -1,8 +1,7 @@
-package com.blackmoss.lazycat.api.recipe.minecraft;
+package com.blackmoss.lazycat.api.recipe;
 
 import com.blackmoss.lazycat.api.LazyIdentifier;
 import com.blackmoss.lazycat.api.LazyIngredient;
-import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
