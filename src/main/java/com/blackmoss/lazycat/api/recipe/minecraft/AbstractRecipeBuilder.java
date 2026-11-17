@@ -1,6 +1,8 @@
-package com.blackmoss.lazycat.api.recipe;
+package com.blackmoss.lazycat.api.recipe.minecraft;
 
+import com.blackmoss.lazycat.api.LazyIdentifier;
 import com.blackmoss.lazycat.api.LazyIngredient;
+import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -17,6 +19,7 @@ import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import java.util.*;
 import java.util.function.BiConsumer;
 
+@SuppressWarnings({"UnusedReturnValue", "SameParameterValue"})
 public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> {
     private final RecipeContext context;
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
@@ -53,12 +56,12 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     }
 
     protected String defaultIdPath() {
-        return LazyIngredient.itemPath(resultItem());
+        return LazyIdentifier.getItemPath(resultItem());
     }
 
     public B count(int count) {
-        if (count < 1 || count > 99) {
-            throw new IllegalArgumentException("count must be between 1 and 99");
+        if (count < 1 || count > 64) {
+            throw new IllegalArgumentException("count must be between 1 and 64");
         }
         this.count = count;
         return self();

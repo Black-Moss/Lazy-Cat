@@ -1,6 +1,6 @@
 package com.blackmoss.lazycat.api.recipe.mekanism;
 
-import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.minecraft.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import mekanism.api.MekanismAPI;
 import mekanism.api.chemical.Chemical;

@@ -1,8 +1,8 @@
 package com.blackmoss.lazycat.api.thaumaturge.research;
 
 import com.blackmoss.lazycat.api.LazyIngredient;
-import com.blackmoss.lazycat.compat.thaumaturge.ResearchCategoryBuilder;
-import com.blackmoss.lazycat.compat.thaumaturge.ResearchEntryBuilder;
+import com.blackmoss.lazycat.compat.thaumaturge.research.ResearchCategoryBuilder;
+import com.blackmoss.lazycat.compat.thaumaturge.research.ResearchEntryBuilder;
 import com.google.gson.JsonObject;
 import com.leclowndu93150.thaumaturge.api.research.IResearchCategory;
 import com.leclowndu93150.thaumaturge.api.research.ResearchIcon;
@@ -97,7 +97,7 @@ public final class ResearchContext {
             case String text ->
                     text.contains(":") ? Identifier.parse(text) : Identifier.fromNamespaceAndPath(this.namespace, text);
             default ->
-                    throw new IllegalArgumentException("Unsupported identifier source: " + source.getClass().getName());
+                    throw new IllegalArgumentException("Unsupported lazyCat source: " + source.getClass().getName());
         };
     }
 

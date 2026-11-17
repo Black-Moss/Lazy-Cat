@@ -3,7 +3,7 @@ package com.blackmoss.lazycat.recipe.ae2;
 import appeng.recipes.entropy.EntropyMode;
 import appeng.recipes.entropy.EntropyRecipeBuilder;
 import appeng.recipes.entropy.PropertyValueMatcher;
-import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.minecraft.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;

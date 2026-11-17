@@ -1,7 +1,7 @@
 package com.blackmoss.lazycat.recipe.avaritia;
 
 import com.blackmoss.lazycat.api.LazyIngredient;
-import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.minecraft.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import committee.nova.mods.avaritia.common.crafting.recipe.ShapelessTableCraftingRecipe;
 import net.minecraft.core.NonNullList;

@@ -2,7 +2,6 @@ package com.blackmoss.lazycat.api;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -33,7 +32,8 @@ public final class LazyIngredient {
 
     public static LazyIngredient of(ItemLike item) {
         Objects.requireNonNull(item, "item");
-        return new LazyIngredient(getter -> Ingredient.of(item), itemPath(item), itemId(item));
+        return new LazyIngredient(getter ->
+                Ingredient.of(item), LazyIdentifier.getItemPath(item), LazyIdentifier.getItemId(item));
     }
 
     public static LazyIngredient of(ItemLike... items) {
@@ -45,7 +45,8 @@ public final class LazyIngredient {
         for (ItemLike item : copy) {
             Objects.requireNonNull(item, "items contains null");
         }
-        return new LazyIngredient(getter -> Ingredient.of(copy), itemPath(copy[0]));
+        return new LazyIngredient(getter ->
+                Ingredient.of(copy), LazyIdentifier.getItemPath(copy[0]));
     }
 
     public static LazyIngredient of(TagKey<Item> tag) {
@@ -61,7 +62,7 @@ public final class LazyIngredient {
         //noinspection deprecation
         String label = ingredient.items()
                 .findFirst()
-                .map(holder -> itemPath(holder.value()))
+                .map(holder -> LazyIdentifier.getItemPath(holder.value()))
                 .orElse("ingredient");
         return new LazyIngredient(getter -> ingredient, label);
     }
@@ -69,7 +70,8 @@ public final class LazyIngredient {
     public static LazyIngredient of(Holder<?> holder) {
         Objects.requireNonNull(holder, "holder");
         ItemLike item = (ItemLike) holder.value();
-        return new LazyIngredient(getter -> Ingredient.of(item), itemPath(item), itemId(item));
+        return new LazyIngredient(getter ->
+                Ingredient.of(item), LazyIdentifier.getItemPath(item), LazyIdentifier.getItemId(item));
     }
 
     public static LazyIngredient from(Object source) {
@@ -133,18 +135,6 @@ public final class LazyIngredient {
                         .flatMap(value -> from(value).resolve(getter).items())
                         .map(Holder::value)),
                 label);
-    }
-
-    public static String itemPath(ItemLike item) {
-        Objects.requireNonNull(item, "item");
-        return BuiltInRegistries.ITEM.getKey(item.asItem()).getPath();
-    }
-
-    private static String itemId(ItemLike item) {
-        Objects.requireNonNull(item, "item");
-        Identifier id = Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item.asItem()),
-                () -> "Unregistered item: " + item);
-        return id.toString();
     }
 
     public Ingredient resolve(HolderGetter<Item> items) {

@@ -1,5 +1,8 @@
-package com.blackmoss.lazycat.api.recipe;
+package com.blackmoss.lazycat.recipe;
 
+import com.blackmoss.lazycat.api.recipe.RecipeContext;
+import com.blackmoss.lazycat.api.recipe.RecipeContributor;
+import com.blackmoss.lazycat.api.recipe.RecipeGroupBuilder;
 import com.blackmoss.lazycat.api.recipe.minecraft.CookingType;
 import com.blackmoss.lazycat.recipe.minecraft.*;
 import net.minecraft.core.HolderLookup;
@@ -20,9 +23,9 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
     protected LazyCatRecipeProvider(
             HolderLookup.Provider registries,
             RecipeOutput output,
-            String namespace) {
+            String modid) {
         super(registries, output);
-        context = RecipeContext.of(registries, output, namespace);
+        context = RecipeContext.of(registries, output, modid);
     }
 
     protected final void contribute(RecipeContributor... contributors) {

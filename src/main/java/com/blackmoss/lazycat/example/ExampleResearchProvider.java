@@ -1,8 +1,8 @@
 //package com.blackmoss.lazycat.example;
 //
 //import com.blackmoss.lazycat.LazyCat;
-//import com.blackmoss.lazycat.api.thaumaturge.research.ResearchContext;
-//import com.blackmoss.lazycat.api.thaumaturge.research.ThaumaturgeResearchProvider;
+//import com.blackmoss.lazycat.api.thaumaturge.researrch.ResearchContext;
+//import com.blackmoss.lazycat.compat.thaumaturge.research.ThaumaturgeResearchProvider;
 //import com.leclowndu93150.thaumaturge.TTIds;
 //import com.leclowndu93150.thaumaturge.api.aspect.TTAspects;
 //import com.leclowndu93150.thaumaturge.api.capability.KnowledgeType;
@@ -21,7 +21,7 @@
 //
 //    @Override
 //    protected void addResearch(ResearchContext context) {
-//        context.category(LazyCat.identifier("example_category"))   // lazycat:example_category
+//        context.category(LazyCat.lazyCat("example_category"))   // lazycat:example_category
 //                .icon(ResearchIcon.ofTexture(TTIds.rl("textures/research/r_basics.png")))
 //                .background(TTIds.rl("textures/research/back_basics.png"))
 //                .overlayBackground(TTIds.rl("textures/research/back_basics_over.png"))
@@ -43,7 +43,7 @@
 //                        ResearchEntryMeta.HEX,
 //                        ResearchEntryMeta.HIDDEN)
 //                .icon(Items.DIAMOND)
-//                .icon(ResearchIcon.ofTexture(LazyCat.identifier("textures/research/example.png")))
+//                .icon(ResearchIcon.ofTexture(LazyCat.lazyCat("textures/research/example.png")))
 //                .icon(ResearchIcon.ofFocus(Identifier.withDefaultNamespace("touch")))
 //                .noteAspect("thaumaturge:sensus", 3)
 //                .complexity(3)

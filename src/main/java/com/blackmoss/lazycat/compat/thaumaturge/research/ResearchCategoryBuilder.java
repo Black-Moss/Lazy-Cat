@@ -1,4 +1,4 @@
-package com.blackmoss.lazycat.compat.thaumaturge;
+package com.blackmoss.lazycat.compat.thaumaturge.research;
 
 import com.blackmoss.lazycat.api.thaumaturge.research.ResearchContext;
 import com.google.gson.JsonArray;

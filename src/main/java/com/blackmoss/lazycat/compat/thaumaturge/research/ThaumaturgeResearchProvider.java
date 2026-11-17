@@ -1,5 +1,6 @@
-package com.blackmoss.lazycat.api.thaumaturge.research;
+package com.blackmoss.lazycat.compat.thaumaturge.research;
 
+import com.blackmoss.lazycat.api.thaumaturge.research.ResearchContext;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;

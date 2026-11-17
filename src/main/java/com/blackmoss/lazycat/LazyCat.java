@@ -17,10 +17,6 @@ public class LazyCat {
     public LazyCat(IEventBus modEventBus, ModContainer modContainer) {
     }
 
-    public static Identifier identifier(String path) {
-        return Identifier.fromNamespaceAndPath(MODID, path);
-    }
-
 //    @SubscribeEvent
 //    public static void onGatherData(GatherDataEvent.Client event) {
 //        RegistrySetBuilder registries = new RegistrySetBuilder()
