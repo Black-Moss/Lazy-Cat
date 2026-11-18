@@ -26,13 +26,14 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumaturgeRecipeBuilder<B>>
         extends AbstractRecipeBuilder<B> {
-    private final HolderGetter<IAspect> aspects;
+    private final RecipeContext context;
+    private HolderGetter<IAspect> aspects;
     private final List<AspectInstance> entries = new ArrayList<>();
     private @Nullable ResearchGate gate;
 
     protected AbstractThaumaturgeRecipeBuilder(RecipeContext context, Object result) {
         super(context, result);
-        this.aspects = context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
+        this.context = Objects.requireNonNull(context, "context");
     }
 
     @SuppressWarnings("unchecked")
@@ -52,7 +53,10 @@ public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumat
     }
 
     protected final HolderGetter<IAspect> aspects() {
-        return aspects;
+        if (this.aspects == null) {
+            this.aspects = this.context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
+        }
+        return this.aspects;
     }
 
     protected final AspectList buildAspects() {
@@ -78,7 +82,7 @@ public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumat
     }
 
     public B aspect(Object source, int amount) {
-        entries.add(new AspectInstance(resolveAspect(aspects, source, amount), amount));
+        entries.add(new AspectInstance(resolveAspect(aspects(), source, amount), amount));
         return self();
     }
 
