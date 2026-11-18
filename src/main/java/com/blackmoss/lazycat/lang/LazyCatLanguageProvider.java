@@ -1,9 +1,12 @@
 package com.blackmoss.lazycat.lang;
 
+import com.leclowndu93150.thaumaturge.api.aspect.IAspect;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.jspecify.annotations.NonNull;
 
@@ -53,5 +56,31 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
 
     protected void addConfiguration(String configID, String translations) {
         add("%s.configuration.%s".formatted(modid, configID), translations);
+    }
+
+    protected void addContainer(String containerId, String translations) {
+        add("container.%s.%s".formatted(modid, containerId), translations);
+    }
+
+    protected void addRecipeType(RecipeType<?> type, String translations) {
+        add("recipe.type.%s.%s".formatted(modid, BuiltInRegistries.RECIPE_TYPE.getId(type)), translations);
+    }
+
+    protected void addEnchantment(String enchantmentId, String translations) {
+        add("enchantment.%s.%s".formatted(modid, enchantmentId), translations);
+    }
+
+    protected void addAspect(ResourceKey<IAspect> aspect, String name, String desc, String help) {
+        add("aspect.%s.%s".formatted(modid, aspect), name);
+        add("aspect.%s.%s.desc".formatted(modid, aspect), desc);
+        add("aspect.%s.%s.help".formatted(modid, aspect), help);
+    }
+
+    protected void addWandCap(String wandCapId, String translations) {
+        add("wand.thaumaturge.cap.%s".formatted(wandCapId), translations);
+    }
+
+    protected void addWandRod(String wandRodId, String translations) {
+        add("wand.thaumaturge.rod.%s".formatted(wandRodId), translations);
     }
 }
