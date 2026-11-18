@@ -1,11 +1,13 @@
 package com.blackmoss.lazycat.thaumaturge.research;
 
+import com.blackmoss.lazycat.api.condition.ConditionalBuilder;
 import com.blackmoss.lazycat.api.thaumaturge.research.ResearchContext;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.leclowndu93150.thaumaturge.api.research.ResearchEntryMeta;
 import com.leclowndu93150.thaumaturge.api.research.ResearchParent;
 import net.minecraft.resources.Identifier;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
-public final class ResearchEntryBuilder {
+public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEntryBuilder> {
     private final ResearchContext context;
     private final String category;
     private final String name;
@@ -24,6 +26,7 @@ public final class ResearchEntryBuilder {
     private final List<AddendumBuilder> addenda = new ArrayList<>();
     private final List<JsonObject> noteAspects = new ArrayList<>();
     private final List<ResearchStageBuilder> stages = new ArrayList<>();
+    private final List<ICondition> conditions = new ArrayList<>();
     private Identifier id;
     private int column;
     private int row;
@@ -146,6 +149,11 @@ public final class ResearchEntryBuilder {
         return this;
     }
 
+    @Override
+    public List<ICondition> conditionList() {
+        return this.conditions;
+    }
+
     public void save() {
         if (this.id == null) {
             throw new IllegalStateException("Research entry '%s' has no id, call id(...) or save(...)".formatted(this.name));
@@ -198,6 +206,7 @@ public final class ResearchEntryBuilder {
         if (this.complexity != 1) {
             json.addProperty("complexity", this.complexity);
         }
+        writeConditions(json);
         this.context.submitEntry(id, json);
     }
 

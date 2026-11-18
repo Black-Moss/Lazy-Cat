@@ -5,14 +5,22 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import org.jspecify.annotations.NonNull;
 
 @SuppressWarnings("unused")
 public abstract class LazyCatLanguageProvider extends LanguageProvider {
-    private final String MODID;
+    private final String modid;
+    private final String locale;
 
     public LazyCatLanguageProvider(PackOutput output, String modid, String locale) {
         super(output, modid, locale);
-        MODID = modid;
+        this.modid = modid;
+        this.locale = locale;
+    }
+
+    @Override
+    public @NonNull String getName() {
+        return "%s %s Language by Lazy Cat".formatted(modid, locale);
     }
 
     protected void addCreativeModeTab(CreativeModeTab tab, String translations) {
@@ -23,19 +31,19 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
     }
 
     protected void addResearch(String researchId, String title, String... stage) {
-        add("research.%s.%s.title".formatted(MODID, researchId), title);
+        add("research.%s.%s.title".formatted(modid, researchId), title);
         for (int i = 0; i < stage.length; i++) {
-            add("research.%s.%s.stage_%d".formatted(MODID, researchId, i), stage[i]);
+            add("research.%s.%s.stage_%d".formatted(modid, researchId, i), stage[i]);
         }
     }
 
     protected void addResearchAddenda(String researchId, String... stage) {
         for (int i = 0; i < stage.length; i++) {
-            add("research.%s.%s.addendum_%d".formatted(MODID, researchId, i), stage[i]);
+            add("research.%s.%s.addendum_%d".formatted(modid, researchId, i), stage[i]);
         }
     }
 
     protected void addConfiguration(String configID, String translations) {
-        add("%s.configuration.%s".formatted(MODID, configID), translations);
+        add("%s.configuration.%s".formatted(modid, configID), translations);
     }
 }

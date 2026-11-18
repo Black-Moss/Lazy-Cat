@@ -26,7 +26,7 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
             RecipeOutput output,
             String modid) {
         super(registries, output);
-        context = RecipeContext.of(registries, output, modid);
+        this.context = RecipeContext.of(registries, output, modid);
     }
 
     protected final void contribute(RecipeContributor... contributors) {

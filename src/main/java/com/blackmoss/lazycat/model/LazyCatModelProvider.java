@@ -20,12 +20,17 @@ import org.jspecify.annotations.NonNull;
 
 @SuppressWarnings("unused")
 public abstract class LazyCatModelProvider extends ModelProvider {
-    protected final String MODID;
+    protected final String modid;
     private ModelContext context;
 
     public LazyCatModelProvider(PackOutput output, String modid) {
         super(output, modid);
-        this.MODID = modid;
+        this.modid = modid;
+    }
+
+    @Override
+    public @NonNull String getName() {
+        return modid + "Model by Lazy Cat";
     }
 
     @Override
@@ -79,10 +84,10 @@ public abstract class LazyCatModelProvider extends ModelProvider {
     }
 
     private Identifier getBlockModelId(Block block) {
-        return Identifier.fromNamespaceAndPath(this.MODID, "block/" + LazyIdentifier.getBlockIdentifier(block));
+        return Identifier.fromNamespaceAndPath(this.modid, "block/" + LazyIdentifier.getBlockIdentifier(block));
     }
 
     private Identifier getItemModelId(Item item) {
-        return Identifier.fromNamespaceAndPath(this.MODID, "item/" + LazyIdentifier.getItemIdentifier(item));
+        return Identifier.fromNamespaceAndPath(this.modid, "item/" + LazyIdentifier.getItemIdentifier(item));
     }
 }
