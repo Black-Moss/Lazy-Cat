@@ -1,4 +1,4 @@
-package com.blackmoss.lazycat.api.thaumaturge;
+package com.blackmoss.lazycat.api.recipe.thaumaturge;
 
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;

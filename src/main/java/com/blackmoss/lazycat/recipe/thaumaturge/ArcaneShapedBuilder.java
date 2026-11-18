@@ -2,7 +2,7 @@ package com.blackmoss.lazycat.recipe.thaumaturge;
 
 import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.thaumaturge.AbstractThaumaturgeRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.thaumaturge.AbstractThaumaturgeRecipeBuilder;
 import com.leclowndu93150.thaumaturge.content.recipe.workbench.ArcaneShapedCraftingRecipe;
 import com.leclowndu93150.thaumaturge.content.recipe.workbench.ArcaneShapedRecipePattern;
 import net.minecraft.data.recipes.RecipeOutput;

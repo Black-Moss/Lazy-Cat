@@ -2,7 +2,7 @@ package com.blackmoss.lazycat.recipe.thaumaturge;
 
 import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import com.blackmoss.lazycat.api.thaumaturge.AbstractThaumaturgeRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.thaumaturge.AbstractThaumaturgeRecipeBuilder;
 import com.leclowndu93150.thaumaturge.content.recipe.crucible.CrucibleRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
