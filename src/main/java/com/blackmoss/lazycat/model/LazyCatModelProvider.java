@@ -31,7 +31,7 @@ public abstract class LazyCatModelProvider extends ModelProvider {
 
     @Override
     public @NonNull String getName() {
-        return modid + "Model by Lazy Cat";
+        return modid + " Model by Lazy Cat";
     }
 
     @Override
@@ -88,7 +88,7 @@ public abstract class LazyCatModelProvider extends ModelProvider {
     }
 
     protected void itemFlat(ItemLike item) {
-        context.itemModels().createFlatItemModel(item.asItem(), ModelTemplates.FLAT_ITEM);
+        context.itemModels().generateFlatItem(item.asItem(), ModelTemplates.FLAT_ITEM);
     }
 
     private Identifier getBlockModelId(Block block) {
