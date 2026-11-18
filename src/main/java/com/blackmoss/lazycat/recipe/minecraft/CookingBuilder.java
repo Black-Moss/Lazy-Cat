@@ -18,7 +18,7 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
     private LazyIngredient input;
     private Float experience;
     private Integer time;
-    private CookingType currentType;
+    private CookingType type;
 
     public CookingBuilder(RecipeContext context, Object result, Object input, CookingType type) {
         super(context, result);
@@ -68,11 +68,11 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
     @Override
     public void save() {
         for (CookingType type : types) {
-            currentType = type;
+            this.type = type;
             validate();
             emit(idFor(type));
         }
-        currentType = null;
+        type = null;
     }
 
     @Override
@@ -95,11 +95,14 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
         if (time != null && time <= 0) {
             throw new IllegalArgumentException("time must be positive");
         }
+        if (type == null) {
+            throw new IllegalStateException("requires a type");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceLocation id) {
-        CookingType type = currentType != null ? currentType : types.iterator().next();
+        CookingType type = this.type != null ? this.type : types.iterator().next();
         Ingredient ingredient = input.resolve(context().items());
         float exp = experience != null ? experience : type.defaultExperience();
         int duration = time != null ? time : type.defaultTime();
