@@ -142,7 +142,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_description        : mod_description,
             thaumaturge_version    : thaumaturge_version,
             re_avaritia_version    : re_avaritia_version,
-            mekanism_version       : mekanism_version,
+            mekanism_mod_version   : mekanism_mod_version,
             farmers_delight_version: farmers_delight_version,
             ae2_version            : ae2_version
     ]
