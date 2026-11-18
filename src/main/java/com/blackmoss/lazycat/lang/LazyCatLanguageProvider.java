@@ -62,8 +62,8 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
         add("container.%s.%s".formatted(modid, containerId), translations);
     }
 
-    protected void addRecipeType(RecipeType<?> type, String translations) {
-        add("recipe.type.%s.%s".formatted(modid, BuiltInRegistries.RECIPE_TYPE.getId(type)), translations);
+    protected void addRecipeType(ResourceKey<RecipeType<?>> type, String translations) {
+        add("recipe.type.%s.%s".formatted(modid, type.identifier().getPath()), translations);
     }
 
     protected void addEnchantment(String enchantmentId, String translations) {
