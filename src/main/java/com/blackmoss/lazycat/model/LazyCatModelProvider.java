@@ -120,10 +120,10 @@ public abstract class LazyCatModelProvider extends ModelProvider {
     }
 
     protected Identifier getBlockModelId(Block block) {
-        return Identifier.fromNamespaceAndPath(this.modid, "block/" + LazyIdentifier.getBlockIdentifier(block));
+        return Identifier.fromNamespaceAndPath(this.modid, "block/" + LazyIdentifier.getBlockPath(block));
     }
 
     protected Identifier getItemModelId(Item item) {
-        return Identifier.fromNamespaceAndPath(this.modid, "item/" + LazyIdentifier.getItemIdentifier(item));
+        return Identifier.fromNamespaceAndPath(this.modid, "item/" + LazyIdentifier.getItemPath(item));
     }
 }
