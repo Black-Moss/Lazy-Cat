@@ -1,4 +1,4 @@
-﻿package com.blackmoss.lazycat.api.recipe.thaumaturge;
+package com.blackmoss.lazycat.api.recipe.thaumaturge;
 
 import com.leclowndu93150.thaumaturge.api.aspect.AspectInstance;
 import com.leclowndu93150.thaumaturge.api.aspect.IAspect;
