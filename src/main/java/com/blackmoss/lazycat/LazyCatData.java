@@ -10,9 +10,6 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
 public final class LazyCatData {
-    private LazyCatData() {
-    }
-
     public static <P extends RecipeProvider> P recipes(
             GatherDataEvent event,
             String namespace,

@@ -73,7 +73,6 @@ public final class ArcaneShapedBuilder extends AbstractThaumaturgeRecipeBuilder<
                 }
             }
         }
-        requireAspects();
     }
 
     @Override

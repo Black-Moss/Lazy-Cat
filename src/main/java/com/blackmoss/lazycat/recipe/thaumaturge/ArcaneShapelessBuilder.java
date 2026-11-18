@@ -51,7 +51,6 @@ public final class ArcaneShapelessBuilder extends AbstractThaumaturgeRecipeBuild
         if (ingredients.isEmpty()) {
             throw new IllegalStateException("Arcane workbench shapeless recipe requires at least one ingredient");
         }
-        requireAspects();
     }
 
     @Override
