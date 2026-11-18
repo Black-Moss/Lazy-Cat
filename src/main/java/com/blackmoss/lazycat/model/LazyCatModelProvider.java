@@ -31,6 +31,16 @@ public abstract class LazyCatModelProvider extends ModelProvider {
         this.modid = modid;
     }
 
+    private static Identifier defaultModel(ItemLike item) {
+        if (item.asItem() instanceof BlockItem blockItem) {
+            Block block = blockItem.getBlock();
+            return Identifier.fromNamespaceAndPath(
+                    LazyIdentifier.getBlockSpace(block), "block/" + LazyIdentifier.getBlockPath(block));
+        }
+        return Identifier.fromNamespaceAndPath(
+                LazyIdentifier.getItemSpace(item), "item/" + LazyIdentifier.getItemPath(item));
+    }
+
     @Override
     public @NonNull String getName() {
         return modid + " Model by Lazy Cat";
@@ -107,16 +117,6 @@ public abstract class LazyCatModelProvider extends ModelProvider {
 
     protected void plainModel(ItemLike item, Identifier model) {
         new ItemModelBuilder(this.context, item.asItem()).plainModel(model).save();
-    }
-
-    private static Identifier defaultModel(ItemLike item) {
-        if (item.asItem() instanceof BlockItem blockItem) {
-            Block block = blockItem.getBlock();
-            return Identifier.fromNamespaceAndPath(
-                    LazyIdentifier.getBlockSpace(block), "block/" + LazyIdentifier.getBlockPath(block));
-        }
-        return Identifier.fromNamespaceAndPath(
-                LazyIdentifier.getItemSpace(item), "item/" + LazyIdentifier.getItemPath(item));
     }
 
     protected Identifier getBlockModelId(Block block) {
