@@ -71,9 +71,10 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
     }
 
     protected void addAspect(ResourceKey<IAspect> aspect, String name, String desc, String help) {
-        add("aspect.%s.%s".formatted(modid, aspect), name);
-        add("aspect.%s.%s.desc".formatted(modid, aspect), desc);
-        add("aspect.%s.%s.help".formatted(modid, aspect), help);
+        var id = aspect.identifier().getPath();
+        add("aspect.%s.%s".formatted(modid, id), name);
+        add("aspect.%s.%s.desc".formatted(modid, id), desc);
+        add("aspect.%s.%s.help".formatted(modid, id), help);
     }
 
     protected void addWandCap(String wandCapId, String translations) {
