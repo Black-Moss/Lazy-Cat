@@ -15,6 +15,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 
@@ -45,42 +46,49 @@ public abstract class LazyCatModelProvider extends ModelProvider {
         return this.context;
     }
 
-    protected void blockCubeAll(BlockModelGenerators blockModels, ItemModelGenerators itemModels, Block block) {
+    protected void blockCubeAll(ModelContext context, Block block) {
+        var blockModels = this.context.blockModels();
+        var itemModels = this.context.itemModels();
+
         Identifier modelId = getBlockModelId(block);
         ModelTemplates.CUBE_ALL.create(modelId, TextureMapping.cube(block), blockModels.modelOutput);
         blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, BlockModelGenerators.plainVariant(modelId)));
         itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(modelId));
     }
 
-    protected void blockCustom(BlockModelGenerators blockModels, ItemModelGenerators itemModels, Block block) {
+    protected void blockCustom(Block block) {
         Identifier modelId = getBlockModelId(block);
         MultiVariant variant = new MultiVariant(WeightedList.of(new Variant(modelId)));
-        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant));
-        itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(modelId));
+        context.blockModels().blockStateOutput.accept(MultiVariantGenerator.dispatch(block, variant));
+        context.itemModels().itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(modelId));
     }
 
-    protected void onlyBlockState(BlockModelGenerators blockModels, Block block) {
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(getBlockModelId(block))));
+    protected void blockBlockState(Block block) {
+        context.blockModels().blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(getBlockModelId(block))));
     }
 
-    protected void onlyItemModel(ItemModelGenerators itemModels, Block block) {
-        itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getBlockModelId(block)));
+    protected void blockItemModel(Block block) {
+        context.itemModels().itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(getBlockModelId(block)));
     }
 
-    protected void blockObj(BlockModelGenerators blockModels, ItemModelGenerators itemModels, Block block) {
+    protected void blockObj(Block block) {
         Identifier modelId = getBlockModelId(block);
-        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(modelId)));
-        itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(modelId));
+        context.blockModels().blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, BlockModelGenerators.plainVariant(modelId)));
+        context.itemModels().itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(modelId));
     }
 
-    protected void blockFacing(BlockModelGenerators blockModels, ItemModelGenerators itemModels, Block block) {
+    protected void blockFacing(Block block) {
         Identifier modelId = getBlockModelId(block);
         MultiVariant variant = new MultiVariant(WeightedList.of(new Variant(modelId)));
 
-        blockModels.blockStateOutput.accept(
+        context.blockModels().blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(block, variant)
                         .with(BlockModelGenerators.ROTATION_FACING));
-        itemModels.itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(modelId));
+        context.itemModels().itemModelOutput.accept(block.asItem(), ItemModelUtils.plainModel(modelId));
+    }
+
+    protected void itemFlat(ItemLike item) {
+        context.itemModels().createFlatItemModel(item.asItem(), ModelTemplates.FLAT_ITEM);
     }
 
     private Identifier getBlockModelId(Block block) {
