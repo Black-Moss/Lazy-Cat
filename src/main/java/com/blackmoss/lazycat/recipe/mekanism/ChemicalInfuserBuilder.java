@@ -10,11 +10,11 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<ChemicalInfuserBuilder> {
+    private final ChemicalInfuserType type;
     private Object left;
     private Object right;
     private Object output;
     private int outputAmount = 1;
-    private final ChemicalInfuserType type;
 
     public ChemicalInfuserBuilder(RecipeContext context, ChemicalInfuserType type) {
         super(context, null);

@@ -16,9 +16,9 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoardBuilder> {
+    private final List<Extra> extras = new ArrayList<>();
     private Object primarySource;
     private Object toolSource;
-    private final List<Extra> extras = new ArrayList<>();
     private SoundEvent sound;
     private CuttingRecipeFolder folder = CuttingRecipeFolder.CUTTING;
 

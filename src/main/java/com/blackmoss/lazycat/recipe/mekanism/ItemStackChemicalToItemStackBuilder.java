@@ -11,11 +11,11 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public final class ItemStackChemicalToItemStackBuilder
         extends AbstractMekanismRecipeBuilder<ItemStackChemicalToItemStackBuilder> {
+    private final ItemStackChemicalToItemStackType type;
     private Object mainItem;
     private Object chemical;
     private int chemicalAmount = 1;
     private boolean perTick;
-    private final ItemStackChemicalToItemStackType type;
 
     public ItemStackChemicalToItemStackBuilder(RecipeContext context, ItemStackChemicalToItemStackType type) {
         super(context, null);

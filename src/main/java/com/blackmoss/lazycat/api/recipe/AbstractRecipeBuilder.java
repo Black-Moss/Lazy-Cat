@@ -21,12 +21,6 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
     private final List<ICondition> conditions = new ArrayList<>();
     private final LazyIngredient result;
-
-    @Override
-    public List<ICondition> conditionList() {
-        return conditions;
-    }
-
     private RecipeCategory category = RecipeCategory.MISC;
     private Integer count;
     private String group;
@@ -35,7 +29,6 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     private String suffix;
     private LazyIngredient defaultUnlock;
     private boolean allowEmptyAdvancement;
-
     protected AbstractRecipeBuilder(RecipeContext context, Object result) {
         this.context = Objects.requireNonNull(context, "context");
         this.result = result == null ? null : LazyIngredient.from(result);
@@ -51,6 +44,11 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
 
     protected static String folderOf(Enum<?> mode) {
         return mode == null ? "" : mode.name().toLowerCase(Locale.ROOT);
+    }
+
+    @Override
+    public List<ICondition> conditionList() {
+        return conditions;
     }
 
     protected abstract B self();

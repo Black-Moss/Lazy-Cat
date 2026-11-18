@@ -10,13 +10,13 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBuilder> {
+    private final RotaryType type;
     private Object fluidInput;
     private Object chemicalInput;
     private Object chemicalOutput;
     private int chemicalOutputAmount = 1;
     private Object fluidOutput;
     private int fluidOutputAmount = 1;
-    private final RotaryType type;
 
     public RotaryBuilder(RecipeContext context, RotaryType type) {
         super(context, null);

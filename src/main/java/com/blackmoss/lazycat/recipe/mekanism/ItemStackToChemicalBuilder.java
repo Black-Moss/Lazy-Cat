@@ -10,10 +10,10 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuilder<ItemStackToChemicalBuilder> {
+    private final ItemStackToChemicalType type;
     private Object input;
     private Object output;
     private int outputAmount = 1;
-    private final ItemStackToChemicalType type;
 
     public ItemStackToChemicalBuilder(RecipeContext context, ItemStackToChemicalType type) {
         super(context, null);

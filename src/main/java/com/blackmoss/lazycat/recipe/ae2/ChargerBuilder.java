@@ -1,9 +1,9 @@
 package com.blackmoss.lazycat.recipe.ae2;
 
+import appeng.recipes.handlers.ChargerRecipe;
 import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
-import appeng.recipes.handlers.ChargerRecipe;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;

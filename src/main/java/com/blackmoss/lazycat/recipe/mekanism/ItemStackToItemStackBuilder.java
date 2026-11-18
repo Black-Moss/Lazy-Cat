@@ -10,8 +10,8 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBuilder<ItemStackToItemStackBuilder> {
-    private Object input;
     private final ItemStackToItemStackType type;
+    private Object input;
 
     public ItemStackToItemStackBuilder(RecipeContext context, Object result, ItemStackToItemStackType type) {
         super(context, result);

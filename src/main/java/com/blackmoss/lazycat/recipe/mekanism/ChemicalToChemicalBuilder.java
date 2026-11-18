@@ -10,10 +10,10 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuilder<ChemicalToChemicalBuilder> {
+    private final ChemicalToChemicalType type;
     private Object input;
     private Object output;
     private int outputAmount = 1;
-    private final ChemicalToChemicalType type;
 
     public ChemicalToChemicalBuilder(RecipeContext context, ChemicalToChemicalType type) {
         super(context, null);
