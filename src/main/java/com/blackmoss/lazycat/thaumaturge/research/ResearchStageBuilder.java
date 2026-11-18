@@ -70,8 +70,18 @@ public final class ResearchStageBuilder {
         return this;
     }
 
+    public ResearchStageBuilder obtain(Object items) {
+        this.obtain.add(requirement(items, 1));
+        return this;
+    }
+
     public ResearchStageBuilder obtain(Object items, int amount) {
         this.obtain.add(requirement(items, amount));
+        return this;
+    }
+
+    public ResearchStageBuilder craft(Object items) {
+        this.craft.add(requirement(items, 1));
         return this;
     }
 
@@ -90,8 +100,18 @@ public final class ResearchStageBuilder {
         return this;
     }
 
+    public ResearchStageBuilder knowledge(KnowledgeType type, Object category) {
+        this.knowledge.add(reward(type, category, 1));
+        return this;
+    }
+
     public ResearchStageBuilder knowledge(KnowledgeType type, Object category, int amount) {
         this.knowledge.add(reward(type, category, amount));
+        return this;
+    }
+
+    public ResearchStageBuilder requiredKnowledge(KnowledgeType type, Object category) {
+        this.requiredKnowledge.add(reward(type, category, 1));
         return this;
     }
 
@@ -116,11 +136,11 @@ public final class ResearchStageBuilder {
     public ResearchStageBuilder construct(int xSize, int ySize, int zSize, String... cells) {
         Objects.requireNonNull(cells, "cells");
         if (xSize < 1 || ySize < 1 || zSize < 1) {
-            throw new IllegalArgumentException("Construct dimensions must be positive: " + xSize + "x" + ySize + "x" + zSize);
+            throw new IllegalArgumentException("Construct dimensions must be positive: %dx%dx%d".formatted(xSize, ySize, zSize));
         }
         int expected = xSize * ySize * zSize;
         if (cells.length != expected) {
-            throw new IllegalArgumentException("Construct needs " + expected + " cells but got " + cells.length);
+            throw new IllegalArgumentException("Construct needs %d cells but got %d".formatted(expected, cells.length));
         }
         this.xSize = xSize;
         this.ySize = ySize;

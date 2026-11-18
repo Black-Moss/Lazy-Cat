@@ -28,8 +28,8 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
     private final List<JsonObject> noteAspects = new ArrayList<>();
     private final List<ResearchStageBuilder> stages = new ArrayList<>();
     private ResourceLocation id;
-    private int column;
-    private int row;
+    private int x;
+    private int y;
     private int complexity = 1;
 
     public ResearchEntryBuilder(ResearchContext context, Object category, String nameKey) {
@@ -58,19 +58,19 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
         return id(this.context.resolveId(path));
     }
 
-    public ResearchEntryBuilder position(int column, int row) {
-        this.column = column;
-        this.row = row;
+    public ResearchEntryBuilder position(int x, int y) {
+        this.x = x;
+        this.y = y;
         return this;
     }
 
-    public ResearchEntryBuilder column(int column) {
-        this.column = column;
+    public ResearchEntryBuilder x(int x) {
+        this.x = x;
         return this;
     }
 
-    public ResearchEntryBuilder row(int row) {
-        this.row = row;
+    public ResearchEntryBuilder y(int y) {
+        this.y = y;
         return this;
     }
 
@@ -143,7 +143,7 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
     }
 
     public ResearchStageBuilder stage() {
-        ResearchStageBuilder stage = new ResearchStageBuilder(this.context, this, this.name + ".stage_" + (this.stages.size() + 1));
+        ResearchStageBuilder stage = new ResearchStageBuilder(this.context, this, "%s.stage_%d".formatted(this.name, this.stages.size() + 1));
         this.stages.add(stage);
         return stage;
     }
@@ -179,8 +179,8 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
         if (!this.siblings.isEmpty()) {
             json.add("siblings", strings(this.siblings));
         }
-        json.addProperty("column", this.column);
-        json.addProperty("row", this.row);
+        json.addProperty("column", this.x);
+        json.addProperty("row", this.y);
         JsonArray stageArray = new JsonArray();
         this.stages.forEach(stage -> stageArray.add(stage.toJson()));
         json.add("stages", stageArray);
