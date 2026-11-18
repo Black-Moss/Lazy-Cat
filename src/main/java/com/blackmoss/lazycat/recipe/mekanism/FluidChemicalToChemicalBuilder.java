@@ -33,7 +33,7 @@ public final class FluidChemicalToChemicalBuilder
 
     @Override
     protected String defaultIdPath() {
-        return sourcePath(output, "output");
+        return sourcePath(this.output, "output");
     }
 
     public FluidChemicalToChemicalBuilder fluidInput(Object source) {
@@ -79,7 +79,7 @@ public final class FluidChemicalToChemicalBuilder
         FluidChemicalToChemicalRecipeBuilder.washing(
                         fluidIngredient(fluidInput, 1),
                         chemicalIngredient(chemicalInput, chemicalInputAmount),
-                        chemicalStack(output, outputAmount))
+                        chemicalStack(this.output, outputAmount))
                 .build(output, id);
     }
 }

@@ -13,11 +13,11 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
     private Object input;
     private Object output;
     private int outputAmount = 1;
-    private final Mode mode;
+    private final ChemicalToChemicalType type;
 
-    public ChemicalToChemicalBuilder(RecipeContext context, Mode mode) {
+    public ChemicalToChemicalBuilder(RecipeContext context, ChemicalToChemicalType type) {
         super(context, null);
-        this.mode = Objects.requireNonNull(mode, "mode");
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -27,12 +27,12 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
 
     @Override
     protected String defaultFolder() {
-        return folderOf(mode);
+        return folderOf(type);
     }
 
     @Override
     protected String defaultIdPath() {
-        return sourcePath(output, "output");
+        return sourcePath(this.output, "output");
     }
 
     public ChemicalToChemicalBuilder input(Object source) {
@@ -58,20 +58,23 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
         if (output == null) {
             throw new IllegalStateException("requires a chemical output");
         }
+        if (type == null) {
+            throw new IllegalStateException("requires a type");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceLocation id) {
-        ChemicalToChemicalRecipeBuilder builder = switch (mode) {
+        ChemicalToChemicalRecipeBuilder builder = switch (type) {
             case ACTIVATING -> ChemicalToChemicalRecipeBuilder.activating(
-                    chemicalIngredient(input, 1), chemicalStack(output, outputAmount));
+                    chemicalIngredient(input, 1), chemicalStack(this.output, outputAmount));
             case CENTRIFUGING -> ChemicalToChemicalRecipeBuilder.centrifuging(
-                    chemicalIngredient(input, 1), chemicalStack(output, outputAmount));
+                    chemicalIngredient(input, 1), chemicalStack(this.output, outputAmount));
         };
         builder.build(output, id);
     }
 
-    public enum Mode {
+    public enum ChemicalToChemicalType {
         ACTIVATING,
         CENTRIFUGING
     }

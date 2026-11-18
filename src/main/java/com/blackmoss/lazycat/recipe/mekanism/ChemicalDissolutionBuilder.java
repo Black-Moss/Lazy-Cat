@@ -33,7 +33,7 @@ public final class ChemicalDissolutionBuilder extends AbstractMekanismRecipeBuil
 
     @Override
     protected String defaultIdPath() {
-        return sourcePath(output, "output");
+        return sourcePath(this.output, "output");
     }
 
     public ChemicalDissolutionBuilder itemInput(Object source) {
@@ -84,7 +84,7 @@ public final class ChemicalDissolutionBuilder extends AbstractMekanismRecipeBuil
         ChemicalDissolutionRecipeBuilder.dissolution(
                         itemIngredient(itemInput),
                         chemicalIngredient(chemicalInput, chemicalInputAmount),
-                        chemicalStack(output, outputAmount),
+                        chemicalStack(this.output, outputAmount),
                         perTick)
                 .build(output, id);
     }

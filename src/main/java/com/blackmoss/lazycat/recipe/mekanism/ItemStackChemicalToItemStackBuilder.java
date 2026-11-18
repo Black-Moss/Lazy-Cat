@@ -15,11 +15,11 @@ public final class ItemStackChemicalToItemStackBuilder
     private Object chemical;
     private int chemicalAmount = 1;
     private boolean perTick;
-    private final Mode mode;
+    private final ItemStackChemicalToItemStackType type;
 
-    public ItemStackChemicalToItemStackBuilder(RecipeContext context, Mode mode) {
+    public ItemStackChemicalToItemStackBuilder(RecipeContext context, ItemStackChemicalToItemStackType type) {
         super(context, null);
-        this.mode = Objects.requireNonNull(mode, "mode");
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -29,7 +29,7 @@ public final class ItemStackChemicalToItemStackBuilder
 
     @Override
     protected String defaultFolder() {
-        return folderOf(mode);
+        return folderOf(type);
     }
 
     @Override
@@ -65,11 +65,14 @@ public final class ItemStackChemicalToItemStackBuilder
         if (chemical == null) {
             throw new IllegalStateException("requires a chemical input");
         }
+        if (type == null) {
+            throw new IllegalStateException("requires a type");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceLocation id) {
-        ItemStackChemicalToItemStackRecipeBuilder builder = switch (mode) {
+        ItemStackChemicalToItemStackRecipeBuilder builder = switch (type) {
             case METALLURGIC_INFUSING -> ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
                     itemIngredient(mainItem), chemicalIngredient(chemical, chemicalAmount), result(), perTick);
             case COMPRESSING -> ItemStackChemicalToItemStackRecipeBuilder.compressing(
@@ -84,7 +87,7 @@ public final class ItemStackChemicalToItemStackBuilder
         builder.build(output, id);
     }
 
-    public enum Mode {
+    public enum ItemStackChemicalToItemStackType {
         METALLURGIC_INFUSING,
         COMPRESSING,
         PURIFYING,

@@ -16,6 +16,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 
@@ -120,6 +121,7 @@ public abstract class AbstractMekanismRecipeBuilder<B extends AbstractMekanismRe
             case ResourceLocation identifier -> identifier.getPath();
             case ResourceKey<?> key -> sanitize(key.location().toString());
             case TagKey<?> tag -> sanitize(tag.location().toString());
+            case ItemLike item -> LazyIngredient.from(item).label();
             case Holder<?> holder -> holder.unwrapKey()
                     .map(key -> sanitize(key.location().toString()))
                     .orElseThrow(() -> new IllegalStateException(field + " holder has no registry key"));

@@ -14,11 +14,11 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
     private Object right;
     private Object output;
     private int outputAmount = 1;
-    private final Mode mode;
+    private final ChemicalInfuserType type;
 
-    public ChemicalInfuserBuilder(RecipeContext context, Mode mode) {
+    public ChemicalInfuserBuilder(RecipeContext context, ChemicalInfuserType type) {
         super(context, null);
-        this.mode = Objects.requireNonNull(mode, "mode");
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -28,12 +28,12 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
 
     @Override
     protected String defaultFolder() {
-        return folderOf(mode);
+        return folderOf(type);
     }
 
     @Override
     protected String defaultIdPath() {
-        return sourcePath(output, "output");
+        return sourcePath(this.output, "output");
     }
 
     public ChemicalInfuserBuilder left(Object source) {
@@ -67,20 +67,23 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
         if (output == null) {
             throw new IllegalStateException("requires a chemical output");
         }
+        if (type == null) {
+            throw new IllegalStateException("requires a type");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceLocation id) {
-        ChemicalChemicalToChemicalRecipeBuilder builder = switch (mode) {
+        ChemicalChemicalToChemicalRecipeBuilder builder = switch (type) {
             case CHEMICAL_INFUSING -> ChemicalChemicalToChemicalRecipeBuilder.chemicalInfusing(
-                    chemicalIngredient(left, 1), chemicalIngredient(right, 1), chemicalStack(output, outputAmount));
+                    chemicalIngredient(left, 1), chemicalIngredient(right, 1), chemicalStack(this.output, outputAmount));
             case PIGMENT_MIXING -> ChemicalChemicalToChemicalRecipeBuilder.pigmentMixing(
-                    chemicalIngredient(left, 1), chemicalIngredient(right, 1), chemicalStack(output, outputAmount));
+                    chemicalIngredient(left, 1), chemicalIngredient(right, 1), chemicalStack(this.output, outputAmount));
         };
         builder.build(output, id);
     }
 
-    public enum Mode {
+    public enum ChemicalInfuserType {
         CHEMICAL_INFUSING,
         PIGMENT_MIXING
     }

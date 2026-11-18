@@ -11,11 +11,11 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBuilder<ItemStackToItemStackBuilder> {
     private Object input;
-    private final Mode mode;
+    private final ItemStackToItemStackType type;
 
-    public ItemStackToItemStackBuilder(RecipeContext context, Object result, Mode mode) {
+    public ItemStackToItemStackBuilder(RecipeContext context, Object result, ItemStackToItemStackType type) {
         super(context, result);
-        this.mode = Objects.requireNonNull(mode, "mode");
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -25,7 +25,7 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
 
     @Override
     protected String defaultFolder() {
-        return folderOf(mode);
+        return folderOf(type);
     }
 
     @Override
@@ -43,14 +43,14 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
         if (input == null) {
             throw new IllegalStateException("requires an item input");
         }
-        if (mode == null) {
-            throw new IllegalStateException("requires a mode");
+        if (type == null) {
+            throw new IllegalStateException("requires a type");
         }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceLocation id) {
-        ItemStackToItemStackRecipeBuilder builder = switch (mode) {
+        ItemStackToItemStackRecipeBuilder builder = switch (type) {
             case CRUSHING -> ItemStackToItemStackRecipeBuilder.crushing(itemIngredient(input), result());
             case ENRICHING -> ItemStackToItemStackRecipeBuilder.enriching(itemIngredient(input), result());
             case SMELTING -> ItemStackToItemStackRecipeBuilder.smelting(itemIngredient(input), result());
@@ -58,7 +58,7 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
         builder.build(output, id);
     }
 
-    public enum Mode {
+    public enum ItemStackToItemStackType {
         CRUSHING,
         ENRICHING,
         SMELTING

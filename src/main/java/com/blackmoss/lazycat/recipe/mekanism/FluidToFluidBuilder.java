@@ -30,7 +30,7 @@ public final class FluidToFluidBuilder extends AbstractMekanismRecipeBuilder<Flu
 
     @Override
     protected String defaultIdPath() {
-        return sourcePath(output, "output");
+        return sourcePath(this.output, "output");
     }
 
     public FluidToFluidBuilder input(Object source) {
@@ -61,6 +61,6 @@ public final class FluidToFluidBuilder extends AbstractMekanismRecipeBuilder<Flu
     @Override
     protected void build(RecipeOutput output, ResourceLocation id) {
         FluidToFluidRecipeBuilder.evaporating(
-                fluidIngredient(input, 1), fluidStack(output, outputAmount)).build(output, id);
+                fluidIngredient(input, 1), fluidStack(this.output, outputAmount)).build(output, id);
     }
 }

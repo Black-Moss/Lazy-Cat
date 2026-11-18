@@ -13,11 +13,11 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
     private Object input;
     private Object output;
     private int outputAmount = 1;
-    private final Mode mode;
+    private final ItemStackToChemicalType type;
 
-    public ItemStackToChemicalBuilder(RecipeContext context, Mode mode) {
+    public ItemStackToChemicalBuilder(RecipeContext context, ItemStackToChemicalType type) {
         super(context, null);
-        this.mode = Objects.requireNonNull(mode, "mode");
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -27,12 +27,12 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
 
     @Override
     protected String defaultFolder() {
-        return folderOf(mode);
+        return folderOf(type);
     }
 
     @Override
     protected String defaultIdPath() {
-        return sourcePath(output, "output");
+        return sourcePath(this.output, "output");
     }
 
     public ItemStackToChemicalBuilder input(Object source) {
@@ -58,22 +58,25 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
         if (output == null) {
             throw new IllegalStateException("requires a chemical output");
         }
+        if (type == null) {
+            throw new IllegalStateException("requires a type");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceLocation id) {
-        ItemStackToChemicalRecipeBuilder builder = switch (mode) {
+        ItemStackToChemicalRecipeBuilder builder = switch (type) {
             case CHEMICAL_CONVERSION -> ItemStackToChemicalRecipeBuilder.chemicalConversion(
-                    itemIngredient(input), chemicalStack(output, outputAmount));
+                    itemIngredient(input), chemicalStack(this.output, outputAmount));
             case OXIDIZING -> ItemStackToChemicalRecipeBuilder.oxidizing(
-                    itemIngredient(input), chemicalStack(output, outputAmount));
+                    itemIngredient(input), chemicalStack(this.output, outputAmount));
             case PIGMENT_EXTRACTING -> ItemStackToChemicalRecipeBuilder.pigmentExtracting(
-                    itemIngredient(input), chemicalStack(output, outputAmount));
+                    itemIngredient(input), chemicalStack(this.output, outputAmount));
         };
         builder.build(output, id);
     }
 
-    public enum Mode {
+    public enum ItemStackToChemicalType {
         CHEMICAL_CONVERSION,
         OXIDIZING,
         PIGMENT_EXTRACTING
