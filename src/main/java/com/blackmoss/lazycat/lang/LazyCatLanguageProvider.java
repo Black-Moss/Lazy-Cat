@@ -30,6 +30,10 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
         }
     }
 
+    protected void addTooltip(String tooltip, String translations) {
+        add("tooltip.%s.%s".formatted(modid, tooltip), translations);
+    }
+
     protected void addResearch(String researchId, String title, String... stage) {
         add("research.%s.%s.title".formatted(modid, researchId), title);
         for (int i = 0; i < stage.length; i++) {

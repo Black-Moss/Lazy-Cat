@@ -1,6 +1,7 @@
 package com.blackmoss.lazycat.model;
 
 import com.blackmoss.lazycat.api.LazyIdentifier;
+import com.blackmoss.lazycat.api.model.ItemModelBuilder;
 import com.blackmoss.lazycat.api.model.ModelContext;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -14,6 +15,7 @@ import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.random.WeightedList;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -91,11 +93,37 @@ public abstract class LazyCatModelProvider extends ModelProvider {
         context.itemModels().generateFlatItem(item.asItem(), ModelTemplates.FLAT_ITEM);
     }
 
-    private Identifier getBlockModelId(Block block) {
+    protected void itemTwoLayered(ItemLike item) {
+        new ItemModelBuilder(this.context, item.asItem()).twoLayered().save();
+    }
+
+    protected void itemTwoLayered(ItemLike item, Identifier base, Identifier overlay) {
+        new ItemModelBuilder(this.context, item.asItem()).twoLayered(base, overlay).save();
+    }
+
+    protected void plainModel(ItemLike item) {
+        new ItemModelBuilder(this.context, item.asItem()).plainModel(defaultModel(item)).save();
+    }
+
+    protected void plainModel(ItemLike item, Identifier model) {
+        new ItemModelBuilder(this.context, item.asItem()).plainModel(model).save();
+    }
+
+    private static Identifier defaultModel(ItemLike item) {
+        if (item.asItem() instanceof BlockItem blockItem) {
+            Block block = blockItem.getBlock();
+            return Identifier.fromNamespaceAndPath(
+                    LazyIdentifier.getBlockSpace(block), "block/" + LazyIdentifier.getBlockPath(block));
+        }
+        return Identifier.fromNamespaceAndPath(
+                LazyIdentifier.getItemSpace(item), "item/" + LazyIdentifier.getItemPath(item));
+    }
+
+    protected Identifier getBlockModelId(Block block) {
         return Identifier.fromNamespaceAndPath(this.modid, "block/" + LazyIdentifier.getBlockIdentifier(block));
     }
 
-    private Identifier getItemModelId(Item item) {
+    protected Identifier getItemModelId(Item item) {
         return Identifier.fromNamespaceAndPath(this.modid, "item/" + LazyIdentifier.getItemIdentifier(item));
     }
 }
