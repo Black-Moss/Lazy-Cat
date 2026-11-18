@@ -13,15 +13,15 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuilder> {
-    private final InscriberProcessType mode;
+    private final InscriberProcessType type;
     private Object input;
     private Object plate;
     private Object fluid;
     private Object item;
 
-    public InscriberBuilder(RecipeContext context, Object result, InscriberProcessType mode) {
+    public InscriberBuilder(RecipeContext context, Object result, InscriberProcessType type) {
         super(context, result);
-        this.mode = Objects.requireNonNull(mode, "mode");
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -68,7 +68,7 @@ public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuild
         Ingredient fluidIngredient = LazyIngredient.from(fluid).resolve(context().items());
         Ingredient itemIngredient = LazyIngredient.from(item).resolve(context().items());
         InscriberRecipe recipe = new InscriberRecipe(
-                inputIngredient, result(), fluidIngredient, itemIngredient, mode);
+                inputIngredient, result(), fluidIngredient, itemIngredient, type);
         output.accept(id, recipe, null);
     }
 }

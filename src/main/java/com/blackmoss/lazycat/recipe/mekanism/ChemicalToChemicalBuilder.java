@@ -2,6 +2,7 @@ package com.blackmoss.lazycat.recipe.mekanism;
 
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import com.blackmoss.lazycat.api.recipe.mekanism.AbstractMekanismRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.mekanism.ChemicalToChemicalType;
 import mekanism.api.datagen.recipe.builder.ChemicalToChemicalRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -72,10 +73,5 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
                     chemicalIngredient(input, 1), chemicalStack(this.output, outputAmount));
         };
         builder.build(output, id);
-    }
-
-    public enum ChemicalToChemicalType {
-        ACTIVATING,
-        CENTRIFUGING
     }
 }
