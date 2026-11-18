@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEntryBuilder> {
     private final ResearchContext context;
     private final String category;
@@ -110,6 +110,11 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
 
     public ResearchEntryBuilder icon(Object icon) {
         this.icons.add(ResearchContext.iconRef(icon));
+        return this;
+    }
+
+    public ResearchEntryBuilder noteAspect(Object aspect) {
+        noteAspect(aspect, 5);
         return this;
     }
 
