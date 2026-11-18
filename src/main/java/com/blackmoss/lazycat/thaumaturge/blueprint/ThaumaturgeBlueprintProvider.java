@@ -11,9 +11,8 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
 public abstract class ThaumaturgeBlueprintProvider implements DataProvider {
-    private String modid;
-
     private final BlueprintContext context;
+    private String modid;
 
     protected ThaumaturgeBlueprintProvider(PackOutput output, String modid) {
         this(BlueprintContext.of(output, modid));

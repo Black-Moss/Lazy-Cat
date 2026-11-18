@@ -32,6 +32,23 @@ public final class BlueprintBuilder implements ConditionalBuilder<BlueprintBuild
         this.id = Objects.requireNonNull(id, "id");
     }
 
+    private static void dropDefaultPriorities(JsonObject blueprint) {
+        JsonElement keys = blueprint.get("keys");
+        if (keys == null || !keys.isJsonObject()) {
+            return;
+        }
+        for (Map.Entry<String, JsonElement> entry : keys.getAsJsonObject().entrySet()) {
+            if (!entry.getValue().isJsonObject()) {
+                continue;
+            }
+            JsonObject part = entry.getValue().getAsJsonObject();
+            JsonElement priority = part.get("priority");
+            if (priority != null && priority.isJsonPrimitive() && priority.getAsInt() == 0) {
+                part.remove("priority");
+            }
+        }
+    }
+
     public BlueprintBuilder size(int x, int y, int z) {
         if (x < 1 || y < 1 || z < 1) {
             throw new IllegalArgumentException("Blueprint size must be positive: %dx%dx%d".formatted(x, y, z));
@@ -112,23 +129,6 @@ public final class BlueprintBuilder implements ConditionalBuilder<BlueprintBuild
         dropDefaultPriorities(json);
         writeConditions(json);
         this.context.submit(outputId, json);
-    }
-
-    private static void dropDefaultPriorities(JsonObject blueprint) {
-        JsonElement keys = blueprint.get("keys");
-        if (keys == null || !keys.isJsonObject()) {
-            return;
-        }
-        for (Map.Entry<String, JsonElement> entry : keys.getAsJsonObject().entrySet()) {
-            if (!entry.getValue().isJsonObject()) {
-                continue;
-            }
-            JsonObject part = entry.getValue().getAsJsonObject();
-            JsonElement priority = part.get("priority");
-            if (priority != null && priority.isJsonPrimitive() && priority.getAsInt() == 0) {
-                part.remove("priority");
-            }
-        }
     }
 
     private void validate(ResourceLocation outputId) {

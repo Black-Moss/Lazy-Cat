@@ -29,6 +29,7 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     private String suffix;
     private LazyIngredient defaultUnlock;
     private boolean allowEmptyAdvancement;
+
     protected AbstractRecipeBuilder(RecipeContext context, Object result) {
         this.context = Objects.requireNonNull(context, "context");
         this.result = result == null ? null : LazyIngredient.from(result);

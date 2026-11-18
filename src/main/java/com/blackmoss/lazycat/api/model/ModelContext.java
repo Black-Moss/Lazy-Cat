@@ -43,6 +43,14 @@ public final class ModelContext {
         }
     }
 
+    private static ResourceLocation relative(ResourceLocation id, String folder) {
+        String path = id.getPath();
+        if (path.startsWith(folder + "/")) {
+            path = path.substring(folder.length() + 1);
+        }
+        return ResourceLocation.fromNamespaceAndPath(id.getNamespace(), path);
+    }
+
     public String namespace() {
         return this.namespace;
     }
@@ -60,14 +68,6 @@ public final class ModelContext {
     public void submitBlockState(ResourceLocation id, JsonObject json) {
         Objects.requireNonNull(id, "id");
         submit(this.blockStateData, id, json, "blockstate");
-    }
-
-    private static ResourceLocation relative(ResourceLocation id, String folder) {
-        String path = id.getPath();
-        if (path.startsWith(folder + "/")) {
-            path = path.substring(folder.length() + 1);
-        }
-        return ResourceLocation.fromNamespaceAndPath(id.getNamespace(), path);
     }
 
     public CompletableFuture<?> save(CachedOutput cache) {

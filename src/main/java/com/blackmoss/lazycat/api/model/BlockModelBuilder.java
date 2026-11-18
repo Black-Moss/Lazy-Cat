@@ -30,6 +30,15 @@ public final class BlockModelBuilder extends AbstractModelBuilder<BlockModelBuil
         return ResourceLocation.fromNamespaceAndPath(LazyIdentifier.getBlockSpace(block), "block/" + LazyIdentifier.getBlockPath(block));
     }
 
+    private static void addVariant(JsonObject variants, String key, ResourceLocation model, int y) {
+        JsonObject variant = new JsonObject();
+        variant.addProperty("model", model.toString());
+        if (y != 0) {
+            variant.addProperty("y", y);
+        }
+        variants.add(key, variant);
+    }
+
     @Override
     protected BlockModelBuilder self() {
         return this;
@@ -100,14 +109,5 @@ public final class BlockModelBuilder extends AbstractModelBuilder<BlockModelBuil
             itemJson.addProperty("parent", stateModelId.toString());
             this.context().submitItem(this.blockId, itemJson);
         }
-    }
-
-    private static void addVariant(JsonObject variants, String key, ResourceLocation model, int y) {
-        JsonObject variant = new JsonObject();
-        variant.addProperty("model", model.toString());
-        if (y != 0) {
-            variant.addProperty("y", y);
-        }
-        variants.add(key, variant);
     }
 }

@@ -11,8 +11,8 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
 public abstract class ThaumaturgeResearchProvider implements DataProvider {
-    private String modid;
     private final ResearchContext context;
+    private String modid;
 
     protected ThaumaturgeResearchProvider(PackOutput output, String modid) {
         this(ResearchContext.of(output, modid));
