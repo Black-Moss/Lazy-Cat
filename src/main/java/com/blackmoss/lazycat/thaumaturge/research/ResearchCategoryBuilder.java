@@ -1,19 +1,22 @@
 package com.blackmoss.lazycat.thaumaturge.research;
 
+import com.blackmoss.lazycat.api.condition.ConditionalBuilder;
 import com.blackmoss.lazycat.api.thaumaturge.research.ResearchContext;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @SuppressWarnings("unused")
-public final class ResearchCategoryBuilder {
+public final class ResearchCategoryBuilder implements ConditionalBuilder<ResearchCategoryBuilder> {
     private final ResearchContext context;
     private final ResourceLocation id;
     private final List<JsonObject> formula = new ArrayList<>();
+    private final List<ICondition> conditions = new ArrayList<>();
     private String requiredResearch;
     private String icon;
     private String background;
@@ -64,6 +67,11 @@ public final class ResearchCategoryBuilder {
         return this;
     }
 
+    @Override
+    public List<ICondition> conditionList() {
+        return this.conditions;
+    }
+
     public ResourceLocation id() {
         return this.id;
     }
@@ -86,6 +94,7 @@ public final class ResearchCategoryBuilder {
         if (this.index != 0) {
             json.addProperty("index", this.index);
         }
+        writeConditions(json);
         this.context.submitCategory(this.id, json);
     }
 }

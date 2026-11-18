@@ -1,6 +1,7 @@
 package com.blackmoss.lazycat.api.recipe;
 
 import com.blackmoss.lazycat.api.LazyIngredient;
+import com.blackmoss.lazycat.api.condition.ConditionalBuilder;
 import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -10,17 +11,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.conditions.ICondition;
-import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 
 import java.util.*;
 import java.util.function.BiConsumer;
 
 @SuppressWarnings({"UnusedReturnValue", "SameParameterValue", "unused"})
-public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> {
+public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> implements ConditionalBuilder<B> {
     private final RecipeContext context;
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
     private final List<ICondition> conditions = new ArrayList<>();
     private final LazyIngredient result;
+
+    @Override
+    public List<ICondition> conditionList() {
+        return conditions;
+    }
 
     private RecipeCategory category = RecipeCategory.MISC;
     private Integer count;
@@ -175,26 +180,6 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
         return unlockedBy("has_" + ingredient.label(), context.has(source));
     }
 
-    public B when(ICondition... conditions) {
-        Objects.requireNonNull(conditions, "conditions");
-        for (ICondition condition : conditions) {
-            this.conditions.add(Objects.requireNonNull(condition, "conditions contains null"));
-        }
-        return self();
-    }
-
-    public B ifModLoaded(String... modIds) {
-        Objects.requireNonNull(modIds, "modIds");
-        for (String modId : modIds) {
-            Objects.requireNonNull(modId, "modIds contains null");
-            if (modId.isBlank()) {
-                throw new IllegalArgumentException("modId must not be blank");
-            }
-            conditions.add(new ModLoadedCondition(modId));
-        }
-        return self();
-    }
-
     public void save() {
         validate();
         emit(resolveId());
@@ -241,9 +226,9 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     protected final void emit(ResourceLocation id) {
         Objects.requireNonNull(id, "id");
         RecipeOutput target = context.output();
-        if (!conditions.isEmpty()) {
+        if (hasConditions()) {
             target = Objects.requireNonNull(
-                    target.withConditions(conditions.toArray(ICondition[]::new)),
+                    target.withConditions(conditionsArray()),
                     "conditional recipe output");
         }
         build(target, id);

@@ -1,11 +1,13 @@
 package com.blackmoss.lazycat.thaumaturge.research;
 
+import com.blackmoss.lazycat.api.condition.ConditionalBuilder;
 import com.blackmoss.lazycat.api.thaumaturge.research.ResearchContext;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.leclowndu93150.thaumaturge.api.research.ResearchEntryMeta;
 import com.leclowndu93150.thaumaturge.api.research.ResearchParent;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,10 +15,11 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 @SuppressWarnings("unused")
-public final class ResearchEntryBuilder {
+public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEntryBuilder> {
     private final ResearchContext context;
     private final String category;
     private final String name;
+    private final List<ICondition> conditions = new ArrayList<>();
     private final List<String> parents = new ArrayList<>();
     private final List<String> siblings = new ArrayList<>();
     private final List<String> meta = new ArrayList<>();
@@ -39,6 +42,11 @@ public final class ResearchEntryBuilder {
         JsonArray array = new JsonArray();
         values.forEach(array::add);
         return array;
+    }
+
+    @Override
+    public List<ICondition> conditionList() {
+        return this.conditions;
     }
 
     public ResearchEntryBuilder id(ResourceLocation id) {
@@ -198,6 +206,7 @@ public final class ResearchEntryBuilder {
         if (this.complexity != 1) {
             json.addProperty("complexity", this.complexity);
         }
+        writeConditions(json);
         this.context.submitEntry(id, json);
     }
 
