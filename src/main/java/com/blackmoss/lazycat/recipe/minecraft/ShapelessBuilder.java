@@ -1,0 +1,65 @@
+package com.blackmoss.lazycat.recipe.minecraft;
+
+import com.blackmoss.lazycat.api.LazyIngredient;
+import com.blackmoss.lazycat.api.recipe.AbstractRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.RecipeContext;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@SuppressWarnings("unused")
+public final class ShapelessBuilder extends AbstractRecipeBuilder<ShapelessBuilder> {
+    private static final int MAX_INGREDIENTS = 9;
+
+    private final List<LazyIngredient> recipeIngredients = new ArrayList<>();
+
+    public ShapelessBuilder(RecipeContext context, Object result) {
+        super(context, result);
+    }
+
+    @Override
+    protected ShapelessBuilder self() {
+        return this;
+    }
+
+    public ShapelessBuilder requires(Object source) {
+        return requires(source, 1);
+    }
+
+    public ShapelessBuilder requires(Object source, int count) {
+        if (count < 1) {
+            throw new IllegalArgumentException("count must be positive");
+        }
+        LazyIngredient ingredient = LazyIngredient.from(source);
+        for (int i = 0; i < count; i++) {
+            recipeIngredients.add(ingredient);
+        }
+        defaultUnlock(ingredient);
+        return this;
+    }
+
+    @Override
+    protected void validate() {
+        if (recipeIngredients.isEmpty()) {
+            throw new IllegalStateException("Shapeless recipe %s has no ingredients".formatted(defaultIdPath()));
+        }
+        if (recipeIngredients.size() > MAX_INGREDIENTS) {
+            throw new IllegalStateException(
+                    "Shapeless recipe %s has more than %d ingredients".formatted(defaultIdPath(), MAX_INGREDIENTS));
+        }
+    }
+
+    @Override
+    protected void build(RecipeOutput output, ResourceLocation id) {
+        ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(category(), result());
+        for (LazyIngredient ingredient : recipeIngredients) {
+            builder.requires(ingredient.resolve(context().items()));
+        }
+        builder.group(group());
+        applyCriteria(builder::unlockedBy);
+        builder.save(output, id);
+    }
+}
