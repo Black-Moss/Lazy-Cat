@@ -12,23 +12,23 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
 public abstract class LazyCatRecipeProvider extends RecipeProvider {
-    protected final String namespace;
+    protected final String modid;
 
     protected LazyCatRecipeProvider(
             PackOutput output,
             CompletableFuture<HolderLookup.Provider> registries,
-            String namespace) {
+            String modid) {
         super(output, registries);
-        Objects.requireNonNull(namespace, "namespace");
-        if (namespace.isBlank()) {
-            throw new IllegalArgumentException("namespace must not be blank");
+        Objects.requireNonNull(modid, "modid");
+        if (modid.isBlank()) {
+            throw new IllegalArgumentException("modid must not be blank");
         }
-        this.namespace = namespace;
+        this.modid = modid;
     }
 
     @Override
     protected final void buildRecipes(@NonNull RecipeOutput output, HolderLookup.@NonNull Provider registries) {
-        addRecipes(RecipeContext.of(registries, output, namespace));
+        addRecipes(RecipeContext.of(registries, output, modid));
     }
 
     protected abstract void addRecipes(RecipeContext context);

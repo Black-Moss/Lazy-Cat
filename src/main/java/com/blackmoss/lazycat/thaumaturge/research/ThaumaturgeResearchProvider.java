@@ -11,10 +11,12 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
 public abstract class ThaumaturgeResearchProvider implements DataProvider {
+    private String modid;
     private final ResearchContext context;
 
-    protected ThaumaturgeResearchProvider(PackOutput output, String namespace) {
-        this(ResearchContext.of(output, namespace));
+    protected ThaumaturgeResearchProvider(PackOutput output, String modid) {
+        this(ResearchContext.of(output, modid));
+        this.modid = modid;
     }
 
     protected ThaumaturgeResearchProvider(ResearchContext context) {
@@ -35,6 +37,6 @@ public abstract class ThaumaturgeResearchProvider implements DataProvider {
 
     @Override
     public @NonNull String getName() {
-        return "Lazy Cat Research";
+        return modid + " Research by Lazy Cat";
     }
 }
