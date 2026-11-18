@@ -26,6 +26,16 @@ public abstract class LazyCatModelProvider implements DataProvider {
         this.context = ModelContext.of(output, modid);
     }
 
+    private static ResourceLocation defaultModel(ItemLike item) {
+        if (item.asItem() instanceof BlockItem blockItem) {
+            Block block = blockItem.getBlock();
+            return ResourceLocation.fromNamespaceAndPath(
+                    LazyIdentifier.getBlockSpace(block), "block/" + LazyIdentifier.getBlockPath(block));
+        }
+        return ResourceLocation.fromNamespaceAndPath(
+                LazyIdentifier.getItemSpace(item), "item/" + LazyIdentifier.getItemPath(item));
+    }
+
     protected abstract void addModels(ModelContext context);
 
     protected final ModelContext context() {
@@ -85,16 +95,6 @@ public abstract class LazyCatModelProvider implements DataProvider {
 
     protected void plainModel(ItemLike item, ResourceLocation model) {
         new ItemModelBuilder(this.context, item.asItem()).plainModel(model).save();
-    }
-
-    private static ResourceLocation defaultModel(ItemLike item) {
-        if (item.asItem() instanceof BlockItem blockItem) {
-            Block block = blockItem.getBlock();
-            return ResourceLocation.fromNamespaceAndPath(
-                    LazyIdentifier.getBlockSpace(block), "block/" + LazyIdentifier.getBlockPath(block));
-        }
-        return ResourceLocation.fromNamespaceAndPath(
-                LazyIdentifier.getItemSpace(item), "item/" + LazyIdentifier.getItemPath(item));
     }
 
     protected ResourceLocation getBlockModelId(Block block) {
