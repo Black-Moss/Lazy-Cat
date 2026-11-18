@@ -2,6 +2,7 @@ package com.blackmoss.lazycat.recipe.mekanism;
 
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import com.blackmoss.lazycat.api.recipe.mekanism.AbstractMekanismRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.mekanism.ItemStackChemicalToItemStackType;
 import mekanism.api.datagen.recipe.builder.ItemStackChemicalToItemStackRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
@@ -80,13 +81,5 @@ public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismR
                     itemIngredient(mainItem), chemicalIngredient(chemical, chemicalAmount), result(), perTick);
         };
         builder.save(output, key.identifier());
-    }
-
-    public enum ItemStackChemicalToItemStackType {
-        METALLURGIC_INFUSING,
-        COMPRESSING,
-        PURIFYING,
-        INJECTING,
-        PAINTING
     }
 }

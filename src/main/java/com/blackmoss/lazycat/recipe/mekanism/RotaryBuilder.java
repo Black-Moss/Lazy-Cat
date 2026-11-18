@@ -2,6 +2,7 @@ package com.blackmoss.lazycat.recipe.mekanism;
 
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import com.blackmoss.lazycat.api.recipe.mekanism.AbstractMekanismRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.mekanism.RotaryType;
 import mekanism.api.datagen.recipe.builder.RotaryRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
@@ -104,10 +105,5 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
                     RotaryRecipeBuilder.rotary(chemicalIngredient(chemicalInput, 1), fluidTemplate(fluidOutput, fluidOutputAmount));
         };
         builder.save(output, key.identifier());
-    }
-
-    public enum RotaryType {
-        FLUID_TO_CHEMICAL,
-        CHEMICAL_TO_FLUID
     }
 }

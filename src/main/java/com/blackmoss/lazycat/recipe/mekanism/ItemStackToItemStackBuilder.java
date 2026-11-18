@@ -2,6 +2,7 @@ package com.blackmoss.lazycat.recipe.mekanism;
 
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import com.blackmoss.lazycat.api.recipe.mekanism.AbstractMekanismRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.mekanism.ItemStackToItemStackType;
 import mekanism.api.datagen.recipe.builder.ItemStackToItemStackRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
@@ -11,8 +12,8 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBuilder<ItemStackToItemStackBuilder> {
-    private Object input;
     private final ItemStackToItemStackType type;
+    private Object input;
 
     public ItemStackToItemStackBuilder(RecipeContext context, Object result, ItemStackToItemStackType type) {
         super(context, result);
@@ -52,11 +53,5 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
             case SMELTING -> ItemStackToItemStackRecipeBuilder.smelting(itemIngredient(input), result());
         };
         builder.save(output, key.identifier());
-    }
-
-    public enum ItemStackToItemStackType {
-        CRUSHING,
-        ENRICHING,
-        SMELTING
     }
 }

@@ -2,6 +2,7 @@ package com.blackmoss.lazycat.recipe.mekanism;
 
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import com.blackmoss.lazycat.api.recipe.mekanism.AbstractMekanismRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.mekanism.ItemStackToChemicalType;
 import mekanism.api.datagen.recipe.builder.ItemStackToChemicalRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
@@ -75,11 +76,5 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
                     ItemStackToChemicalRecipeBuilder.pigmentExtracting(itemIngredient(input), chemicalTemplate(this.output, outputAmount));
         };
         builder.save(output, key.identifier());
-    }
-
-    public enum ItemStackToChemicalType {
-        CHEMICAL_CONVERSION,
-        OXIDIZING,
-        PIGMENT_EXTRACTING
     }
 }

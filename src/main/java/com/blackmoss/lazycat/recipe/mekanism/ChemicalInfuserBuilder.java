@@ -2,6 +2,7 @@ package com.blackmoss.lazycat.recipe.mekanism;
 
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import com.blackmoss.lazycat.api.recipe.mekanism.AbstractMekanismRecipeBuilder;
+import com.blackmoss.lazycat.api.recipe.mekanism.ChemicalInfuserType;
 import mekanism.api.datagen.recipe.builder.ChemicalChemicalToChemicalRecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
@@ -82,10 +83,5 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
                     chemicalIngredient(left, 1), chemicalIngredient(right, 1), chemicalTemplate(this.output, outputAmount));
         };
         builder.save(output, key.identifier());
-    }
-
-    public enum ChemicalInfuserType {
-        CHEMICAL_INFUSING,
-        PIGMENT_MIXING
     }
 }
