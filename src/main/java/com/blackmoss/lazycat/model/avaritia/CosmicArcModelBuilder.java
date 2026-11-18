@@ -2,7 +2,6 @@ package com.blackmoss.lazycat.model.avaritia;
 
 import com.blackmoss.lazycat.api.model.ModelContext;
 import com.blackmoss.lazycat.api.model.avaritia.AbstractEffectModelBuilder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 @SuppressWarnings("unused")
