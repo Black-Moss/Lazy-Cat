@@ -11,14 +11,14 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuilder<ItemStackToChemicalBuilder> {
+    private final ItemStackToChemicalType type;
     private Object input;
     private Object output;
     private int outputAmount = 1;
-    private final Mode mode;
 
-    public ItemStackToChemicalBuilder(RecipeContext context, Mode mode) {
+    public ItemStackToChemicalBuilder(RecipeContext context, ItemStackToChemicalType type) {
         super(context, null);
-        this.mode = mode;
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -33,7 +33,7 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
 
     @Override
     protected String defaultFolder() {
-        return folderOf(mode);
+        return folderOf(type);
     }
 
     public ItemStackToChemicalBuilder input(Object source) {
@@ -59,11 +59,14 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
         if (output == null) {
             throw new IllegalStateException("requires a chemical output");
         }
+        if (type == null) {
+            throw new IllegalStateException("requires a rotary mode");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
-        ItemStackToChemicalRecipeBuilder builder = switch (mode) {
+        ItemStackToChemicalRecipeBuilder builder = switch (type) {
             case CHEMICAL_CONVERSION ->
                     ItemStackToChemicalRecipeBuilder.chemicalConversion(itemIngredient(input), chemicalTemplate(this.output, outputAmount));
             case OXIDIZING ->
@@ -74,7 +77,7 @@ public final class ItemStackToChemicalBuilder extends AbstractMekanismRecipeBuil
         builder.save(output, key.identifier());
     }
 
-    public enum Mode {
+    public enum ItemStackToChemicalType {
         CHEMICAL_CONVERSION,
         OXIDIZING,
         PIGMENT_EXTRACTING

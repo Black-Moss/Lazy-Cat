@@ -11,15 +11,15 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismRecipeBuilder<ItemStackChemicalToItemStackBuilder> {
+    private final ItemStackChemicalToItemStackType type;
     private Object mainItem;
     private Object chemical;
     private int chemicalAmount = 1;
     private boolean perTick;
-    private final Mode mode;
 
-    public ItemStackChemicalToItemStackBuilder(RecipeContext context, Object result, Mode mode) {
+    public ItemStackChemicalToItemStackBuilder(RecipeContext context, Object result, ItemStackChemicalToItemStackType type) {
         super(context, result);
-        this.mode = mode;
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -29,7 +29,7 @@ public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismR
 
     @Override
     protected String defaultFolder() {
-        return folderOf(mode);
+        return folderOf(type);
     }
 
     public ItemStackChemicalToItemStackBuilder mainItem(Object source) {
@@ -60,11 +60,14 @@ public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismR
         if (chemical == null) {
             throw new IllegalStateException("requires a chemical input");
         }
+        if (type == null) {
+            throw new IllegalStateException("requires a rotary mode");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
-        ItemStackChemicalToItemStackRecipeBuilder builder = switch (mode) {
+        ItemStackChemicalToItemStackRecipeBuilder builder = switch (type) {
             case METALLURGIC_INFUSING -> ItemStackChemicalToItemStackRecipeBuilder.metallurgicInfusing(
                     itemIngredient(mainItem), chemicalIngredient(chemical, chemicalAmount), result(), perTick);
             case COMPRESSING -> ItemStackChemicalToItemStackRecipeBuilder.compressing(
@@ -79,7 +82,7 @@ public final class ItemStackChemicalToItemStackBuilder extends AbstractMekanismR
         builder.save(output, key.identifier());
     }
 
-    public enum Mode {
+    public enum ItemStackChemicalToItemStackType {
         METALLURGIC_INFUSING,
         COMPRESSING,
         PURIFYING,

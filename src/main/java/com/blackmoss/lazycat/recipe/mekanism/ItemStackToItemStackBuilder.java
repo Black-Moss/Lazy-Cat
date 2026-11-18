@@ -12,11 +12,11 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBuilder<ItemStackToItemStackBuilder> {
     private Object input;
-    private Mode mode;
+    private final ItemStackToItemStackType type;
 
-    public ItemStackToItemStackBuilder(RecipeContext context, Object result, Mode mode) {
+    public ItemStackToItemStackBuilder(RecipeContext context, Object result, ItemStackToItemStackType type) {
         super(context, result);
-        this.mode = mode;
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -26,7 +26,7 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
 
     @Override
     protected String defaultFolder() {
-        return folderOf(mode);
+        return folderOf(type);
     }
 
     public ItemStackToItemStackBuilder input(Object source) {
@@ -39,11 +39,14 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
         if (input == null) {
             throw new IllegalStateException("ItemStack to ItemStack recipe requires an input");
         }
+        if (type == null) {
+            throw new IllegalStateException("requires a rotary mode");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
-        ItemStackToItemStackRecipeBuilder builder = switch (mode) {
+        ItemStackToItemStackRecipeBuilder builder = switch (type) {
             case CRUSHING -> ItemStackToItemStackRecipeBuilder.crushing(itemIngredient(input), result());
             case ENRICHING -> ItemStackToItemStackRecipeBuilder.enriching(itemIngredient(input), result());
             case SMELTING -> ItemStackToItemStackRecipeBuilder.smelting(itemIngredient(input), result());
@@ -51,7 +54,7 @@ public final class ItemStackToItemStackBuilder extends AbstractMekanismRecipeBui
         builder.save(output, key.identifier());
     }
 
-    public enum Mode {
+    public enum ItemStackToItemStackType {
         CRUSHING,
         ENRICHING,
         SMELTING

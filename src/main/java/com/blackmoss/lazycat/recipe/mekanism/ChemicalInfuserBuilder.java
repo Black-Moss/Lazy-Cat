@@ -11,15 +11,15 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<ChemicalInfuserBuilder> {
+    private final ChemicalInfuserType type;
     private Object left;
     private Object right;
     private Object output;
     private int outputAmount = 1;
-    private final Mode mode;
 
-    public ChemicalInfuserBuilder(RecipeContext context, Mode mode) {
+    public ChemicalInfuserBuilder(RecipeContext context, ChemicalInfuserType type) {
         super(context, null);
-        this.mode = mode;
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -34,7 +34,7 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
 
     @Override
     protected String defaultFolder() {
-        return folderOf(mode);
+        return folderOf(type);
     }
 
     public ChemicalInfuserBuilder left(Object source) {
@@ -68,11 +68,14 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
         if (output == null) {
             throw new IllegalStateException("requires a chemical output");
         }
+        if (type == null) {
+            throw new IllegalStateException("requires a rotary mode");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
-        ChemicalChemicalToChemicalRecipeBuilder builder = switch (mode) {
+        ChemicalChemicalToChemicalRecipeBuilder builder = switch (type) {
             case CHEMICAL_INFUSING -> ChemicalChemicalToChemicalRecipeBuilder.chemicalInfusing(
                     chemicalIngredient(left, 1), chemicalIngredient(right, 1), chemicalTemplate(this.output, outputAmount));
             case PIGMENT_MIXING -> ChemicalChemicalToChemicalRecipeBuilder.pigmentMixing(
@@ -81,7 +84,7 @@ public final class ChemicalInfuserBuilder extends AbstractMekanismRecipeBuilder<
         builder.save(output, key.identifier());
     }
 
-    public enum Mode {
+    public enum ChemicalInfuserType {
         CHEMICAL_INFUSING,
         PIGMENT_MIXING
     }

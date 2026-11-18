@@ -11,18 +11,18 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBuilder> {
+    private final RotaryType type;
     private Object fluidInput;
     private Object chemicalInput;
     private Object chemicalOutput;
     private int chemicalOutputAmount = 1;
     private Object fluidOutput;
     private int fluidOutputAmount = 1;
-    private final Mode mode;
 
 
-    public RotaryBuilder(RecipeContext context, Mode mode) {
+    public RotaryBuilder(RecipeContext context, RotaryType type) {
         super(context, null);
-        this.mode = mode;
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -32,7 +32,7 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
 
     @Override
     protected String defaultIdPath() {
-        return switch (mode) {
+        return switch (type) {
             case FLUID_TO_CHEMICAL -> sourcePath(chemicalOutput, "chemicalOutput");
             case CHEMICAL_TO_FLUID -> sourcePath(fluidOutput, "fluidOutput");
         };
@@ -75,10 +75,10 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
 
     @Override
     protected void validate() {
-        if (mode == null) {
+        if (type == null) {
             throw new IllegalStateException("requires a rotary mode");
         }
-        if (mode == Mode.FLUID_TO_CHEMICAL) {
+        if (type == RotaryType.FLUID_TO_CHEMICAL) {
             if (fluidInput == null) {
                 throw new IllegalStateException("requires a fluid input");
             }
@@ -97,7 +97,7 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
 
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
-        RotaryRecipeBuilder builder = switch (mode) {
+        RotaryRecipeBuilder builder = switch (type) {
             case FLUID_TO_CHEMICAL ->
                     RotaryRecipeBuilder.rotary(fluidIngredient(fluidInput, 1), chemicalTemplate(chemicalOutput, chemicalOutputAmount));
             case CHEMICAL_TO_FLUID ->
@@ -106,7 +106,7 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
         builder.save(output, key.identifier());
     }
 
-    public enum Mode {
+    public enum RotaryType {
         FLUID_TO_CHEMICAL,
         CHEMICAL_TO_FLUID
     }

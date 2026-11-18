@@ -14,14 +14,14 @@ import java.util.Optional;
 
 @SuppressWarnings("unused")
 public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuilder> {
-    private final InscriberProcessType mode;
+    private final InscriberProcessType type;
     private Object middle;
     private Object top;
     private Object bottom;
 
-    public InscriberBuilder(RecipeContext context, Object result, InscriberProcessType mode) {
+    public InscriberBuilder(RecipeContext context, Object result, InscriberProcessType type) {
         super(context, result);
-        this.mode = Objects.requireNonNull(mode, "mode");
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -66,6 +66,6 @@ public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuild
                 result(),
                 Optional.ofNullable(topIngredient),
                 Optional.ofNullable(bottomIngredient),
-                mode), null);
+                type), null);
     }
 }

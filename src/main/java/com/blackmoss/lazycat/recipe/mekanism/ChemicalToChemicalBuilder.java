@@ -11,14 +11,14 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuilder<ChemicalToChemicalBuilder> {
+    private final ChemicalToChemicalType type;
     private Object input;
     private Object output;
     private int outputAmount = 1;
-    private final Mode mode;
 
-    public ChemicalToChemicalBuilder(RecipeContext context, Mode mode) {
+    public ChemicalToChemicalBuilder(RecipeContext context, ChemicalToChemicalType type) {
         super(context, null);
-        this.mode = mode;
+        this.type = Objects.requireNonNull(type, "type");
     }
 
     @Override
@@ -33,7 +33,7 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
 
     @Override
     protected String defaultFolder() {
-        return folderOf(mode);
+        return folderOf(type);
     }
 
     public ChemicalToChemicalBuilder input(Object source) {
@@ -60,11 +60,14 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
         if (output == null) {
             throw new IllegalStateException("requires a chemical output");
         }
+        if (type == null) {
+            throw new IllegalStateException("requires a rotary mode");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
-        ChemicalToChemicalRecipeBuilder builder = switch (mode) {
+        ChemicalToChemicalRecipeBuilder builder = switch (type) {
             case ACTIVATING ->
                     ChemicalToChemicalRecipeBuilder.activating(chemicalIngredient(input, 1), chemicalTemplate(this.output, outputAmount));
             case CENTRIFUGING ->
@@ -73,7 +76,7 @@ public final class ChemicalToChemicalBuilder extends AbstractMekanismRecipeBuild
         builder.save(output, key.identifier());
     }
 
-    public enum Mode {
+    public enum ChemicalToChemicalType {
         ACTIVATING,
         CENTRIFUGING
     }

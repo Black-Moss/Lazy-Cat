@@ -23,7 +23,7 @@ public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBui
     private Float experience;
     private Integer time;
     private ItemLike container;
-    private CookingPotRecipeBookTab recipeBookTab;
+    private CookingPotRecipeBookTab tab;
 
     public CookingPotBuilder(RecipeContext context, Object result) {
         super(context, result);
@@ -54,8 +54,8 @@ public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBui
         return this;
     }
 
-    public CookingPotBuilder recipeBookTab(CookingPotRecipeBookTab tab) {
-        this.recipeBookTab = tab;
+    public CookingPotBuilder tab(CookingPotRecipeBookTab tab) {
+        this.tab = tab;
         return this;
     }
 
@@ -93,7 +93,7 @@ public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBui
         ItemStack containerStack = container != null ? new ItemStack(container.asItem()) : ItemStack.EMPTY;
         String grp = group() != null ? group() : "";
         CookingPotRecipe recipe = new CookingPotRecipe(
-                grp, recipeBookTab, inputs, resultIngredient().stack(context().items()),
+                grp, tab, inputs, resultIngredient().stack(context().items()),
                 containerStack, experience, time);
         RecipeUnlockAdvancementBuilder advancement = new RecipeUnlockAdvancementBuilder();
         applyCriteria(advancement::unlockedBy);
