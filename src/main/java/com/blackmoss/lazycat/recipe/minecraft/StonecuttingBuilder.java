@@ -93,9 +93,9 @@ public final class StonecuttingBuilder extends AbstractRecipeBuilder<Stonecuttin
 
     private ResourceLocation idFor(LazyIngredient input, boolean multiple) {
         ResourceLocation explicit = explicitId();
-        String namespace = explicit != null ? explicit.getNamespace() : context().namespace();
+        String modid = explicit != null ? explicit.getNamespace() : context().modid();
         String base = explicit != null ? explicit.getPath() : decoratePath(defaultIdPath());
         String path = multiple ? "%s_from_%s".formatted(base, sanitize(input.label())) : base;
-        return withFolder(ResourceLocation.fromNamespaceAndPath(namespace, path));
+        return withFolder(ResourceLocation.fromNamespaceAndPath(modid, path));
     }
 }

@@ -19,34 +19,34 @@ public final class RecipeContext {
     private final HolderLookup.Provider lookupProvide;
     private final HolderGetter<Item> items;
     private final RecipeOutput output;
-    private final String space;
+    private final String modid;
 
     private RecipeContext(
             HolderLookup.Provider registries,
             HolderGetter<Item> items,
             RecipeOutput output,
-            String namespace) {
+            String modid) {
         lookupProvide = registries;
         this.items = items;
         this.output = output;
-        space = namespace;
+        this.modid = modid;
     }
 
     public static RecipeContext of(
             HolderLookup.Provider registries,
             RecipeOutput output,
-            String namespace) {
+            String modid) {
         Objects.requireNonNull(registries, "registries");
         Objects.requireNonNull(output, "output");
-        Objects.requireNonNull(namespace, "namespace");
-        if (namespace.isBlank()) {
-            throw new IllegalArgumentException("namespace must not be blank");
+        Objects.requireNonNull(modid, "modid");
+        if (modid.isBlank()) {
+            throw new IllegalArgumentException("modid must not be blank");
         }
         return new RecipeContext(
                 registries,
                 registries.lookupOrThrow(Registries.ITEM),
                 output,
-                namespace);
+                modid);
     }
 
     public HolderLookup.Provider lookupProvide() {
@@ -61,8 +61,8 @@ public final class RecipeContext {
         return output;
     }
 
-    public String namespace() {
-        return space;
+    public String modid() {
+        return modid;
     }
 
     public LazyIngredient ingredient(Object source) {

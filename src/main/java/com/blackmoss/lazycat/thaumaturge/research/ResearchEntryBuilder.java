@@ -33,17 +33,33 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
     private int y;
     private int complexity = 1;
 
-    public ResearchEntryBuilder(ResearchContext context, Object category, String nameKey) {
+    public ResearchEntryBuilder(ResearchContext context, Object category, String id) {
         this.context = Objects.requireNonNull(context, "context");
         this.category = context.resolveText(category);
-        Objects.requireNonNull(nameKey, "nameKey");
-        if (nameKey.startsWith("research.")) {
-            this.name = nameKey.endsWith(".title") ? nameKey : nameKey + ".title";
+        Objects.requireNonNull(id, "id");
+        if (id.startsWith("research.")) {
+            this.name = id.endsWith(".title") ? id : id + ".title";
             this.textPrefix = this.name.substring(0, this.name.length() - ".title".length());
         } else {
-            this.textPrefix = "research.%s.%s".formatted(context.namespace(), nameKey);
+            this.textPrefix = "research.%s.%s".formatted(context.modid(), id);
             this.name = this.textPrefix + ".title";
         }
+        this.id = ResourceLocation.fromNamespaceAndPath(context.modid(), idPath(context.modid(), id));
+    }
+
+    private static String idPath(String modid, String id) {
+        String path = id;
+        if (path.startsWith("research.")) {
+            path = path.substring("research.".length());
+        }
+        if (path.endsWith(".title")) {
+            path = path.substring(0, path.length() - ".title".length());
+        }
+        String prefix = modid + ".";
+        if (path.startsWith(prefix)) {
+            path = path.substring(prefix.length());
+        }
+        return path;
     }
 
     private static JsonArray strings(List<String> values) {
@@ -188,7 +204,7 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
     }
 
     public void save(String path) {
-        save(ResourceLocation.fromNamespaceAndPath(this.context.namespace(), path));
+        save(ResourceLocation.fromNamespaceAndPath(this.context.modid(), path));
     }
 
     public void save(ResourceLocation id) {

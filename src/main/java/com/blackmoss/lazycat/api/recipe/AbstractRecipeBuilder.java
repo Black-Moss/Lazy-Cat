@@ -140,7 +140,7 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
         Objects.requireNonNull(id, "id");
         this.id = id.indexOf(':') >= 0
                 ? ResourceLocation.parse(id)
-                : ResourceLocation.fromNamespaceAndPath(context.namespace(), sanitize(id));
+                : ResourceLocation.fromNamespaceAndPath(context.modid(), sanitize(id));
         return self();
     }
 
@@ -197,7 +197,7 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     protected final ResourceLocation resolveId() {
         ResourceLocation target = id != null
                 ? id
-                : ResourceLocation.fromNamespaceAndPath(context.namespace(), decoratePath(defaultIdPath()));
+                : ResourceLocation.fromNamespaceAndPath(context.modid(), decoratePath(defaultIdPath()));
         return withFolder(target);
     }
 

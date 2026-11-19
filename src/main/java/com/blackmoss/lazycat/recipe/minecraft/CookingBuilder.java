@@ -121,7 +121,7 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
 
     private ResourceLocation idFor(CookingType type) {
         ResourceLocation explicit = explicitId();
-        String namespace = explicit != null ? explicit.getNamespace() : context().namespace();
+        String modid = explicit != null ? explicit.getNamespace() : context().modid();
         String path;
         if (explicit != null) {
             path = types.size() == 1
@@ -130,6 +130,6 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
         } else {
             path = type.folder() + "/" + decoratePath(defaultIdPath());
         }
-        return withFolder(ResourceLocation.fromNamespaceAndPath(namespace, path));
+        return withFolder(ResourceLocation.fromNamespaceAndPath(modid, path));
     }
 }

@@ -12,10 +12,10 @@ import java.util.concurrent.CompletableFuture;
 public final class LazyCatData {
     public static <P extends RecipeProvider> P recipes(
             GatherDataEvent event,
-            String namespace,
+            String modid,
             RecipeProviderFactory<P> factory) {
         Objects.requireNonNull(event, "event");
-        Objects.requireNonNull(namespace, "namespace");
+        Objects.requireNonNull(modid, "modid");
         Objects.requireNonNull(factory, "factory");
         if (!event.includeServer()) {
             return null;

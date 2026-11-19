@@ -24,18 +24,18 @@ public final class ResearchContext {
     private final PackOutput.PathProvider entries;
     private final Map<ResourceLocation, JsonObject> categoryData = new LinkedHashMap<>();
     private final Map<ResourceLocation, JsonObject> entryData = new LinkedHashMap<>();
-    private final String namespace;
+    private final String modid;
 
-    private ResearchContext(PackOutput output, String namespace) {
+    private ResearchContext(PackOutput output, String modid) {
         this.categories = output.createPathProvider(PackOutput.Target.DATA_PACK, CATEGORY_DIRECTORY);
         this.entries = output.createPathProvider(PackOutput.Target.DATA_PACK, ENTRY_DIRECTORY);
-        this.namespace = namespace;
+        this.modid = modid;
     }
 
-    public static ResearchContext of(PackOutput output, String namespace) {
+    public static ResearchContext of(PackOutput output, String modid) {
         Objects.requireNonNull(output, "output");
-        Objects.requireNonNull(namespace, "namespace");
-        return new ResearchContext(output, namespace);
+        Objects.requireNonNull(modid, "modid");
+        return new ResearchContext(output, modid);
     }
 
     public static String itemRef(Object source) {
@@ -56,8 +56,8 @@ public final class ResearchContext {
         }
     }
 
-    public String namespace() {
-        return this.namespace;
+    public String modid() {
+        return this.modid;
     }
 
     public ResearchCategoryBuilder category(ResourceKey<IResearchCategory> key) {
@@ -97,7 +97,7 @@ public final class ResearchContext {
             case ResourceKey<?> key -> key.location();
             case String text -> text.contains(":")
                     ? ResourceLocation.parse(text)
-                    : ResourceLocation.fromNamespaceAndPath(this.namespace, text);
+                    : ResourceLocation.fromNamespaceAndPath(this.modid, text);
             default -> throw new IllegalArgumentException("Unsupported lazyCat source: " + source.getClass().getName());
         };
     }

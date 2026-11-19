@@ -21,19 +21,19 @@ public final class ModelContext {
     private final Map<ResourceLocation, JsonObject> itemData = new LinkedHashMap<>();
     private final Map<ResourceLocation, JsonObject> blockData = new LinkedHashMap<>();
     private final Map<ResourceLocation, JsonObject> blockStateData = new LinkedHashMap<>();
-    private final String namespace;
+    private final String modid;
 
-    private ModelContext(PackOutput output, String namespace) {
+    private ModelContext(PackOutput output, String modid) {
         this.itemModels = output.createPathProvider(PackOutput.Target.RESOURCE_PACK, ITEM_DIRECTORY);
         this.blockModels = output.createPathProvider(PackOutput.Target.RESOURCE_PACK, BLOCK_DIRECTORY);
         this.blockStates = output.createPathProvider(PackOutput.Target.RESOURCE_PACK, BLOCK_STATE_DIRECTORY);
-        this.namespace = namespace;
+        this.modid = modid;
     }
 
-    public static ModelContext of(PackOutput output, String namespace) {
+    public static ModelContext of(PackOutput output, String modid) {
         Objects.requireNonNull(output, "output");
-        Objects.requireNonNull(namespace, "namespace");
-        return new ModelContext(output, namespace);
+        Objects.requireNonNull(modid, "modid");
+        return new ModelContext(output, modid);
     }
 
     private static void submit(Map<ResourceLocation, JsonObject> target, ResourceLocation id, JsonObject json, String type) {
@@ -51,8 +51,8 @@ public final class ModelContext {
         return ResourceLocation.fromNamespaceAndPath(id.getNamespace(), path);
     }
 
-    public String namespace() {
-        return this.namespace;
+    public String modid() {
+        return this.modid;
     }
 
     public void submitItem(ResourceLocation id, JsonObject json) {

@@ -16,21 +16,21 @@ public final class BlueprintContext {
 
     private final PackOutput.PathProvider blueprints;
     private final Map<ResourceLocation, JsonObject> data = new LinkedHashMap<>();
-    private final String namespace;
+    private final String modid;
 
-    private BlueprintContext(PackOutput output, String namespace) {
+    private BlueprintContext(PackOutput output, String modid) {
         this.blueprints = output.createPathProvider(PackOutput.Target.DATA_PACK, DIRECTORY);
-        this.namespace = namespace;
+        this.modid = modid;
     }
 
-    public static BlueprintContext of(PackOutput output, String namespace) {
+    public static BlueprintContext of(PackOutput output, String modid) {
         Objects.requireNonNull(output, "output");
-        Objects.requireNonNull(namespace, "namespace");
-        return new BlueprintContext(output, namespace);
+        Objects.requireNonNull(modid, "modid");
+        return new BlueprintContext(output, modid);
     }
 
-    public String namespace() {
-        return this.namespace;
+    public String modid() {
+        return this.modid;
     }
 
     public BlueprintBuilder blueprint(ResourceLocation id) {
@@ -40,7 +40,7 @@ public final class BlueprintContext {
 
     public BlueprintBuilder blueprint(String path) {
         Objects.requireNonNull(path, "path");
-        return blueprint(ResourceLocation.fromNamespaceAndPath(this.namespace, path));
+        return blueprint(ResourceLocation.fromNamespaceAndPath(this.modid, path));
     }
 
     public void submit(ResourceLocation id, JsonObject json) {
