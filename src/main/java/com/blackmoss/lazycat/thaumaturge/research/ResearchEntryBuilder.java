@@ -19,6 +19,7 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
     private final ResearchContext context;
     private final String category;
     private final String name;
+    private final String textPrefix;
     private final List<ICondition> conditions = new ArrayList<>();
     private final List<String> parents = new ArrayList<>();
     private final List<String> siblings = new ArrayList<>();
@@ -33,9 +34,16 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
     private int complexity = 1;
 
     public ResearchEntryBuilder(ResearchContext context, Object category, String nameKey) {
-        this.context = context;
+        this.context = Objects.requireNonNull(context, "context");
         this.category = context.resolveText(category);
-        this.name = Objects.requireNonNull(nameKey, "nameKey");
+        Objects.requireNonNull(nameKey, "nameKey");
+        if (nameKey.startsWith("research.")) {
+            this.name = nameKey.endsWith(".title") ? nameKey : nameKey + ".title";
+            this.textPrefix = this.name.substring(0, this.name.length() - ".title".length());
+        } else {
+            this.textPrefix = "research.%s.%s".formatted(context.namespace(), nameKey);
+            this.name = this.textPrefix + ".title";
+        }
     }
 
     private static JsonArray strings(List<String> values) {
@@ -113,6 +121,18 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
         return this;
     }
 
+    public ResearchEntryBuilder icon(Object... icons) {
+        return icons(icons);
+    }
+
+    public ResearchEntryBuilder icons(Object... icons) {
+        Objects.requireNonNull(icons, "icons");
+        for (Object icon : icons) {
+            icon(icon);
+        }
+        return this;
+    }
+
     public ResearchEntryBuilder noteAspect(Object aspect) {
         noteAspect(aspect, 5);
         return this;
@@ -148,7 +168,8 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
     }
 
     public ResearchStageBuilder stage() {
-        ResearchStageBuilder stage = new ResearchStageBuilder(this.context, this, "%s.stage_%d".formatted(this.name, this.stages.size() + 1));
+        ResearchStageBuilder stage = new ResearchStageBuilder(
+                this.context, this, "%s.stage_%d".formatted(this.textPrefix, this.stages.size()));
         this.stages.add(stage);
         return stage;
     }
@@ -198,7 +219,7 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
         if (!this.addenda.isEmpty()) {
             JsonArray array = new JsonArray();
             for (int i = 0; i < this.addenda.size(); i++) {
-                String defaultText = this.name + (this.addenda.size() == 1 ? ".addendum" : ".addendum_" + (i + 1));
+                String defaultText = "%s.addendum_%d".formatted(this.textPrefix, i);
                 array.add(this.addenda.get(i).toJson(defaultText));
             }
             json.add("addenda", array);
