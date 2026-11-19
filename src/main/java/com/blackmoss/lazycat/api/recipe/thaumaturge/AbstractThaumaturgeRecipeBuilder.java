@@ -27,8 +27,8 @@ import java.util.Optional;
 public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumaturgeRecipeBuilder<B>>
         extends AbstractRecipeBuilder<B> {
     private final RecipeContext context;
-    private HolderGetter<IAspect> aspects;
     private final List<AspectInstance> entries = new ArrayList<>();
+    private HolderGetter<IAspect> aspects;
     private @Nullable ResearchGate gate;
 
     protected AbstractThaumaturgeRecipeBuilder(RecipeContext context, Object result) {

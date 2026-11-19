@@ -140,7 +140,7 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
 
     private ResourceKey<Recipe<?>> keyFor(CookingType type) {
         Identifier explicit = explicitId();
-        String namespace = explicit != null ? explicit.getNamespace() : context().namespace();
+        String modid = explicit != null ? explicit.getNamespace() : context().modid();
         String path;
         if (explicit != null) {
             path = types.size() == 1
@@ -151,6 +151,6 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
         }
         return ResourceKey.create(
                 Registries.RECIPE,
-                withFolder(Identifier.fromNamespaceAndPath(namespace, path)));
+                withFolder(Identifier.fromNamespaceAndPath(modid, path)));
     }
 }

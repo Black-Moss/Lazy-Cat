@@ -114,7 +114,7 @@ public final class BlueprintBuilder implements ConditionalBuilder<BlueprintBuild
     }
 
     public void save(String path) {
-        emit(Identifier.fromNamespaceAndPath(this.context.namespace(), path));
+        emit(Identifier.fromNamespaceAndPath(this.context.modid(), path));
     }
 
     private void emit(Identifier outputId) {

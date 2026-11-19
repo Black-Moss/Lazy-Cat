@@ -96,11 +96,11 @@ public final class StonecuttingBuilder extends AbstractRecipeBuilder<Stonecuttin
 
     private ResourceKey<Recipe<?>> keyFor(LazyIngredient input, boolean multiple) {
         Identifier explicit = explicitId();
-        String namespace = explicit != null ? explicit.getNamespace() : context().namespace();
+        String modid = explicit != null ? explicit.getNamespace() : context().modid();
         String base = explicit != null ? explicit.getPath() : decoratePath(defaultIdPath());
         String path = multiple ? "%s_from_%s".formatted(base, sanitize(input.label())) : base;
         return ResourceKey.create(
                 Registries.RECIPE,
-                withFolder(Identifier.fromNamespaceAndPath(namespace, path)));
+                withFolder(Identifier.fromNamespaceAndPath(modid, path)));
     }
 }

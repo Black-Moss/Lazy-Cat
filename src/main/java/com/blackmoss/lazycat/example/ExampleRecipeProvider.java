@@ -14,8 +14,8 @@
 //import java.util.concurrent.CompletableFuture;
 //
 //public final class ExampleRecipeProvider extends LazyCatRecipeProvider {
-//    private ExampleRecipeProvider(HolderLookup.Provider registries, RecipeOutput output, String namespace) {
-//        super(registries, output, namespace);
+//    private ExampleRecipeProvider(HolderLookup.Provider registries, RecipeOutput output, String modid) {
+//        super(registries, output, modid);
 //    }
 //
 //    @Override
