@@ -145,7 +145,7 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
     }
 
     public ResearchEntryBuilder noteAspect(Object aspect) {
-        return noteAspect(aspect, 1);
+        return noteAspect(aspect, 5);
     }
 
     public ResearchEntryBuilder noteAspect(Object aspect, int amount) {
