@@ -70,6 +70,10 @@ public final class ResearchContext {
         return new ResearchCategoryBuilder(this, id);
     }
 
+    public ResearchCategoryBuilder category(String id) {
+        return new ResearchCategoryBuilder(this, resolveId(id));
+    }
+
     public ResearchEntryBuilder entry(Object category, String nameKey) {
         return new ResearchEntryBuilder(this, category, nameKey);
     }
