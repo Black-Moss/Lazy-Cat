@@ -41,18 +41,18 @@ public interface ConditionalBuilder<T> {
         return when(Conditionals.or(conditions));
     }
 
-    default T ifModLoaded(String... modIds) {
-        Objects.requireNonNull(modIds, "modIds");
-        for (String modId : modIds) {
-            when(Conditionals.modLoaded(Objects.requireNonNull(modId, "modIds contains null")));
+    default T ifModLoaded(String... modids) {
+        Objects.requireNonNull(modids, "modids");
+        for (String modid : modids) {
+            when(Conditionals.modLoaded(Objects.requireNonNull(modid, "modids contains null")));
         }
         return typedThis();
     }
 
-    default T unlessModLoaded(String... modIds) {
-        Objects.requireNonNull(modIds, "modIds");
-        for (String modId : modIds) {
-            when(Conditionals.not(Conditionals.modLoaded(Objects.requireNonNull(modId, "modIds contains null"))));
+    default T unlessModLoaded(String... modids) {
+        Objects.requireNonNull(modids, "modids");
+        for (String modid : modids) {
+            when(Conditionals.not(Conditionals.modLoaded(Objects.requireNonNull(modid, "modids contains null"))));
         }
         return typedThis();
     }

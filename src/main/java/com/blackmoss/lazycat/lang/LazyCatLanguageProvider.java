@@ -1,11 +1,8 @@
 package com.blackmoss.lazycat.lang;
 
 import com.leclowndu93150.thaumaturge.api.aspect.IAspect;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.jspecify.annotations.NonNull;
@@ -26,11 +23,8 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
         return "%s %s Language by Lazy Cat".formatted(modid, locale);
     }
 
-    protected void addCreativeModeTab(CreativeModeTab tab, String translations) {
-        ResourceLocation key = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
-        if (key != null) {
-            add(key.toLanguageKey(), translations);
-        }
+    protected void addCreativeModeTab(String tooltip, String translations) {
+        add("itemGroup.%s.%s".formatted(modid, tooltip), translations);
     }
 
     protected void addTooltip(String tooltip, String translations) {

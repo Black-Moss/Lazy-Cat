@@ -16,15 +16,12 @@ final class Conditionals {
     private static final IConditionBuilder HELPERS = new IConditionBuilder() {
     };
 
-    private Conditionals() {
-    }
-
-    static ICondition modLoaded(String modId) {
-        Objects.requireNonNull(modId, "modId");
-        if (modId.isBlank()) {
-            throw new IllegalArgumentException("modId must not be blank");
+    static ICondition modLoaded(String modid) {
+        Objects.requireNonNull(modid, "modid");
+        if (modid.isBlank()) {
+            throw new IllegalArgumentException("modid must not be blank");
         }
-        return HELPERS.modLoaded(modId);
+        return HELPERS.modLoaded(modid);
     }
 
     static ICondition not(ICondition condition) {

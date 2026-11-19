@@ -11,9 +11,6 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class Blueprints {
-    private Blueprints() {
-    }
-
     public static BlueprintSource source(Block block) {
         return new BlueprintSource.BlockSource(Objects.requireNonNull(block, "block"));
     }

@@ -10,9 +10,6 @@ import java.util.Objects;
 
 @SuppressWarnings("unused")
 public final class LazyIdentifier {
-    private LazyIdentifier() {
-    }
-
     public static ResourceLocation lazyCat(String path) {
         return ResourceLocation.fromNamespaceAndPath(LazyCat.MODID, path);
     }
