@@ -3,9 +3,7 @@ package com.blackmoss.lazycat.recipe.thaumaturge;
 import com.blackmoss.lazycat.api.LazyIngredient;
 import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import com.blackmoss.lazycat.api.recipe.thaumaturge.AbstractThaumaturgeRecipeBuilder;
-import com.leclowndu93150.thaumaturge.api.aspect.IAspect;
 import com.leclowndu93150.thaumaturge.content.recipe.workbench.ArcaneShapelessCraftingRecipe;
-import net.minecraft.core.Holder;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
@@ -38,11 +36,10 @@ public final class ArcaneShapelessBuilder extends AbstractThaumaturgeRecipeBuild
 
     @Override
     public ArcaneShapelessBuilder aspect(Object source, int amount) {
-        Holder<IAspect> holder = resolveAspect(aspects(), source, amount);
-        if (!holder.value().isPrimal()) {
+        if (!isPrimalAspect(source)) {
             throw new IllegalArgumentException("Arcane workbench aspects must be primal");
         }
-        super.aspect(holder, amount);
+        super.aspect(source, amount);
         return this;
     }
 
