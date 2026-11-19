@@ -37,6 +37,6 @@ public abstract class LazyCatBlueprintProvider implements DataProvider {
 
     @Override
     public @NonNull String getName() {
-        return modid + " Thaumaturge Blueprints by Lazy Cat";
+        return this.modid + " Blueprints by Lazy Cat";
     }
 }

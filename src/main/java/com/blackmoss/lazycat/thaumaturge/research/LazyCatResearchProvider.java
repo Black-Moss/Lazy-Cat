@@ -37,6 +37,6 @@ public abstract class LazyCatResearchProvider implements DataProvider {
 
     @Override
     public @NonNull String getName() {
-        return modid + " Thaumaturge Research by Lazy Cat";
+        return this.modid + " Research by Lazy Cat";
     }
 }
