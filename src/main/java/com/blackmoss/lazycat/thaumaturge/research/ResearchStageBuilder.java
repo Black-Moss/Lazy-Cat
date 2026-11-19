@@ -70,9 +70,17 @@ public final class ResearchStageBuilder {
         return this;
     }
 
+    public ResearchStageBuilder obtain(Object items) {
+        return obtain(items, 1);
+    }
+
     public ResearchStageBuilder obtain(Object items, int amount) {
         this.obtain.add(requirement(items, amount));
         return this;
+    }
+
+    public ResearchStageBuilder craft(Object items) {
+        return craft(craft, 1);
     }
 
     public ResearchStageBuilder craft(Object items, int amount) {
@@ -90,9 +98,17 @@ public final class ResearchStageBuilder {
         return this;
     }
 
+    public ResearchStageBuilder knowledge(KnowledgeType type, Object category) {
+        return knowledge(type, category, 1);
+    }
+
     public ResearchStageBuilder knowledge(KnowledgeType type, Object category, int amount) {
         this.knowledge.add(reward(type, category, amount));
         return this;
+    }
+
+    public ResearchStageBuilder requiredKnowledge(KnowledgeType type, Object category) {
+        return requiredKnowledge(type, category, 1);
     }
 
     public ResearchStageBuilder requiredKnowledge(KnowledgeType type, Object category, int amount) {
@@ -116,11 +132,11 @@ public final class ResearchStageBuilder {
     public ResearchStageBuilder construct(int xSize, int ySize, int zSize, String... cells) {
         Objects.requireNonNull(cells, "cells");
         if (xSize < 1 || ySize < 1 || zSize < 1) {
-            throw new IllegalArgumentException("Construct dimensions must be positive: " + xSize + "x" + ySize + "x" + zSize);
+            throw new IllegalArgumentException("Construct dimensions must be positive: %dx%dx%d".formatted(xSize, ySize, zSize));
         }
         int expected = xSize * ySize * zSize;
         if (cells.length != expected) {
-            throw new IllegalArgumentException("Construct needs " + expected + " cells but got " + cells.length);
+            throw new IllegalArgumentException("Construct needs %d cells but got %d".formatted(expected, cells.length));
         }
         this.xSize = xSize;
         this.ySize = ySize;
@@ -177,6 +193,10 @@ public final class ResearchStageBuilder {
             json.addProperty("warp", this.warp);
         }
         return json;
+    }
+
+    private JsonObject requirement(Object items) {
+        return requirement(items, 1);
     }
 
     private JsonObject requirement(Object items, int amount) {

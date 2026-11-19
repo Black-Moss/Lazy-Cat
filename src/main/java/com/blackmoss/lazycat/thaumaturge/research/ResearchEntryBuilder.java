@@ -144,6 +144,10 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
         return this;
     }
 
+    public ResearchEntryBuilder noteAspect(Object aspect) {
+        return noteAspect(aspect, 1);
+    }
+
     public ResearchEntryBuilder noteAspect(Object aspect, int amount) {
         if (amount < 1) {
             throw new IllegalArgumentException("Aspect amount must be at least 1: " + amount);
