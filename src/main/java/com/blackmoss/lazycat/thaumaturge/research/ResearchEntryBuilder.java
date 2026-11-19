@@ -77,9 +77,9 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
         return id(this.context.resolveId(path));
     }
 
-    public ResearchEntryBuilder position(int column, int row) {
-        this.x = column;
-        this.y = row;
+    public ResearchEntryBuilder position(int x, int y) {
+        this.x = x;
+        this.y = y;
         return this;
     }
 
