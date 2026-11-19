@@ -83,10 +83,10 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         NonNullList<ChanceResult> results = NonNullList.create();
-        results.add(new ChanceResult(resultIngredient().stack(context().items()), 1f));
+        results.add(new ChanceResult(resultIngredient().template(context().items()), 1f));
         for (Extra extra : extras) {
             results.add(new ChanceResult(
-                    extra.item().count(extra.count()).stack(context().items()), extra.chance()));
+                    extra.item().count(extra.count()).template(context().items()), extra.chance()));
         }
         Optional<SoundEvent> soundEvent = sound != null ? Optional.of(sound) : Optional.empty();
         String grp = group() != null ? group() : "";

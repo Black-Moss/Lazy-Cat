@@ -6,19 +6,23 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.crafting.CookingPotRecipe;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @SuppressWarnings("unused")
 public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBuilder> {
+    private static final Constructor<CookingPotRecipe> TEMPLATE_CONSTRUCTOR = resolveTemplateConstructor();
+
     private final List<Object> ingredients = new ArrayList<>();
     private Float experience;
     private Integer time;
@@ -90,13 +94,45 @@ public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBui
         for (Object source : ingredients) {
             inputs.add(toIngredient(source));
         }
-        ItemStack containerStack = container != null ? new ItemStack(container.asItem()) : ItemStack.EMPTY;
-        String grp = group() != null ? group() : "";
-        CookingPotRecipe recipe = new CookingPotRecipe(
-                grp, tab, inputs, resultIngredient().stack(context().items()),
-                containerStack, experience, time);
+
+        ItemStackTemplate result = resultIngredient().template(context().items());
+        Optional<ItemStackTemplate> containerTemplate = container == null
+                ? Optional.empty()
+                : Optional.of(new ItemStackTemplate(container.asItem()));
+        CookingPotRecipe recipe;
+        try {
+            recipe = TEMPLATE_CONSTRUCTOR.newInstance(
+                    group() == null ? "" : group(),
+                    tab == null ? CookingPotRecipeBookTab.MISC : tab,
+                    inputs,
+                    result,
+                    containerTemplate,
+                    experience == null ? 0.0f : experience,
+                    time == null ? 200 : time);
+        } catch (ReflectiveOperationException exception) {
+            throw new IllegalStateException(
+                    "Failed to build farmersdelight:cooking recipe " + key.identifier(), exception);
+        }
         RecipeUnlockAdvancementBuilder advancement = new RecipeUnlockAdvancementBuilder();
         applyCriteria(advancement::unlockedBy);
         output.accept(key, recipe, advancement.build(output, key, category()));
+    }
+
+    private static Constructor<CookingPotRecipe> resolveTemplateConstructor() {
+        try {
+            Constructor<CookingPotRecipe> constructor = CookingPotRecipe.class.getDeclaredConstructor(
+                    String.class,
+                    CookingPotRecipeBookTab.class,
+                    NonNullList.class,
+                    ItemStackTemplate.class,
+                    Optional.class,
+                    float.class,
+                    int.class);
+            constructor.setAccessible(true);
+            return constructor;
+        } catch (NoSuchMethodException exception) {
+            throw new IllegalStateException(
+                    "FarmersDelight CookingPotRecipe no longer exposes an ItemStackTemplate constructor; please update Lazy Cat", exception);
+        }
     }
 }
