@@ -173,8 +173,8 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
         return addendum;
     }
 
-    public AddendumBuilder addendum(String textKey) {
-        return addendum().text(textKey);
+    public AddendumBuilder addendum(String id) {
+        return addendum().text(id);
     }
 
     public ResearchStageBuilder stage() {

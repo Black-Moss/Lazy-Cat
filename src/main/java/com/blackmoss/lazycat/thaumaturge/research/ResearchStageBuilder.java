@@ -80,7 +80,7 @@ public final class ResearchStageBuilder {
     }
 
     public ResearchStageBuilder craft(Object items) {
-        return craft(craft, 1);
+        return craft(items, 1);
     }
 
     public ResearchStageBuilder craft(Object items, int amount) {
