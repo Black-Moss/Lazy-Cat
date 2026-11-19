@@ -46,4 +46,29 @@ public final class Blueprints {
     public static BlueprintTarget target(ItemStack stack) {
         return new BlueprintTarget.StackTarget(Objects.requireNonNull(stack, "stack"));
     }
+
+    @SuppressWarnings("unchecked")
+    public static BlueprintSource sourceOf(Object source) {
+        Objects.requireNonNull(source, "source");
+        return switch (source) {
+            case BlueprintSource blueprintSource -> blueprintSource;
+            case Block block -> source(block);
+            case BlockState state -> source(state);
+            case TagKey<?> tag -> source((TagKey<Block>) tag);
+            default -> throw new IllegalArgumentException(
+                    "Unsupported blueprint source: " + source.getClass().getName());
+        };
+    }
+
+    public static BlueprintTarget targetOf(Object target) {
+        Objects.requireNonNull(target, "target");
+        return switch (target) {
+            case BlueprintTarget blueprintTarget -> blueprintTarget;
+            case Block block -> target(block);
+            case BlockState state -> target(state);
+            case ItemStack stack -> target(stack);
+            default -> throw new IllegalArgumentException(
+                    "Unsupported blueprint target: " + target.getClass().getName());
+        };
+    }
 }

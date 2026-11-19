@@ -10,16 +10,16 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
-public abstract class ThaumaturgeBlueprintProvider implements DataProvider {
+public abstract class LazyCatBlueprintProvider implements DataProvider {
     private final BlueprintContext context;
     private String modid;
 
-    protected ThaumaturgeBlueprintProvider(PackOutput output, String modid) {
+    protected LazyCatBlueprintProvider(PackOutput output, String modid) {
         this(BlueprintContext.of(output, modid));
         this.modid = modid;
     }
 
-    protected ThaumaturgeBlueprintProvider(BlueprintContext context) {
+    protected LazyCatBlueprintProvider(BlueprintContext context) {
         this.context = Objects.requireNonNull(context, "context");
     }
 
@@ -37,6 +37,6 @@ public abstract class ThaumaturgeBlueprintProvider implements DataProvider {
 
     @Override
     public @NonNull String getName() {
-        return modid + " Blueprints by Lazy Cat";
+        return modid + " Thaumaturge Blueprints by Lazy Cat";
     }
 }

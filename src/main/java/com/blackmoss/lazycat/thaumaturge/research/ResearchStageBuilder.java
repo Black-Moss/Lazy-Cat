@@ -71,8 +71,7 @@ public final class ResearchStageBuilder {
     }
 
     public ResearchStageBuilder obtain(Object items) {
-        this.obtain.add(requirement(items, 1));
-        return this;
+        return obtain(items, 1);
     }
 
     public ResearchStageBuilder obtain(Object items, int amount) {
@@ -81,8 +80,7 @@ public final class ResearchStageBuilder {
     }
 
     public ResearchStageBuilder craft(Object items) {
-        this.craft.add(requirement(items, 1));
-        return this;
+        return craft(items, 1);
     }
 
     public ResearchStageBuilder craft(Object items, int amount) {
@@ -101,8 +99,7 @@ public final class ResearchStageBuilder {
     }
 
     public ResearchStageBuilder knowledge(KnowledgeType type, Object category) {
-        this.knowledge.add(reward(type, category, 1));
-        return this;
+        return knowledge(type, category, 1);
     }
 
     public ResearchStageBuilder knowledge(KnowledgeType type, Object category, int amount) {
@@ -111,8 +108,7 @@ public final class ResearchStageBuilder {
     }
 
     public ResearchStageBuilder requiredKnowledge(KnowledgeType type, Object category) {
-        this.requiredKnowledge.add(reward(type, category, 1));
-        return this;
+        return requiredKnowledge(type, category, 1);
     }
 
     public ResearchStageBuilder requiredKnowledge(KnowledgeType type, Object category, int amount) {

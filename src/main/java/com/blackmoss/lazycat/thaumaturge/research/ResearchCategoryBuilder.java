@@ -29,8 +29,16 @@ public final class ResearchCategoryBuilder implements ConditionalBuilder<Researc
     }
 
     public ResearchCategoryBuilder requiredResearch(Object research) {
-        this.requiredResearch = this.context.resolveText(research);
+        this.requiredResearch = research == null ? defaultRequiredResearch() : this.context.resolveText(research);
         return this;
+    }
+
+    private String defaultRequiredResearch() {
+        return "%s:unlock_%s".formatted(this.context.modid(), this.id.getPath());
+    }
+
+    public ResearchCategoryBuilder formula(Object aspect) {
+        return formula(aspect, 5);
     }
 
     public ResearchCategoryBuilder formula(Object aspect, int amount) {
@@ -45,8 +53,12 @@ public final class ResearchCategoryBuilder implements ConditionalBuilder<Researc
     }
 
     public ResearchCategoryBuilder icon(Object icon) {
-        this.icon = ResearchContext.iconRef(icon);
+        this.icon = icon == null ? defaultIcon() : ResearchContext.iconRef(icon);
         return this;
+    }
+
+    private String defaultIcon() {
+        return "%s:textures/research/cat_%s.png".formatted(this.context.modid(), this.id.getPath());
     }
 
     public ResearchCategoryBuilder background(Object background) {
@@ -77,17 +89,15 @@ public final class ResearchCategoryBuilder implements ConditionalBuilder<Researc
     }
 
     public void save() {
-        Objects.requireNonNull(this.icon, "category icon");
         Objects.requireNonNull(this.background, "category background");
         JsonObject json = new JsonObject();
-        json.addProperty("icon", this.icon);
+        json.addProperty("icon", this.icon != null ? this.icon : defaultIcon());
         json.addProperty("background", this.background);
         JsonArray aspects = new JsonArray();
         this.formula.forEach(aspects::add);
         json.add("formula", aspects);
-        if (this.requiredResearch != null) {
-            json.addProperty("required_research", this.requiredResearch);
-        }
+        json.addProperty("required_research",
+                this.requiredResearch != null ? this.requiredResearch : defaultRequiredResearch());
         if (this.overlayBackground != null) {
             json.addProperty("overlay_background", this.overlayBackground);
         }
