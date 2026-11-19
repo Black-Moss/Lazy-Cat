@@ -74,8 +74,8 @@ public final class ResearchContext {
         return new ResearchCategoryBuilder(this, resolveId(id));
     }
 
-    public ResearchEntryBuilder entry(Object category, String nameKey) {
-        return new ResearchEntryBuilder(this, category, nameKey);
+    public ResearchEntryBuilder entry(Object category, String id) {
+        return new ResearchEntryBuilder(this, category, id);
     }
 
     public CompletableFuture<?> save(CachedOutput cache) {
