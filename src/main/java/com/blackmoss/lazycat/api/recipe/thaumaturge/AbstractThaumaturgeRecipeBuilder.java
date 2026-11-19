@@ -5,6 +5,7 @@ import com.blackmoss.lazycat.api.recipe.RecipeContext;
 import com.leclowndu93150.thaumaturge.api.aspect.AspectInstance;
 import com.leclowndu93150.thaumaturge.api.aspect.AspectList;
 import com.leclowndu93150.thaumaturge.api.aspect.IAspect;
+import com.leclowndu93150.thaumaturge.api.aspect.TTAspects;
 import com.leclowndu93150.thaumaturge.api.recipe.ResearchGate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -50,6 +51,29 @@ public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumat
             this.aspects = this.context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
         }
         return this.aspects;
+    }
+
+    protected static boolean isPrimalAspect(Object source) {
+        Objects.requireNonNull(source, "aspect source");
+        return switch (source) {
+            case Holder<?> holder -> holder.unwrapKey()
+                    .filter(AbstractThaumaturgeRecipeBuilder::isPrimalKey).isPresent();
+            case ResourceKey<?> key -> isPrimalKey(key);
+            case String text -> isPrimalKey(
+                    ResourceKey.create(IAspect.REGISTRY_KEY, ResourceLocation.parse(text)));
+            case AspectInstance instance -> instance.aspect().unwrapKey()
+                    .filter(AbstractThaumaturgeRecipeBuilder::isPrimalKey).isPresent();
+            default -> false;
+        };
+    }
+
+    private static boolean isPrimalKey(ResourceKey<?> key) {
+        for (ResourceKey<IAspect> primal : TTAspects.PRIMALS) {
+            if (primal.equals(key)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected final AspectList buildAspects() {

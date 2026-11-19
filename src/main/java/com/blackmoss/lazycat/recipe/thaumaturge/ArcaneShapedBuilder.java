@@ -35,6 +35,15 @@ public final class ArcaneShapedBuilder extends AbstractThaumaturgeRecipeBuilder<
         return "arcane_workbench";
     }
 
+    @Override
+    public ArcaneShapedBuilder aspect(Object source, int amount) {
+        if (isPrimalAspect(source)) {
+            throw new IllegalArgumentException("Arcane workbench aspects must be primal");
+        }
+        super.aspect(source, amount);
+        return this;
+    }
+
     public ArcaneShapedBuilder define(char symbol, Object source) {
         Objects.requireNonNull(source, "source");
         if (symbol == ' ') {

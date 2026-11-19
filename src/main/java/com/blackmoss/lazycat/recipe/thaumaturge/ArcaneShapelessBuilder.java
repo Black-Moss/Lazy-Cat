@@ -34,6 +34,15 @@ public final class ArcaneShapelessBuilder extends AbstractThaumaturgeRecipeBuild
         return "arcane_workbench";
     }
 
+    @Override
+    public ArcaneShapelessBuilder aspect(Object source, int amount) {
+        if (isPrimalAspect(source)) {
+            throw new IllegalArgumentException("Arcane workbench aspects must be primal");
+        }
+        super.aspect(source, amount);
+        return this;
+    }
+
     public ArcaneShapelessBuilder requires(Object source) {
         return requires(source, 1);
     }
