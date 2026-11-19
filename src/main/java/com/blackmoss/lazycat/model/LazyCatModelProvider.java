@@ -69,10 +69,6 @@ public abstract class LazyCatModelProvider implements DataProvider {
         new BlockModelBuilder(this.context, block).model(getBlockModelId(block)).onlyItem().save();
     }
 
-    protected void blockObj(Block block) {
-        new BlockModelBuilder(this.context, block).custom(getBlockModelId(block)).save();
-    }
-
     protected void blockFacing(Block block) {
         new BlockModelBuilder(this.context, block).facing().custom(getBlockModelId(block)).save();
     }
