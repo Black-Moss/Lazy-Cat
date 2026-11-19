@@ -16,7 +16,7 @@ public abstract class LazyCatResearchProvider implements DataProvider {
 
     protected LazyCatResearchProvider(PackOutput output, String modid) {
         this(ResearchContext.of(output, modid));
-        this.modid = modid;
+        this.modid = Objects.requireNonNull(modid, "modid");
     }
 
     protected LazyCatResearchProvider(ResearchContext context) {

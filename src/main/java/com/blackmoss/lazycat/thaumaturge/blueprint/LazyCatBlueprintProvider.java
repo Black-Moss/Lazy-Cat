@@ -16,7 +16,7 @@ public abstract class LazyCatBlueprintProvider implements DataProvider {
 
     protected LazyCatBlueprintProvider(PackOutput output, String modid) {
         this(BlueprintContext.of(output, modid));
-        this.modid = modid;
+        this.modid = Objects.requireNonNull(modid, "modid");
     }
 
     protected LazyCatBlueprintProvider(BlueprintContext context) {
