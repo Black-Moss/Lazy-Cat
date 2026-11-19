@@ -1,5 +1,6 @@
 package com.blackmoss.lazycat.datamap.neoforge;
 
+import com.blackmoss.lazycat.api.LazyIdentifier;
 import com.blackmoss.lazycat.api.datamap.AbstractDataMapBuilder;
 import com.blackmoss.lazycat.api.datamap.DataMapContext;
 import com.blackmoss.lazycat.api.datamap.DataMapTargets;
@@ -20,7 +21,7 @@ public final class MonsterRoomMobBuilder extends AbstractDataMapBuilder<EntityTy
 
     public MonsterRoomMobBuilder(DataMapContext context, EntityType<?> entityType) {
         this(context, DataMapTargets.entry(
-                BuiltInRegistries.ENTITY_TYPE, Objects.requireNonNull(entityType, "entityType")));
+                LazyIdentifier.getIdentifier(BuiltInRegistries.ENTITY_TYPE, entityType)));
     }
 
     public MonsterRoomMobBuilder(DataMapContext context, TagKey<EntityType<?>> tag) {

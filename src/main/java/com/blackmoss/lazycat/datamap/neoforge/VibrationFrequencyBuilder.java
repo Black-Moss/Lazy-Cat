@@ -1,5 +1,6 @@
 package com.blackmoss.lazycat.datamap.neoforge;
 
+import com.blackmoss.lazycat.api.LazyIdentifier;
 import com.blackmoss.lazycat.api.datamap.AbstractDataMapBuilder;
 import com.blackmoss.lazycat.api.datamap.DataMapContext;
 import com.blackmoss.lazycat.api.datamap.DataMapTargets;
@@ -19,7 +20,7 @@ public final class VibrationFrequencyBuilder extends AbstractDataMapBuilder<Game
     private Integer frequency;
 
     public VibrationFrequencyBuilder(DataMapContext context, GameEvent gameEvent) {
-        this(context, DataMapTargets.entry(BuiltInRegistries.GAME_EVENT, Objects.requireNonNull(gameEvent, "gameEvent")));
+        this(context, DataMapTargets.entry(LazyIdentifier.getIdentifier(BuiltInRegistries.GAME_EVENT, gameEvent)));
     }
 
     public VibrationFrequencyBuilder(DataMapContext context, Holder<GameEvent> gameEvent) {

@@ -1,9 +1,9 @@
 package com.blackmoss.lazycat.datamap.neoforge;
 
+import com.blackmoss.lazycat.api.LazyIdentifier;
 import com.blackmoss.lazycat.api.datamap.AbstractDataMapBuilder;
 import com.blackmoss.lazycat.api.datamap.DataMapContext;
 import com.blackmoss.lazycat.api.datamap.DataMapTargets;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.DataMapProvider;
@@ -18,7 +18,7 @@ public final class OxidizableBuilder extends AbstractDataMapBuilder<Block, Oxidi
     private Block nextStage;
 
     public OxidizableBuilder(DataMapContext context, Block block) {
-        this(context, DataMapTargets.entry(BuiltInRegistries.BLOCK, Objects.requireNonNull(block, "block")));
+        this(context, DataMapTargets.entry(LazyIdentifier.getBlockIdentifier(block)));
     }
 
     public OxidizableBuilder(DataMapContext context, TagKey<Block> tag) {

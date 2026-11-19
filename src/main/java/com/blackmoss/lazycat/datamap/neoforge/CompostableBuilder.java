@@ -1,9 +1,9 @@
 package com.blackmoss.lazycat.datamap.neoforge;
 
+import com.blackmoss.lazycat.api.LazyIdentifier;
 import com.blackmoss.lazycat.api.datamap.AbstractDataMapBuilder;
 import com.blackmoss.lazycat.api.datamap.DataMapContext;
 import com.blackmoss.lazycat.api.datamap.DataMapTargets;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.DataMapProvider;
@@ -19,7 +19,7 @@ public final class CompostableBuilder extends AbstractDataMapBuilder<Item, Compo
     private boolean villagerCompost;
 
     public CompostableBuilder(DataMapContext context, Item item) {
-        this(context, DataMapTargets.entry(BuiltInRegistries.ITEM, Objects.requireNonNull(item, "item")));
+        this(context, DataMapTargets.entry(LazyIdentifier.getItemIdentifier(item)));
     }
 
     public CompostableBuilder(DataMapContext context, TagKey<Item> tag) {
