@@ -33,6 +33,24 @@ public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBui
         super(context, result);
     }
 
+    private static Constructor<CookingPotRecipe> resolveTemplateConstructor() {
+        try {
+            Constructor<CookingPotRecipe> constructor = CookingPotRecipe.class.getDeclaredConstructor(
+                    String.class,
+                    CookingPotRecipeBookTab.class,
+                    NonNullList.class,
+                    ItemStackTemplate.class,
+                    Optional.class,
+                    float.class,
+                    int.class);
+            constructor.setAccessible(true);
+            return constructor;
+        } catch (NoSuchMethodException exception) {
+            throw new IllegalStateException(
+                    "FarmersDelight CookingPotRecipe no longer exposes an ItemStackTemplate constructor; please update Lazy Cat", exception);
+        }
+    }
+
     @Override
     protected CookingPotBuilder self() {
         return this;
@@ -116,23 +134,5 @@ public final class CookingPotBuilder extends AbstractRecipeBuilder<CookingPotBui
         RecipeUnlockAdvancementBuilder advancement = new RecipeUnlockAdvancementBuilder();
         applyCriteria(advancement::unlockedBy);
         output.accept(key, recipe, advancement.build(output, key, category()));
-    }
-
-    private static Constructor<CookingPotRecipe> resolveTemplateConstructor() {
-        try {
-            Constructor<CookingPotRecipe> constructor = CookingPotRecipe.class.getDeclaredConstructor(
-                    String.class,
-                    CookingPotRecipeBookTab.class,
-                    NonNullList.class,
-                    ItemStackTemplate.class,
-                    Optional.class,
-                    float.class,
-                    int.class);
-            constructor.setAccessible(true);
-            return constructor;
-        } catch (NoSuchMethodException exception) {
-            throw new IllegalStateException(
-                    "FarmersDelight CookingPotRecipe no longer exposes an ItemStackTemplate constructor; please update Lazy Cat", exception);
-        }
     }
 }

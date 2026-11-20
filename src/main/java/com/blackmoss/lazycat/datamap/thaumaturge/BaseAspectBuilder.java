@@ -1,5 +1,6 @@
 package com.blackmoss.lazycat.datamap.thaumaturge;
 
+import com.blackmoss.lazycat.api.LazyIdentifier;
 import com.blackmoss.lazycat.api.datamap.AbstractDataMapBuilder;
 import com.blackmoss.lazycat.api.datamap.DataMapContext;
 import com.blackmoss.lazycat.api.datamap.DataMapTargets;
@@ -7,7 +8,6 @@ import com.leclowndu93150.thaumaturge.api.aspect.AspectDataMaps;
 import com.leclowndu93150.thaumaturge.api.aspect.AspectList;
 import com.leclowndu93150.thaumaturge.api.aspect.IAspect;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -21,7 +21,7 @@ public final class BaseAspectBuilder extends AbstractDataMapBuilder<Item, Aspect
     private AspectList aspects = AspectList.EMPTY;
 
     public BaseAspectBuilder(DataMapContext context, Item item) {
-        this(context, DataMapTargets.entry(BuiltInRegistries.ITEM, Objects.requireNonNull(item, "item")));
+        this(context, DataMapTargets.entry(LazyIdentifier.getItemIdentifier(item)));
     }
 
     public BaseAspectBuilder(DataMapContext context, TagKey<Item> tag) {
@@ -32,6 +32,10 @@ public final class BaseAspectBuilder extends AbstractDataMapBuilder<Item, Aspect
             DataMapContext context,
             BiConsumer<DataMapProvider.Builder<AspectList, Item>, AspectList> target) {
         super(context, AspectDataMaps.BASE_ASPECTS, target);
+    }
+
+    public BaseAspectBuilder aspect(ResourceKey<IAspect> aspect) {
+        return aspect(aspect, 5);
     }
 
     public BaseAspectBuilder aspect(ResourceKey<IAspect> aspect, int amount) {

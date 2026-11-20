@@ -1,5 +1,6 @@
 package com.blackmoss.lazycat.datamap.neoforge;
 
+import com.blackmoss.lazycat.api.LazyIdentifier;
 import com.blackmoss.lazycat.api.datamap.AbstractDataMapBuilder;
 import com.blackmoss.lazycat.api.datamap.DataMapContext;
 import com.blackmoss.lazycat.api.datamap.DataMapTargets;
@@ -20,7 +21,7 @@ public final class RaidHeroGiftBuilder extends AbstractDataMapBuilder<VillagerPr
     private ResourceKey<LootTable> lootTable;
 
     public RaidHeroGiftBuilder(DataMapContext context, VillagerProfession profession) {
-        this(context, DataMapTargets.entry(BuiltInRegistries.VILLAGER_PROFESSION, Objects.requireNonNull(profession, "profession")));
+        this(context, DataMapTargets.entry(LazyIdentifier.getIdentifier(BuiltInRegistries.VILLAGER_PROFESSION, profession)));
     }
 
     public RaidHeroGiftBuilder(DataMapContext context, TagKey<VillagerProfession> tag) {

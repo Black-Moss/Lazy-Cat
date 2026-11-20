@@ -1,6 +1,5 @@
 package com.blackmoss.lazycat.api.datamap;
 
-import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
@@ -11,13 +10,9 @@ import java.util.function.BiConsumer;
 
 @SuppressWarnings("unused")
 public final class DataMapTargets {
-    private DataMapTargets() {
-    }
-
-    public static <R, V> BiConsumer<DataMapProvider.Builder<V, R>, V> entry(Registry<R> registry, R value) {
-        Objects.requireNonNull(registry, "registry");
-        Identifier id = Objects.requireNonNull(registry.getKey(Objects.requireNonNull(value, "value")), "data map key");
-        return (builder, mapValue) -> builder.add(id, mapValue, false);
+    public static <R, V> BiConsumer<DataMapProvider.Builder<V, R>, V> entry(Identifier id) {
+        Identifier key = Objects.requireNonNull(id, "id");
+        return (builder, mapValue) -> builder.add(key, mapValue, false);
     }
 
     public static <R, V> BiConsumer<DataMapProvider.Builder<V, R>, V> entry(ResourceKey<R> key) {

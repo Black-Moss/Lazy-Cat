@@ -1,6 +1,7 @@
 //package com.blackmoss.lazycat.example;
 //
 //import com.blackmoss.lazycat.LazyCat;
+//import com.blackmoss.lazycat.api.LazyIdentifier;
 //import com.blackmoss.lazycat.api.datamap.DataMapContext;
 //import com.blackmoss.lazycat.datamap.LazyCatDataMapProvider;
 //import com.blackmoss.lazycat.datamap.neoforge.CompostableBuilder;
@@ -10,9 +11,7 @@
 //import com.blackmoss.lazycat.datamap.thaumaturge.BaseAspectBuilder;
 //import com.leclowndu93150.thaumaturge.api.aspect.TTAspects;
 //import net.minecraft.core.HolderLookup;
-//import net.minecraft.core.registries.Registries;
 //import net.minecraft.data.PackOutput;
-//import net.minecraft.resources.Identifier;
 //import net.minecraft.tags.TagKey;
 //import net.minecraft.world.item.Item;
 //import net.minecraft.world.item.Items;
@@ -23,8 +22,7 @@
 //
 //@SuppressWarnings("unused")
 //public final class ExampleDataMapProvider extends LazyCatDataMapProvider {
-//    public static final TagKey<Item> COOKED_MEAT = TagKey.create(
-//            Registries.ITEM, Identifier.fromNamespaceAndPath("c", "foods/cooked_meat"));
+//    public static final TagKey<Item> COOKED_MEAT = LazyIdentifier.getItemTag("c", "foods/cooked_meat");
 //
 //    public ExampleDataMapProvider(
 //            PackOutput output,
