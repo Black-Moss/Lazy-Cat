@@ -87,6 +87,23 @@
     - Infusion
     - Infusion Enchantment
 
+### Data Map
+
+- NeoForge
+    - Acceptable Villager Distances (26.1.2+)
+    - Compostables
+    - Furnace Fuels
+    - Monster Room Mobs
+    - Oxidizables
+    - Parrot Imitations
+    - Raid Hero Gifts
+    - Strippables
+    - Vibration Frequencies
+    - Villager Types
+    - Waxables
+- Thaumaturge
+    - Base Aspects
+
 ### Model
 
 - Avaritia
