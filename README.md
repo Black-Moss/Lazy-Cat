@@ -131,4 +131,4 @@
 
 ## Real Lazy Cat
 
-![ITS SO CUTE!!!](CUTE_BOY.jpg)
+![ITS SO CUTE!!!](CUTE_CAT.png)
