@@ -2,8 +2,6 @@
 ![Modrinth Downloads](https://img.shields.io/modrinth/dt/EXgu3Zk0?style=for-the-badge&logo=modrinth)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Black-Moss/Lazy-Cat?style=for-the-badge&logo=github)
 
-[中文指南](README_ZH.md)
-
 # Lazy Cat
 
 **Alright, let’s do this Q&A in the most straight-talking, no-nonsense, cut-to-the-chase way possible.**
@@ -88,6 +86,23 @@
     - Crucible
     - Infusion
     - Infusion Enchantment
+
+### Data Map
+
+- NeoForge
+    - Acceptable Villager Distances (26.1.2+)
+    - Compostables
+    - Furnace Fuels
+    - Monster Room Mobs
+    - Oxidizables
+    - Parrot Imitations
+    - Raid Hero Gifts
+    - Strippables
+    - Vibration Frequencies
+    - Villager Types
+    - Waxables
+- Thaumaturge
+    - Base Aspects
 
 ### Model
 

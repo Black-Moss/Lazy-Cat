@@ -2,8 +2,6 @@
 ![Modrinth 下载](https://img.shields.io/modrinth/dt/EXgu3Zk0?style=for-the-badge&logo=modrinth)
 ![GitHub最后提交](https://img.shields.io/github/last-commit/Black-Moss/Lazy-Cat?style=for-the-badge&logo=github)
 
-[English Guide](README.md)
-
 # 懒猫
 
 **我现在用最直白、最不绕弯子、一针见血的方式，给你来一套 Q&A**
@@ -88,6 +86,23 @@
     - 坩埚
     - 注魔
     - 注魔附魔
+
+### 数据映射
+
+- NeoForge
+    - 村民敌对距离（26.1.2+）
+    - 可堆肥物品
+    - 熔炉燃料
+    - 地牢刷怪
+    - 可氧化方块
+    - 鹦鹉模仿音效
+    - 袭击英雄礼物
+    - 可去皮方块
+    - 振动频率
+    - 群系村民类型
+    - 可打蜡方块
+- Thaumaturge
+    - 物品基础要素
 
 ### 模型
 
