@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.crafting.Recipe;
 import vectorwing.farmersdelight.common.crafting.CuttingBoardRecipe;
 import vectorwing.farmersdelight.common.crafting.ingredient.ChanceResult;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.Optional;
 public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoardBuilder> {
     private final List<Extra> extras = new ArrayList<>();
     private Object primarySource;
-    private Object toolSource;
+    private Object tool = CommonTags.Items.TOOLS_KNIFE;
     private SoundEvent sound;
 
     public CuttingBoardBuilder(RecipeContext context, Object result) {
@@ -43,7 +44,7 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
     }
 
     public CuttingBoardBuilder tool(Object source) {
-        this.toolSource = Objects.requireNonNull(source, "tool");
+        this.tool = Objects.requireNonNull(source, "tool");
         return this;
     }
 
@@ -75,7 +76,7 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
         if (primarySource == null) {
             throw new IllegalStateException("Cutting board recipe requires an ingredient");
         }
-        if (toolSource == null) {
+        if (tool == null) {
             throw new IllegalStateException("Cutting board recipe requires a tool");
         }
     }
@@ -91,10 +92,10 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
         Optional<SoundEvent> soundEvent = sound != null ? Optional.of(sound) : Optional.empty();
         String grp = group() != null ? group() : "";
         CuttingBoardRecipe recipe = new CuttingBoardRecipe(
-                grp, toIngredient(primarySource), toIngredient(toolSource), results, soundEvent);
+                grp, toIngredient(primarySource), toIngredient(tool), results, soundEvent);
         output.accept(key, recipe, null);
     }
 
-    private record Extra(com.blackmoss.lazycat.api.LazyIngredient item, int count, float chance) {
+    private record Extra(LazyIngredient item, int count, float chance) {
     }
 }
