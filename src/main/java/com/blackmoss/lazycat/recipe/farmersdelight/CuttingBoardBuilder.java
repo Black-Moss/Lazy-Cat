@@ -20,17 +20,32 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoardBuilder> {
     private final List<Extra> extras = new ArrayList<>();
+    private final int primaryCount;
     private Object primarySource;
     private Object tool = CommonTags.Items.TOOLS_KNIFE;
     private SoundEvent sound;
 
     public CuttingBoardBuilder(RecipeContext context, Object result) {
+        this(context, result, 1);
+    }
+
+    public CuttingBoardBuilder(RecipeContext context, Object result, int count) {
         super(context, result);
+        if (count < 1 || count > 64) {
+            throw new IllegalArgumentException("count must be between 1 and 64");
+        }
+        this.primaryCount = count;
     }
 
     @Override
     protected CuttingBoardBuilder self() {
         return this;
+    }
+
+    @Override
+    public CuttingBoardBuilder count(int count) {
+        throw new UnsupportedOperationException(
+                "Cutting Board results carry their own count, use CuttingBoardBuilder(context, result, count)");
     }
 
     @Override
@@ -84,7 +99,7 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         NonNullList<ChanceResult> results = NonNullList.create();
-        results.add(new ChanceResult(resultIngredient().template(context().items()), 1f));
+        results.add(new ChanceResult(resultIngredient().count(this.primaryCount).template(context().items()), 1f));
         for (Extra extra : extras) {
             results.add(new ChanceResult(
                     extra.item().count(extra.count()).template(context().items()), extra.chance()));

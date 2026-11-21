@@ -200,8 +200,8 @@ public final class LazyIngredient {
     }
 
     public LazyIngredient count(int count) {
-        if (count < 1 || count > 99) {
-            throw new IllegalArgumentException("count must be between 1 and 99, was " + count);
+        if (count < 1 || count > 64) {
+            throw new IllegalArgumentException("count must be between 1 and 64, was " + count);
         }
         if (this.templateResolver == null) {
             throw new IllegalStateException("Ingredient has no single item template");
