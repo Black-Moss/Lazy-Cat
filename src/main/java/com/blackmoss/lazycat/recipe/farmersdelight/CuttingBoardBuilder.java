@@ -7,6 +7,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.ItemLike;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 import vectorwing.farmersdelight.data.builder.CuttingRecipeFolder;
 
@@ -18,7 +19,7 @@ import java.util.Objects;
 public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoardBuilder> {
     private final List<Extra> extras = new ArrayList<>();
     private Object primarySource;
-    private Object toolSource;
+    private Object tool = CommonTags.Items.TOOLS_KNIFE;
     private SoundEvent sound;
     private CuttingRecipeFolder folder = CuttingRecipeFolder.CUTTING;
 
@@ -42,7 +43,7 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
     }
 
     public CuttingBoardBuilder tool(Object source) {
-        this.toolSource = Objects.requireNonNull(source, "tool");
+        this.tool = Objects.requireNonNull(source, "tool");
         return this;
     }
 
@@ -79,7 +80,7 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
         if (primarySource == null) {
             throw new IllegalStateException("Cutting board recipe requires an ingredient");
         }
-        if (toolSource == null) {
+        if (tool == null) {
             throw new IllegalStateException("Cutting board recipe requires a tool");
         }
     }
@@ -88,7 +89,7 @@ public final class CuttingBoardBuilder extends AbstractRecipeBuilder<CuttingBoar
     protected void build(RecipeOutput output, ResourceLocation id) {
         CuttingBoardRecipeBuilder builder = CuttingBoardRecipeBuilder.cuttingRecipe(
                 LazyIngredient.from(primarySource).resolve(context().items()),
-                LazyIngredient.from(toolSource).resolve(context().items()),
+                LazyIngredient.from(tool).resolve(context().items()),
                 resultItem());
         for (Extra extra : extras) {
             builder.addResultWithChance(extra.item(), extra.chance(), extra.count());
