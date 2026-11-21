@@ -68,8 +68,8 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
     }
 
     public B count(int count) {
-        if (count < 1 || count > 99) {
-            throw new IllegalArgumentException("count must be between 1 and 99");
+        if (count < 1 || count > 64) {
+            throw new IllegalArgumentException("count must be between 1 and 64");
         }
         this.count = count;
         return self();
