@@ -12,21 +12,23 @@ import java.util.concurrent.CompletableFuture;
 @SuppressWarnings("unused")
 public abstract class LazyCatDataMapProvider extends DataMapProvider {
     private final String modid;
+    protected DataMapContext context;
 
     protected LazyCatDataMapProvider(
             PackOutput output,
-            CompletableFuture<HolderLookup.Provider> lookupProvider,
+            CompletableFuture<HolderLookup.Provider> registries,
             String modid) {
-        super(output, lookupProvider);
+        super(output, registries);
         this.modid = Objects.requireNonNull(modid, "modid");
     }
 
     @Override
-    protected final void gather(HolderLookup.@NonNull Provider provider) {
-        buildDataMaps(new DataMapContext(provider, this));
+    protected final void gather(HolderLookup.@NonNull Provider registries) {
+        this.context = new DataMapContext(registries, this);
+        buildDataMaps();
     }
 
-    protected abstract void buildDataMaps(DataMapContext context);
+    protected abstract void buildDataMaps();
 
     @Override
     public @NonNull String getName() {

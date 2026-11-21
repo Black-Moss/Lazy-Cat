@@ -13,6 +13,7 @@ import java.util.concurrent.CompletableFuture;
 @SuppressWarnings("unused")
 public abstract class LazyCatRecipeProvider extends RecipeProvider {
     protected final String modid;
+    protected RecipeContext context;
 
     protected LazyCatRecipeProvider(
             PackOutput output,
@@ -28,8 +29,9 @@ public abstract class LazyCatRecipeProvider extends RecipeProvider {
 
     @Override
     protected final void buildRecipes(@NonNull RecipeOutput output, HolderLookup.@NonNull Provider registries) {
-        addRecipes(RecipeContext.of(registries, output, modid));
+        this.context = RecipeContext.of(registries, output, modid);
+        addRecipes();
     }
 
-    protected abstract void addRecipes(RecipeContext context);
+    protected abstract void addRecipes();
 }

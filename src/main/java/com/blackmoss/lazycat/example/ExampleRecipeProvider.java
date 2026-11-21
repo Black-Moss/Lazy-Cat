@@ -27,7 +27,7 @@
 //    }
 //
 //    @Override
-//    protected void addRecipes(RecipeContext context) {
+//    protected void addRecipes() {
 //        new ShapedBuilder(context, Items.DIAMOND)
 //                .pattern("DDD", "D D", "DDD")
 //                .define('D', Items.DIRT)

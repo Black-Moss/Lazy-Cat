@@ -13,7 +13,7 @@
 //    }
 //
 //    @Override
-//    protected void addBlueprints(BlueprintContext context) {
+//    protected void addBlueprints() {
 //        context.blueprint("example/stone_floor")
 //                .key('S', Blocks.STONE_BRICKS)
 //                .row("SSS")

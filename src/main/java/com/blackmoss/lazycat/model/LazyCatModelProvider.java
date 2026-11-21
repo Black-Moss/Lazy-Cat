@@ -19,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 @SuppressWarnings("unused")
 public abstract class LazyCatModelProvider implements DataProvider {
     private final String modid;
-    private final ModelContext context;
+    protected final ModelContext context;
 
     public LazyCatModelProvider(PackOutput output, String modid) {
         this.modid = modid;
@@ -36,7 +36,7 @@ public abstract class LazyCatModelProvider implements DataProvider {
                 LazyIdentifier.getItemSpace(item), "item/" + LazyIdentifier.getItemPath(item));
     }
 
-    protected abstract void addModels(ModelContext context);
+    protected abstract void addModels();
 
     protected final ModelContext context() {
         return this.context;
@@ -44,7 +44,7 @@ public abstract class LazyCatModelProvider implements DataProvider {
 
     @Override
     public @NonNull CompletableFuture<?> run(@NonNull CachedOutput cache) {
-        addModels(this.context);
+        addModels();
         return this.context.save(cache);
     }
 
