@@ -35,7 +35,7 @@ public final class InfusionEnchantmentBuilder extends AbstractRecipeBuilder<Infu
 
     public InfusionEnchantmentBuilder(RecipeContext context, Object enchantment, Object displayCatalyst) {
         super(context, null);
-        this.aspects = context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
+        this.aspects = context.registries().lookupOrThrow(IAspect.REGISTRY_KEY);
         this.enchantment = resolveEnchantment(enchantment);
         this.displayCatalyst = LazyIngredient.from(Objects.requireNonNull(displayCatalyst, "displayCatalyst"))
                 .resolve(context.items());

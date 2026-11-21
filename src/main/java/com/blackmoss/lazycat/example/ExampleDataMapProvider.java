@@ -26,12 +26,12 @@
 //
 //    public ExampleDataMapProvider(
 //            PackOutput output,
-//            CompletableFuture<HolderLookup.Provider> lookupProvider) {
-//        super(output, lookupProvider, LazyCat.MODID);
+//            CompletableFuture<HolderLookup.Provider> registries) {
+//        super(output, registries, LazyCat.MODID);
 //    }
 //
 //    @Override
-//    protected void buildDataMaps(DataMapContext context) {
+//    protected void buildDataMaps() {
 //        new BaseAspectBuilder(context, Items.BREAD)
 //                .aspect(TTAspects.HERBA, 1)
 //                .save();

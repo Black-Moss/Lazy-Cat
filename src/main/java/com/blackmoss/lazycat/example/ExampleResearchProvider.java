@@ -20,7 +20,7 @@
 //    }
 //
 //    @Override
-//    protected void addResearch(ResearchContext context) {
+//    protected void addResearch() {
 //        context.category(LazyCat.lazyCat("example_category"))   // lazycat:example_category
 //                .icon(ResearchIcon.ofTexture(TTIds.rl("textures/research/r_basics.png")))
 //                .background(TTIds.rl("textures/research/back_basics.png"))

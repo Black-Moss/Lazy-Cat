@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
 public abstract class LazyCatBlueprintProvider implements DataProvider {
-    private final BlueprintContext context;
+    protected final BlueprintContext context;
     private String modid;
 
     protected LazyCatBlueprintProvider(PackOutput output, String modid) {
@@ -27,11 +27,11 @@ public abstract class LazyCatBlueprintProvider implements DataProvider {
         return this.context;
     }
 
-    protected abstract void addBlueprints(BlueprintContext context);
+    protected abstract void addBlueprints();
 
     @Override
     public @NonNull CompletableFuture<?> run(@NonNull CachedOutput cache) {
-        addBlueprints(this.context);
+        addBlueprints();
         return this.context.save(cache);
     }
 

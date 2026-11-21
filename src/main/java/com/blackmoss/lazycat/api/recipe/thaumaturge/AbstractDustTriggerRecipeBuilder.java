@@ -47,7 +47,7 @@ public abstract class AbstractDustTriggerRecipeBuilder<B extends AbstractDustTri
 
     private Block blockById(Identifier id) {
         ResourceKey<Block> key = ResourceKey.create(Registries.BLOCK, id);
-        return context().lookupProvide()
+        return context().registries()
                 .lookupOrThrow(Registries.BLOCK)
                 .get(key)
                 .map(Holder::value)

@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
 public abstract class LazyCatResearchProvider implements DataProvider {
-    private final ResearchContext context;
+    protected final ResearchContext context;
     private String modid;
 
     protected LazyCatResearchProvider(PackOutput output, String modid) {
@@ -27,11 +27,11 @@ public abstract class LazyCatResearchProvider implements DataProvider {
         return this.context;
     }
 
-    protected abstract void addResearch(ResearchContext context);
+    protected abstract void addResearch();
 
     @Override
     public @NonNull CompletableFuture<?> run(@NonNull CachedOutput cache) {
-        addResearch(this.context);
+        addResearch();
         return this.context.save(cache);
     }
 

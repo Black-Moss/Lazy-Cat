@@ -72,7 +72,7 @@ public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumat
 
     protected final HolderGetter<IAspect> aspects() {
         if (this.aspects == null) {
-            this.aspects = this.context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
+            this.aspects = this.context.registries().lookupOrThrow(IAspect.REGISTRY_KEY);
         }
         return this.aspects;
     }

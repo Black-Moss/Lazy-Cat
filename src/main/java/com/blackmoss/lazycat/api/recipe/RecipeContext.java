@@ -15,7 +15,7 @@ import net.minecraft.world.item.Item;
 import java.util.Objects;
 
 public final class RecipeContext {
-    private final HolderLookup.Provider lookupProvide;
+    private final HolderLookup.Provider registries;
     private final HolderGetter<Item> items;
     private final RecipeOutput output;
     private final String modid;
@@ -25,7 +25,7 @@ public final class RecipeContext {
             HolderGetter<Item> items,
             RecipeOutput output,
             String modid) {
-        lookupProvide = registries;
+        this.registries = registries;
         this.items = items;
         this.output = output;
         this.modid = modid;
@@ -35,7 +35,7 @@ public final class RecipeContext {
             HolderLookup.Provider registries,
             RecipeOutput output,
             String modid) {
-        Objects.requireNonNull(registries, "lookupProvide");
+        Objects.requireNonNull(registries, "registries");
         Objects.requireNonNull(output, "output");
         Objects.requireNonNull(modid, "modid");
         if (modid.isBlank()) {
@@ -48,8 +48,8 @@ public final class RecipeContext {
                 modid);
     }
 
-    public HolderLookup.Provider lookupProvide() {
-        return lookupProvide;
+    public HolderLookup.Provider registries() {
+        return this.registries;
     }
 
     public HolderGetter<Item> items() {

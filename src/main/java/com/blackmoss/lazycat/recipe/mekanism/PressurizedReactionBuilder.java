@@ -82,7 +82,7 @@ public final class PressurizedReactionBuilder extends AbstractMekanismRecipeBuil
 
     @SuppressWarnings("unchecked")
     private Holder<Chemical> chemicalHolder(Object source) {
-        HolderGetter<Chemical> chemicals = context().lookupProvide().lookupOrThrow(MekanismAPI.CHEMICAL_REGISTRY_NAME);
+        HolderGetter<Chemical> chemicals = context().registries().lookupOrThrow(MekanismAPI.CHEMICAL_REGISTRY_NAME);
         if (source instanceof Holder<?> h) {
             return (Holder<Chemical>) h;
         }

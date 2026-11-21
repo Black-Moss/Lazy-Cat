@@ -60,7 +60,7 @@ public abstract class AbstractMekanismRecipeBuilder<B extends AbstractMekanismRe
         if (amount < 1) {
             throw new IllegalArgumentException("chemical amount must be positive, was " + amount);
         }
-        HolderGetter<Chemical> chemicals = context().lookupProvide().lookupOrThrow(MekanismAPI.CHEMICAL_REGISTRY_NAME);
+        HolderGetter<Chemical> chemicals = context().registries().lookupOrThrow(MekanismAPI.CHEMICAL_REGISTRY_NAME);
         return switch (source) {
             case TagKey<?> tag ->
                     IngredientCreatorAccess.chemicalStack().from(chemicals, (TagKey<Chemical>) tag, amount);
@@ -79,7 +79,7 @@ public abstract class AbstractMekanismRecipeBuilder<B extends AbstractMekanismRe
         if (amount < 1) {
             throw new IllegalArgumentException("fluid amount must be positive, was " + amount);
         }
-        HolderGetter<Fluid> fluids = context().lookupProvide().lookupOrThrow(Registries.FLUID);
+        HolderGetter<Fluid> fluids = context().registries().lookupOrThrow(Registries.FLUID);
         return switch (source) {
             case TagKey<?> tag -> IngredientCreatorAccess.fluid().from(fluids, (TagKey<Fluid>) tag, amount);
             case Holder<?> h -> IngredientCreatorAccess.fluid().fromHolder((Holder<Fluid>) h, amount);
@@ -95,7 +95,7 @@ public abstract class AbstractMekanismRecipeBuilder<B extends AbstractMekanismRe
     protected ItemStackTemplate itemTemplate(Object source, int count) {
         return com.blackmoss.lazycat.api.LazyIngredient.from(source)
                 .count(count)
-                .template(context().lookupProvide().lookupOrThrow(Registries.ITEM));
+                .template(context().registries().lookupOrThrow(Registries.ITEM));
     }
 
     protected ChemicalStackTemplate chemicalTemplate(Object source, int amount) {
@@ -103,7 +103,7 @@ public abstract class AbstractMekanismRecipeBuilder<B extends AbstractMekanismRe
         if (amount < 1) {
             throw new IllegalArgumentException("chemical amount must be positive, was " + amount);
         }
-        HolderGetter<Chemical> chemicals = context().lookupProvide().lookupOrThrow(MekanismAPI.CHEMICAL_REGISTRY_NAME);
+        HolderGetter<Chemical> chemicals = context().registries().lookupOrThrow(MekanismAPI.CHEMICAL_REGISTRY_NAME);
         Holder<Chemical> holder = switch (source) {
             case Holder<?> h -> (Holder<Chemical>) h;
             case ResourceKey<?> k -> chemicals.getOrThrow((ResourceKey<Chemical>) k);
@@ -120,7 +120,7 @@ public abstract class AbstractMekanismRecipeBuilder<B extends AbstractMekanismRe
         if (amount < 1) {
             throw new IllegalArgumentException("fluid amount must be positive, was " + amount);
         }
-        HolderGetter<Fluid> fluids = context().lookupProvide().lookupOrThrow(Registries.FLUID);
+        HolderGetter<Fluid> fluids = context().registries().lookupOrThrow(Registries.FLUID);
         Holder<Fluid> holder = switch (source) {
             case Holder<?> h -> (Holder<Fluid>) h;
             case ResourceKey<?> k -> fluids.getOrThrow((ResourceKey<Fluid>) k);

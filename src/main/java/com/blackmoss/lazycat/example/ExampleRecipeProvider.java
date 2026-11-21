@@ -26,8 +26,8 @@
 //    }
 //
 //    public static final class Runner extends RecipeProvider.Runner {
-//        public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-//            super(output, lookupProvider);
+//        public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+//            super(output, registries);
 //        }
 //
 //        @Override

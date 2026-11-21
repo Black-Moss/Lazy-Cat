@@ -24,7 +24,7 @@ import org.jspecify.annotations.NonNull;
 @SuppressWarnings("unused")
 public abstract class LazyCatModelProvider extends ModelProvider {
     protected final String modid;
-    private ModelContext context;
+    protected ModelContext context;
 
     public LazyCatModelProvider(PackOutput output, String modid) {
         super(output, modid);
@@ -49,16 +49,16 @@ public abstract class LazyCatModelProvider extends ModelProvider {
     @Override
     protected final void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
         this.context = new ModelContext(itemModels, blockModels);
-        addModels(this.context);
+        addModels();
     }
 
-    protected abstract void addModels(ModelContext context);
+    protected abstract void addModels();
 
     protected final ModelContext context() {
         return this.context;
     }
 
-    protected void blockCubeAll(ModelContext context, Block block) {
+    protected void blockCubeAll(Block block) {
         var blockModels = this.context.blockModels();
         var itemModels = this.context.itemModels();
 
