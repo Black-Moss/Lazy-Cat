@@ -76,7 +76,7 @@ public final class LazyIdentifier {
     }
 
     public static TagKey<Item> getItemTag(String path) {
-        return getItemTag(LazyCat.MODID, path);
+        return getItemTag("c", path);
     }
 
     public static TagKey<Block> getBlockTag(ResourceLocation id) {
@@ -88,6 +88,6 @@ public final class LazyIdentifier {
     }
 
     public static TagKey<Block> getBlockTag(String path) {
-        return getBlockTag(LazyCat.MODID, path);
+        return getBlockTag("c", path);
     }
 }
