@@ -37,25 +37,44 @@ public final class ThaumaturgeUtils {
     }
 
     public static ItemStackTemplate aspectItem(Holder<IAspect> aspect, ItemLike item) {
+        return aspectItem(aspect, item, 1);
+    }
+
+    public static ItemStackTemplate aspectItem(Holder<IAspect> aspect, ItemLike item, int count) {
         Objects.requireNonNull(aspect, "aspect");
         Objects.requireNonNull(item, "item");
+        if (count < 1 || count > 64) {
+            throw new IllegalArgumentException("count must be between 1 and 64");
+        }
         return new ItemStackTemplate(
                 item.asItem(),
-                1,
+                count,
                 DataComponentPatch.builder()
                         .set(TTDataComponents.CRYSTAL_ASPECT.get(), new AspectInstance(aspect, 1))
                         .build());
     }
 
     public static ItemStackTemplate crystal(Holder<IAspect> aspect) {
-        return aspectItem(aspect, TTItems.ESSENTIA_CRYSTAL.get());
+        return crystal(aspect, 1);
+    }
+
+    public static ItemStackTemplate crystal(Holder<IAspect> aspect, int count) {
+        return aspectItem(aspect, TTItems.ESSENTIA_CRYSTAL.get(), count);
     }
 
     public static ItemStackTemplate manaBean(Holder<IAspect> aspect) {
-        return aspectItem(aspect, TTItems.MANA_BEAN.get());
+        return manaBean(aspect, 1);
+    }
+
+    public static ItemStackTemplate manaBean(Holder<IAspect> aspect, int count) {
+        return aspectItem(aspect, TTItems.MANA_BEAN.get(), count);
     }
 
     public static ItemStackTemplate phial(Holder<IAspect> aspect) {
-        return aspectItem(aspect, TTItems.PHIAL.get());
+        return phial(aspect, 1);
+    }
+
+    public static ItemStackTemplate phial(Holder<IAspect> aspect, int count) {
+        return aspectItem(aspect, TTItems.PHIAL.get(), count);
     }
 }
