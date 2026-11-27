@@ -36,22 +36,41 @@ public final class ThaumaturgeUtils {
     }
 
     public static ItemStack aspectItem(Holder<IAspect> aspect, ItemLike item) {
+        return aspectItem(aspect, item, 1);
+    }
+
+    public static ItemStack aspectItem(Holder<IAspect> aspect, ItemLike item, int count) {
         Objects.requireNonNull(aspect, "aspect");
         Objects.requireNonNull(item, "item");
-        ItemStack stack = new ItemStack(item);
+        if (count < 1 || count > 64) {
+            throw new IllegalArgumentException("count must be between 1 and 64");
+        }
+        ItemStack stack = new ItemStack(item, count);
         stack.set(TTDataComponents.CRYSTAL_ASPECT.get(), new AspectInstance(aspect, 1));
         return stack;
     }
 
     public static ItemStack crystal(Holder<IAspect> aspect) {
-        return aspectItem(aspect, TTItems.ESSENTIA_CRYSTAL.get());
+        return crystal(aspect, 1);
+    }
+
+    public static ItemStack crystal(Holder<IAspect> aspect, int count) {
+        return aspectItem(aspect, TTItems.ESSENTIA_CRYSTAL.get(), count);
     }
 
     public static ItemStack manaBean(Holder<IAspect> aspect) {
-        return aspectItem(aspect, TTItems.MANA_BEAN.get());
+        return manaBean(aspect, 1);
+    }
+
+    public static ItemStack manaBean(Holder<IAspect> aspect, int count) {
+        return aspectItem(aspect, TTItems.MANA_BEAN.get(), count);
     }
 
     public static ItemStack phial(Holder<IAspect> aspect) {
-        return aspectItem(aspect, TTItems.PHIAL.get());
+        return phial(aspect, 1);
+    }
+
+    public static ItemStack phial(Holder<IAspect> aspect, int count) {
+        return aspectItem(aspect, TTItems.PHIAL.get(), count);
     }
 }
