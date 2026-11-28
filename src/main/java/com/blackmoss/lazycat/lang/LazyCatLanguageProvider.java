@@ -11,6 +11,8 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import org.jspecify.annotations.NonNull;
 
+import java.util.Objects;
+
 @SuppressWarnings("unused")
 public abstract class LazyCatLanguageProvider extends LanguageProvider {
     private final String modid;
@@ -52,14 +54,17 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
     }
 
     protected void addResearchCategory(ResourceKey<IResearchCategory> category, String translations) {
-        addResearchCategory(category.registry().getNamespace(), translations);
+        Objects.requireNonNull(category, "category");
+        addResearchCategory(category.identifier().getPath(), translations);
     }
 
     protected void addResearchMeme(String researchId, String translations) {
+        Objects.requireNonNull(researchId, "researchId");
         add("research.%s.%s.meme".formatted(modid, researchId), translations);
     }
 
     protected void addResearchAddenda(String researchId, String... stage) {
+        Objects.requireNonNull(researchId, "researchId");
         for (int i = 0; i < stage.length; i++) {
             add("research.%s.%s.addendum_%d".formatted(modid, researchId, i), stage[i]);
         }

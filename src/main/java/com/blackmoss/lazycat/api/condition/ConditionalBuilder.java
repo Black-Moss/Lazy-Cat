@@ -67,6 +67,7 @@ public interface ConditionalBuilder<T> {
     }
 
     default T ifTagEmpty(String id) {
+        Objects.requireNonNull(id, "id");
         return ifTagEmpty(LazyIdentifier.getItemTag(id));
     }
 
@@ -75,6 +76,7 @@ public interface ConditionalBuilder<T> {
     }
 
     default T ifTagNotEmpty(String id) {
+        Objects.requireNonNull(id, "id");
         return ifTagNotEmpty(LazyIdentifier.getItemTag(id));
     }
 

@@ -75,6 +75,7 @@ public final class LazyIdentifier {
     }
 
     public static TagKey<Item> getItemTag(String id) {
+        Objects.requireNonNull(id, "id");
         return getItemTag(Identifier.parse(id));
     }
 
@@ -95,6 +96,7 @@ public final class LazyIdentifier {
     }
 
     public static TagKey<Block> getBlockTag(String id) {
+        Objects.requireNonNull(id, "id");
         return getBlockTag(Identifier.parse(id));
     }
 
@@ -111,10 +113,12 @@ public final class LazyIdentifier {
     }
 
     public static TagKey<EntityType<?>> getEntityTag(Identifier id) {
+        Objects.requireNonNull(id, "id");
         return getTag(Registries.ENTITY_TYPE, id);
     }
 
     public static TagKey<EntityType<?>> getEntityTag(String id) {
+        Objects.requireNonNull(id, "id");
         return getEntityTag(Identifier.parse(id));
     }
 
@@ -131,6 +135,7 @@ public final class LazyIdentifier {
     }
 
     public static TagKey<Fluid> getFluidTag(Identifier id) {
+        Objects.requireNonNull(id, "id");
         return getTag(Registries.FLUID, id);
     }
 
@@ -151,10 +156,12 @@ public final class LazyIdentifier {
     }
 
     public static TagKey<MobEffect> getEffectTag(Identifier id) {
+        Objects.requireNonNull(id, "id");
         return getTag(Registries.MOB_EFFECT, id);
     }
 
     public static TagKey<MobEffect> getEffectTag(String id) {
+        Objects.requireNonNull(id, "id");
         return getEffectTag(Identifier.parse(id));
     }
 
