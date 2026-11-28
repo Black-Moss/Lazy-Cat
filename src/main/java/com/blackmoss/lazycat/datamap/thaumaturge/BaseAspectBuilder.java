@@ -35,7 +35,7 @@ public final class BaseAspectBuilder extends AbstractDataMapBuilder<Item, Aspect
     }
 
     public BaseAspectBuilder aspect(ResourceKey<IAspect> aspect) {
-        return aspect(aspect, 1);
+        return aspect(aspect, 5);
     }
 
     public BaseAspectBuilder aspect(ResourceKey<IAspect> aspect, int amount) {
