@@ -39,7 +39,7 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
         Objects.requireNonNull(id, "id");
         String idText = id instanceof String
                 ? id.toString()
-                : ResearchContext.iconRef(id);
+                : ResearchContext.iconRef(id).replace(context.modid() + ":", "");
         if (idText.startsWith("research.")) {
             this.name = idText.endsWith(".title") ? idText : idText + ".title";
             this.textPrefix = this.name.substring(0, this.name.length() - ".title".length());
