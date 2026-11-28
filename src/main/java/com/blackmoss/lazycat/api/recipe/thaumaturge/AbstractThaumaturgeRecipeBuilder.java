@@ -46,13 +46,6 @@ public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumat
         };
     }
 
-    protected final HolderGetter<IAspect> aspects() {
-        if (this.aspects == null) {
-            this.aspects = this.context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
-        }
-        return this.aspects;
-    }
-
     protected static boolean isPrimalAspect(Object source) {
         Objects.requireNonNull(source, "aspect source");
         return switch (source) {
@@ -74,6 +67,13 @@ public abstract class AbstractThaumaturgeRecipeBuilder<B extends AbstractThaumat
             }
         }
         return false;
+    }
+
+    protected final HolderGetter<IAspect> aspects() {
+        if (this.aspects == null) {
+            this.aspects = this.context.lookupProvide().lookupOrThrow(IAspect.REGISTRY_KEY);
+        }
+        return this.aspects;
     }
 
     protected final AspectList buildAspects() {

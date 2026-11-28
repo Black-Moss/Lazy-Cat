@@ -18,8 +18,8 @@ import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
 public abstract class LazyCatModelProvider implements DataProvider {
-    private final String modid;
     protected final ModelContext context;
+    private final String modid;
 
     public LazyCatModelProvider(PackOutput output, String modid) {
         this.modid = modid;
