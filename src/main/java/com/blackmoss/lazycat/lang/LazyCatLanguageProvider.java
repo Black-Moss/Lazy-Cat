@@ -1,6 +1,7 @@
 package com.blackmoss.lazycat.lang;
 
 import com.leclowndu93150.thaumaturge.api.aspect.IAspect;
+import com.leclowndu93150.thaumaturge.api.research.IResearchCategory;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
@@ -48,6 +49,10 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
 
     protected void addResearchCategory(String researchId, String translations) {
         add("research_category.%s.%s".formatted(modid, researchId), translations);
+    }
+
+    protected void addResearchCategory(ResourceKey<IResearchCategory> category, String translations) {
+        addResearchCategory(category.registry().getPath(), translations);
     }
 
     protected void addResearchAddenda(String researchId, String... stage) {
