@@ -74,8 +74,11 @@ public final class ResearchContext {
         return new ResearchCategoryBuilder(this, resolveId(id));
     }
 
-    public ResearchEntryBuilder entry(Object category, String id) {
-        return new ResearchEntryBuilder(this, category, id);
+    public ResearchEntryBuilder entry(Object category, Object id) {
+        if (id instanceof String idText) {
+            return new ResearchEntryBuilder(this, category, idText);
+        }
+        return new ResearchEntryBuilder(this, category, iconRef(id));
     }
 
     public CompletableFuture<?> save(CachedOutput cache) {
@@ -102,7 +105,8 @@ public final class ResearchContext {
             case String text -> text.contains(":")
                     ? ResourceLocation.parse(text)
                     : ResourceLocation.fromNamespaceAndPath(this.modid, text);
-            default -> throw new IllegalArgumentException("Unsupported lazyCat source: " + source.getClass().getName());
+            default ->
+                    throw new IllegalArgumentException("Unsupported Lazy Cat source: " + source.getClass().getName());
         };
     }
 
