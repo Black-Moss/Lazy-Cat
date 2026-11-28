@@ -55,6 +55,10 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
         addResearchCategory(category.registry().getPath(), translations);
     }
 
+    protected void addResearchMeme(String researchId, String translations) {
+        add("research.%s.%s.meme".formatted(modid, researchId), translations);
+    }
+
     protected void addResearchAddenda(String researchId, String... stage) {
         for (int i = 0; i < stage.length; i++) {
             add("research.%s.%s.addendum_%d".formatted(modid, researchId, i), stage[i]);
