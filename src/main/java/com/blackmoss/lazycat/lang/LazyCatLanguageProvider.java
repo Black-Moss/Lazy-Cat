@@ -38,7 +38,9 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
     }
 
     protected void addResearch(String researchId, String title, String... stage) {
-        add("research.%s.%s.title".formatted(modid, researchId), title);
+        if (title != null) {
+            add("research.%s.%s.title".formatted(modid, researchId), title);
+        }
         for (int i = 0; i < stage.length; i++) {
             add("research.%s.%s.stage_%d".formatted(modid, researchId, i), stage[i]);
         }
