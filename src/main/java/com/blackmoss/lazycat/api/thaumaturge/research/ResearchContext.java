@@ -74,7 +74,6 @@ public final class ResearchContext {
         return new ResearchCategoryBuilder(this, resolveId(id));
     }
 
-    // TODO: BUG :(((
     public ResearchEntryBuilder entry(Object category, Object id) {
         if (id instanceof String idText) {
             return new ResearchEntryBuilder(this, category, idText);
