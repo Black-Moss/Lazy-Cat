@@ -37,7 +37,7 @@ public final class ArcaneShapedBuilder extends AbstractThaumaturgeRecipeBuilder<
 
     @Override
     public ArcaneShapedBuilder aspect(Object source, int amount) {
-        if (isPrimalAspect(source)) {
+        if (!isPrimalAspect(source)) {
             throw new IllegalArgumentException("Arcane workbench aspects must be primal");
         }
         super.aspect(source, amount);
@@ -50,7 +50,7 @@ public final class ArcaneShapedBuilder extends AbstractThaumaturgeRecipeBuilder<
             throw new IllegalArgumentException("Symbol ' ' is reserved");
         }
         if (definitions.containsKey(symbol)) {
-            throw new IllegalArgumentException("Symbol '" + symbol + "' is already defined");
+            throw new IllegalArgumentException("Symbol '%s' is already defined".formatted(symbol));
         }
         definitions.put(symbol, LazyIngredient.from(source).resolve(context().items()));
         defaultUnlock(LazyIngredient.from(source));
@@ -78,7 +78,7 @@ public final class ArcaneShapedBuilder extends AbstractThaumaturgeRecipeBuilder<
             for (char symbol : row.toCharArray()) {
                 if (symbol != ' ' && !definitions.containsKey(symbol)) {
                     throw new IllegalStateException(
-                            "Arcane workbench shaped recipe uses undefined symbol '" + symbol + "'");
+                            "Arcane workbench shaped recipe uses undefined symbol '%s'".formatted(symbol));
                 }
             }
         }
