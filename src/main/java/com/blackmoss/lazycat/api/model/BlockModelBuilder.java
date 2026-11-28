@@ -49,6 +49,7 @@ public final class BlockModelBuilder extends AbstractModelBuilder<BlockModelBuil
     }
 
     public BlockModelBuilder custom(MultiVariant variant) {
+        this.writeModel = false;
         this.variant = Objects.requireNonNull(variant, "variant");
         return this;
     }
