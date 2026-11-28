@@ -74,6 +74,10 @@ public final class LazyIdentifier {
         return getTag(Registries.ITEM, id);
     }
 
+    public static TagKey<Item> getItemTag(String id) {
+        return getItemTag(Identifier.parse(id));
+    }
+
     public static TagKey<Item> getItemTag(String namespace, String path) {
         return getItemTag(Identifier.fromNamespaceAndPath(namespace, path));
     }
@@ -88,6 +92,10 @@ public final class LazyIdentifier {
 
     public static TagKey<Block> getBlockTag(Identifier id) {
         return getTag(Registries.BLOCK, id);
+    }
+
+    public static TagKey<Block> getBlockTag(String id) {
+        return getBlockTag(Identifier.parse(id));
     }
 
     public static TagKey<Block> getBlockTag(String namespace, String path) {
@@ -106,6 +114,10 @@ public final class LazyIdentifier {
         return getTag(Registries.ENTITY_TYPE, id);
     }
 
+    public static TagKey<EntityType<?>> getEntityTag(String id) {
+        return getEntityTag(Identifier.parse(id));
+    }
+
     public static TagKey<EntityType<?>> getEntityTag(String namespace, String path) {
         return getEntityTag(Identifier.fromNamespaceAndPath(namespace, path));
     }
@@ -122,6 +134,10 @@ public final class LazyIdentifier {
         return getTag(Registries.FLUID, id);
     }
 
+    public static TagKey<Fluid> getFluidTag(String id) {
+        return getFluidTag(Identifier.parse(id));
+    }
+
     public static TagKey<Fluid> getFluidTag(String namespace, String path) {
         return getFluidTag(Identifier.fromNamespaceAndPath(namespace, path));
     }
@@ -136,6 +152,10 @@ public final class LazyIdentifier {
 
     public static TagKey<MobEffect> getEffectTag(Identifier id) {
         return getTag(Registries.MOB_EFFECT, id);
+    }
+
+    public static TagKey<MobEffect> getEffectTag(String id) {
+        return getEffectTag(Identifier.parse(id));
     }
 
     public static TagKey<MobEffect> getEffectTag(String namespace, String path) {

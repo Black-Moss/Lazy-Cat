@@ -1,5 +1,6 @@
 package com.blackmoss.lazycat.api.condition;
 
+import com.blackmoss.lazycat.api.LazyIdentifier;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.DynamicOps;
@@ -65,8 +66,16 @@ public interface ConditionalBuilder<T> {
         return when(Conditionals.not(Conditionals.itemExists(Conditionals.itemId(item))));
     }
 
+    default T ifTagEmpty(String id) {
+        return ifTagEmpty(LazyIdentifier.getItemTag(id));
+    }
+
     default T ifTagEmpty(TagKey<Item> tag) {
         return when(Conditionals.tagEmpty(Objects.requireNonNull(tag, "tag")));
+    }
+
+    default T ifTagNotEmpty(String id) {
+        return ifTagNotEmpty(LazyIdentifier.getItemTag(id));
     }
 
     default T ifTagNotEmpty(TagKey<Item> tag) {
