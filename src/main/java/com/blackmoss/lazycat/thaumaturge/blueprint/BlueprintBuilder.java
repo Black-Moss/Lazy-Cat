@@ -133,17 +133,17 @@ public final class BlueprintBuilder implements ConditionalBuilder<BlueprintBuild
 
     private void validate(Identifier outputId) {
         if (this.pattern.isEmpty() || this.pattern.getFirst().isEmpty()) {
-            throw new IllegalStateException("Blueprint " + outputId + " has no rows");
+            throw new IllegalStateException("Blueprint %s has no rows".formatted(outputId));
         }
         int xCount = this.pattern.getFirst().size();
         int zLength = this.pattern.getFirst().getFirst().length();
         for (List<String> layer : this.pattern) {
             if (layer.size() != xCount) {
-                throw new IllegalStateException("Blueprint " + outputId + " is not a consistent cuboid");
+                throw new IllegalStateException("Blueprint %s is not a consistent cuboid".formatted(outputId));
             }
             for (String row : layer) {
                 if (row.length() != zLength) {
-                    throw new IllegalStateException("Blueprint " + outputId + " is not a consistent cuboid");
+                    throw new IllegalStateException("Blueprint %s is not a consistent cuboid".formatted(outputId));
                 }
                 for (int i = 0; i < row.length(); i++) {
                     char symbol = row.charAt(i);

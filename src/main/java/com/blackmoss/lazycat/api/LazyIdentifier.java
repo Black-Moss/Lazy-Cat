@@ -7,9 +7,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 
 import java.util.Objects;
 
@@ -75,8 +78,12 @@ public final class LazyIdentifier {
         return getItemTag(Identifier.fromNamespaceAndPath(namespace, path));
     }
 
-    public static TagKey<Item> getItemTag(String path) {
+    public static TagKey<Item> getCommonItemTag(String path) {
         return getItemTag("c", path);
+    }
+
+    public static TagKey<Item> getDefaultItemTag(String path) {
+        return getItemTag(Identifier.withDefaultNamespace(path));
     }
 
     public static TagKey<Block> getBlockTag(Identifier id) {
@@ -87,7 +94,59 @@ public final class LazyIdentifier {
         return getBlockTag(Identifier.fromNamespaceAndPath(namespace, path));
     }
 
-    public static TagKey<Block> getBlockTag(String path) {
+    public static TagKey<Block> getCommonBlockTag(String path) {
         return getBlockTag("c", path);
+    }
+
+    public static TagKey<Block> getDefaultBlockTag(String path) {
+        return getBlockTag(Identifier.withDefaultNamespace(path));
+    }
+
+    public static TagKey<EntityType<?>> getEntityTag(Identifier id) {
+        return getTag(Registries.ENTITY_TYPE, id);
+    }
+
+    public static TagKey<EntityType<?>> getEntityTag(String namespace, String path) {
+        return getEntityTag(Identifier.fromNamespaceAndPath(namespace, path));
+    }
+
+    public static TagKey<EntityType<?>> getCommonEntityTag(String path) {
+        return getEntityTag("c", path);
+    }
+
+    public static TagKey<EntityType<?>> getDefaultEntityTag(String path) {
+        return getEntityTag(Identifier.withDefaultNamespace(path));
+    }
+
+    public static TagKey<Fluid> getFluidTag(Identifier id) {
+        return getTag(Registries.FLUID, id);
+    }
+
+    public static TagKey<Fluid> getFluidTag(String namespace, String path) {
+        return getFluidTag(Identifier.fromNamespaceAndPath(namespace, path));
+    }
+
+    public static TagKey<Fluid> getCommonFluidTag(String path) {
+        return getFluidTag("c", path);
+    }
+
+    public static TagKey<Fluid> getDefaultFluidTag(String path) {
+        return getFluidTag(Identifier.withDefaultNamespace(path));
+    }
+
+    public static TagKey<MobEffect> getEffectTag(Identifier id) {
+        return getTag(Registries.MOB_EFFECT, id);
+    }
+
+    public static TagKey<MobEffect> getEffectTag(String namespace, String path) {
+        return getEffectTag(Identifier.fromNamespaceAndPath(namespace, path));
+    }
+
+    public static TagKey<MobEffect> getCommonEffectTag(String path) {
+        return getEffectTag("c", path);
+    }
+
+    public static TagKey<MobEffect> getDefaultEffectTag(String path) {
+        return getEffectTag(Identifier.withDefaultNamespace(path));
     }
 }

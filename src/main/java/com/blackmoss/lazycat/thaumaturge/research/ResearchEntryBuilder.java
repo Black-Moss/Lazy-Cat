@@ -33,18 +33,24 @@ public final class ResearchEntryBuilder implements ConditionalBuilder<ResearchEn
     private int y;
     private int complexity = 1;
 
-    public ResearchEntryBuilder(ResearchContext context, Object category, String id) {
+    public ResearchEntryBuilder(ResearchContext context, Object category, Object id) {
         this.context = Objects.requireNonNull(context, "context");
         this.category = context.resolveText(category);
         Objects.requireNonNull(id, "id");
-        if (id.startsWith("research.")) {
-            this.name = id.endsWith(".title") ? id : id + ".title";
+        String idText = id instanceof String
+                ? id.toString()
+                : ResearchContext.iconRef(id);
+        if (idText.startsWith("research.")) {
+            this.name = idText.endsWith(".title") ? idText : idText + ".title";
             this.textPrefix = this.name.substring(0, this.name.length() - ".title".length());
         } else {
-            this.textPrefix = "research.%s.%s".formatted(context.modid(), id);
+            this.textPrefix = "research.%s.%s".formatted(context.modid(), idText);
             this.name = this.textPrefix + ".title";
         }
-        this.id = Identifier.fromNamespaceAndPath(context.modid(), idPath(context.modid(), id));
+        this.id = Identifier.fromNamespaceAndPath(context.modid(), idPath(context.modid(), idText));
+        if (!(id instanceof String)) {
+            this.icon(id);
+        }
     }
 
     private static String idPath(String modid, String id) {

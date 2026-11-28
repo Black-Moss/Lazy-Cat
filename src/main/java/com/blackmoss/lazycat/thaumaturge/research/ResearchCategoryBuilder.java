@@ -29,12 +29,8 @@ public final class ResearchCategoryBuilder implements ConditionalBuilder<Researc
     }
 
     public ResearchCategoryBuilder requiredResearch(Object research) {
-        this.requiredResearch = research == null ? defaultRequiredResearch() : this.context.resolveText(research);
+        this.requiredResearch = this.context.resolveText(research);
         return this;
-    }
-
-    private String defaultRequiredResearch() {
-        return "%s:unlock_%s".formatted(this.context.modid(), this.id.getPath());
     }
 
     public ResearchCategoryBuilder formula(Object aspect) {
@@ -96,8 +92,9 @@ public final class ResearchCategoryBuilder implements ConditionalBuilder<Researc
         JsonArray aspects = new JsonArray();
         this.formula.forEach(aspects::add);
         json.add("formula", aspects);
-        json.addProperty("required_research",
-                this.requiredResearch != null ? this.requiredResearch : defaultRequiredResearch());
+        if (this.requiredResearch != null) {
+            json.addProperty("required_research", this.requiredResearch);
+        }
         if (this.overlayBackground != null) {
             json.addProperty("overlay_background", this.overlayBackground);
         }
