@@ -208,7 +208,7 @@ public final class LazyIngredient {
         }
         Function<HolderGetter<Item>, ItemStackTemplate> next =
                 getter -> this.templateResolver.apply(getter).withCount(count);
-        return new LazyIngredient(this.resolver, next, this.label, this.reference);
+        return new LazyIngredient(this.resolver, next, this.label, this.reference, this.tag);
     }
 
     public ItemStack stack(HolderGetter<Item> items) {
@@ -225,7 +225,7 @@ public final class LazyIngredient {
             ItemStackTemplate current = this.templateResolver.apply(getter);
             return new ItemStackTemplate(current.item(), current.count(), components);
         };
-        return new LazyIngredient(this.resolver, next, this.label, this.reference);
+        return new LazyIngredient(this.resolver, next, this.label, this.reference, this.tag);
     }
 
     public String label() {
