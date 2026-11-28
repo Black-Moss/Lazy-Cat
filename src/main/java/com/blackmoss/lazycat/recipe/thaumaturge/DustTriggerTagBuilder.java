@@ -20,7 +20,6 @@ public final class DustTriggerTagBuilder extends AbstractDustTriggerRecipeBuilde
     public DustTriggerTagBuilder(RecipeContext context, Object result, Object targetTag) {
         super(context, result);
         this.targetTag = resolveTag(targetTag);
-        defaultUnlock(resultIngredient());
     }
 
     @Override

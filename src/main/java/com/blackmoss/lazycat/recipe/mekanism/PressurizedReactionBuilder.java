@@ -12,10 +12,12 @@ import java.util.Objects;
 public final class PressurizedReactionBuilder extends AbstractMekanismRecipeBuilder<PressurizedReactionBuilder> {
     private Object input;
     private Object fluidInput;
+    private int fluidInputAmount = 1;
     private Object chemicalInput;
     private int chemicalInputAmount = 1;
     private int duration = 10;
     private Object outputChem;
+    private int outputChemAmount = 1;
 
     public PressurizedReactionBuilder(RecipeContext context, Object result) {
         super(context, result);
@@ -37,7 +39,12 @@ public final class PressurizedReactionBuilder extends AbstractMekanismRecipeBuil
     }
 
     public PressurizedReactionBuilder fluidInput(Object source) {
+        return fluidInput(source, fluidInputAmount);
+    }
+
+    public PressurizedReactionBuilder fluidInput(Object source, int amount) {
         this.fluidInput = Objects.requireNonNull(source, "fluidInput");
+        this.fluidInputAmount = amount;
         return this;
     }
 
@@ -57,7 +64,12 @@ public final class PressurizedReactionBuilder extends AbstractMekanismRecipeBuil
     }
 
     public PressurizedReactionBuilder outputChem(Object source) {
+        return outputChem(source, outputChemAmount);
+    }
+
+    public PressurizedReactionBuilder outputChem(Object source, int amount) {
         this.outputChem = Objects.requireNonNull(source, "outputChem");
+        this.outputChemAmount = amount;
         return this;
     }
 
@@ -75,6 +87,15 @@ public final class PressurizedReactionBuilder extends AbstractMekanismRecipeBuil
         if (duration <= 0) {
             throw new IllegalArgumentException("duration must be positive");
         }
+        if (fluidInputAmount < 1) {
+            throw new IllegalArgumentException("fluid input amount must be positive");
+        }
+        if (chemicalInputAmount < 1) {
+            throw new IllegalArgumentException("chemical input amount must be positive");
+        }
+        if (outputChemAmount < 1) {
+            throw new IllegalArgumentException("chemical output amount must be positive");
+        }
     }
 
     @Override
@@ -82,17 +103,17 @@ public final class PressurizedReactionBuilder extends AbstractMekanismRecipeBuil
         PressurizedReactionRecipeBuilder builder = outputChem == null
                 ? PressurizedReactionRecipeBuilder.reaction(
                 itemIngredient(input),
-                fluidIngredient(fluidInput, 1),
+                fluidIngredient(fluidInput, fluidInputAmount),
                 chemicalIngredient(chemicalInput, chemicalInputAmount),
                 duration,
                 result())
                 : PressurizedReactionRecipeBuilder.reaction(
                 itemIngredient(input),
-                fluidIngredient(fluidInput, 1),
+                fluidIngredient(fluidInput, fluidInputAmount),
                 chemicalIngredient(chemicalInput, chemicalInputAmount),
                 duration,
                 result(),
-                chemicalStack(outputChem, 1));
+                chemicalStack(outputChem, outputChemAmount));
         builder.build(output, id);
     }
 }

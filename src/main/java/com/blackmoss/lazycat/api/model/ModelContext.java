@@ -33,6 +33,9 @@ public final class ModelContext {
     public static ModelContext of(PackOutput output, String modid) {
         Objects.requireNonNull(output, "output");
         Objects.requireNonNull(modid, "modid");
+        if (modid.isBlank()) {
+            throw new IllegalArgumentException("modid must not be blank");
+        }
         return new ModelContext(output, modid);
     }
 

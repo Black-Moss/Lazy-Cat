@@ -18,7 +18,6 @@ public final class DustTriggerMultiblockBuilder extends AbstractDustTriggerRecip
     public DustTriggerMultiblockBuilder(RecipeContext context, Object result, Object blueprint) {
         super(context, result);
         this.blueprintId = resolveBlueprint(blueprint);
-        defaultUnlock(resultIngredient());
     }
 
     @Override

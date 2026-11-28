@@ -28,7 +28,6 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
         defaultUnlock(this.input);
     }
 
-
     @Override
     protected CookingBuilder self() {
         return this;
@@ -36,6 +35,7 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
 
     public CookingBuilder input(Object source) {
         input = LazyIngredient.from(source);
+        replaceDefaultUnlock(input);
         return this;
     }
 
@@ -72,7 +72,6 @@ public final class CookingBuilder extends AbstractRecipeBuilder<CookingBuilder> 
             validate();
             emit(idFor(type));
         }
-        type = null;
     }
 
     @Override

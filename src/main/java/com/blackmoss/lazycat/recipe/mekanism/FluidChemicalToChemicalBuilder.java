@@ -12,6 +12,7 @@ import java.util.Objects;
 public final class FluidChemicalToChemicalBuilder
         extends AbstractMekanismRecipeBuilder<FluidChemicalToChemicalBuilder> {
     private Object fluidInput;
+    private int fluidInputAmount = 1;
     private Object chemicalInput;
     private int chemicalInputAmount = 1;
     private Object output;
@@ -37,7 +38,12 @@ public final class FluidChemicalToChemicalBuilder
     }
 
     public FluidChemicalToChemicalBuilder fluidInput(Object source) {
+        return fluidInput(source, fluidInputAmount);
+    }
+
+    public FluidChemicalToChemicalBuilder fluidInput(Object source, int amount) {
         this.fluidInput = Objects.requireNonNull(source, "fluidInput");
+        this.fluidInputAmount = amount;
         return this;
     }
 
@@ -72,12 +78,21 @@ public final class FluidChemicalToChemicalBuilder
         if (output == null) {
             throw new IllegalStateException("requires a chemical output");
         }
+        if (fluidInputAmount < 1) {
+            throw new IllegalArgumentException("fluid input amount must be positive");
+        }
+        if (chemicalInputAmount < 1) {
+            throw new IllegalArgumentException("chemical input amount must be positive");
+        }
+        if (outputAmount < 1) {
+            throw new IllegalArgumentException("chemical output amount must be positive");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceLocation id) {
         FluidChemicalToChemicalRecipeBuilder.washing(
-                        fluidIngredient(fluidInput, 1),
+                        fluidIngredient(fluidInput, fluidInputAmount),
                         chemicalIngredient(chemicalInput, chemicalInputAmount),
                         chemicalStack(this.output, outputAmount))
                 .build(output, id);

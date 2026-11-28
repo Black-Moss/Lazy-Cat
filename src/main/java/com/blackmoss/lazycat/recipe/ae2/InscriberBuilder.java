@@ -16,7 +16,6 @@ public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuild
     private final InscriberProcessType type;
     private Object input;
     private Object plate;
-    private Object fluid;
     private Object item;
 
     public InscriberBuilder(RecipeContext context, Object result, InscriberProcessType type) {
@@ -44,11 +43,6 @@ public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuild
         return this;
     }
 
-    public InscriberBuilder fluid(Object source) {
-        this.fluid = Objects.requireNonNull(source, "fluid");
-        return this;
-    }
-
     public InscriberBuilder item(Object source) {
         this.item = Objects.requireNonNull(source, "item");
         return this;
@@ -56,8 +50,8 @@ public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuild
 
     @Override
     protected void validate() {
-        if (input == null || plate == null || fluid == null || item == null) {
-            throw new IllegalStateException("Inscriber recipe requires input, plate, fluid and item");
+        if (input == null || plate == null || item == null) {
+            throw new IllegalStateException("Inscriber recipe requires input, plate and item");
         }
     }
 
@@ -65,10 +59,9 @@ public final class InscriberBuilder extends AbstractRecipeBuilder<InscriberBuild
     protected void build(RecipeOutput output, ResourceLocation id) {
         Ingredient inputIngredient = LazyIngredient.from(input).resolve(context().items());
         Ingredient plateIngredient = LazyIngredient.from(plate).resolve(context().items());
-        Ingredient fluidIngredient = LazyIngredient.from(fluid).resolve(context().items());
         Ingredient itemIngredient = LazyIngredient.from(item).resolve(context().items());
         InscriberRecipe recipe = new InscriberRecipe(
-                inputIngredient, result(), fluidIngredient, itemIngredient, type);
+                inputIngredient, result(), plateIngredient, itemIngredient, type);
         output.accept(id, recipe, null);
     }
 }

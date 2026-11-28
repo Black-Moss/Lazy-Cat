@@ -1,8 +1,3 @@
-﻿//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.blackmoss.lazycat.api.recipe;
 
 import net.minecraft.advancements.Criterion;
@@ -47,6 +42,7 @@ public final class RecipeGroupBuilder {
     }
 
     public RecipeGroupBuilder group(String group) {
+        Objects.requireNonNull(group, "group");
         for (AbstractRecipeBuilder<?> builder : this.builders) {
             builder.group(group);
         }

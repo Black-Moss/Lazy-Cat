@@ -122,6 +122,10 @@ public abstract class AbstractRecipeBuilder<B extends AbstractRecipeBuilder<B>> 
         }
     }
 
+    protected final void replaceDefaultUnlock(LazyIngredient ingredient) {
+        this.defaultUnlock = Objects.requireNonNull(ingredient, "ingredient");
+    }
+
     protected final void allowEmptyAdvancement(boolean allow) {
         allowEmptyAdvancement = allow;
     }

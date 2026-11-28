@@ -42,6 +42,9 @@ public final class ExtremeCraftingShapedBuilder extends AbstractRecipeBuilder<Ex
 
     public ExtremeCraftingShapedBuilder pattern(String... rows) {
         Objects.requireNonNull(rows, "rows");
+        for (String row : rows) {
+            Objects.requireNonNull(row, "rows contains null");
+        }
         this.rows = rows.clone();
         return this;
     }
@@ -56,7 +59,13 @@ public final class ExtremeCraftingShapedBuilder extends AbstractRecipeBuilder<Ex
         if (rows.length == 0) {
             throw new IllegalStateException("Extreme crafting shaped recipe requires a pattern");
         }
+        if (rows.length > 9) {
+            throw new IllegalStateException("Extreme crafting shaped recipe exceeds 9 rows");
+        }
         int width = rows[0].length();
+        if (width == 0 || width > 9) {
+            throw new IllegalStateException("Extreme crafting shaped recipe width must be between 1 and 9");
+        }
         for (String row : rows) {
             if (row.length() != width) {
                 throw new IllegalStateException("Extreme crafting shaped recipe has rows of different width");

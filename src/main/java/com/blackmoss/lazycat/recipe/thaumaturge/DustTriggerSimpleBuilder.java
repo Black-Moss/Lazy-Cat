@@ -15,7 +15,6 @@ public final class DustTriggerSimpleBuilder extends AbstractDustTriggerRecipeBui
     public DustTriggerSimpleBuilder(RecipeContext context, Object result, Object target) {
         super(context, result);
         this.target = resolveBlock(target);
-        defaultUnlock(resultIngredient());
     }
 
     @Override

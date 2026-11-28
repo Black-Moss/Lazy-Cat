@@ -14,6 +14,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 @SuppressWarnings("unused")
@@ -22,8 +23,11 @@ public abstract class LazyCatModelProvider implements DataProvider {
     private final String modid;
 
     public LazyCatModelProvider(PackOutput output, String modid) {
-        this.modid = modid;
-        this.context = ModelContext.of(output, modid);
+        this.modid = Objects.requireNonNull(modid, "modid");
+        if (this.modid.isBlank()) {
+            throw new IllegalArgumentException("modid must not be blank");
+        }
+        this.context = ModelContext.of(output, this.modid);
     }
 
     private static ResourceLocation defaultModel(ItemLike item) {

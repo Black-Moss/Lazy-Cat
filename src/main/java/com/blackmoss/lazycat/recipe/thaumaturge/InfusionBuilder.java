@@ -45,6 +45,9 @@ public final class InfusionBuilder extends AbstractThaumaturgeRecipeBuilder<Infu
     }
 
     public InfusionBuilder component(Object source, int count) {
+        if (count < 1) {
+            throw new IllegalArgumentException("component count must be positive");
+        }
         for (int i = 0; i < count; i++) {
             components.add(LazyIngredient.from(source).resolve(context().items()));
         }

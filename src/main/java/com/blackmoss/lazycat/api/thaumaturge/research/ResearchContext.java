@@ -35,6 +35,9 @@ public final class ResearchContext {
     public static ResearchContext of(PackOutput output, String modid) {
         Objects.requireNonNull(output, "output");
         Objects.requireNonNull(modid, "modid");
+        if (modid.isBlank()) {
+            throw new IllegalArgumentException("modid must not be blank");
+        }
         return new ResearchContext(output, modid);
     }
 

@@ -27,7 +27,14 @@ public final class StonecuttingBuilder extends AbstractRecipeBuilder<Stonecuttin
     }
 
     public StonecuttingBuilder input(Object source) {
-        return inputs(source);
+        Objects.requireNonNull(source, "source");
+        LazyIngredient ingredient = LazyIngredient.from(source);
+        if (inputs.isEmpty()) {
+            inputs.add(ingredient);
+        } else {
+            inputs.set(0, ingredient);
+        }
+        return this;
     }
 
     public StonecuttingBuilder inputs(Object... sources) {
@@ -52,7 +59,7 @@ public final class StonecuttingBuilder extends AbstractRecipeBuilder<Stonecuttin
         boolean multiple = inputs.size() > 1;
         for (LazyIngredient input : inputs) {
             currentInput = input;
-            defaultUnlock(input);
+            replaceDefaultUnlock(input);
             validate();
             emit(idFor(input, multiple));
         }

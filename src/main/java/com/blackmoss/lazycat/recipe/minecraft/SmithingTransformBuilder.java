@@ -30,11 +30,6 @@ public final class SmithingTransformBuilder extends AbstractRecipeBuilder<Smithi
         return this;
     }
 
-    public SmithingTransformBuilder noTemplate() {
-        template = null;
-        return this;
-    }
-
     public SmithingTransformBuilder base(Object source) {
         base = LazyIngredient.from(source);
         defaultUnlock(base);
@@ -46,27 +41,24 @@ public final class SmithingTransformBuilder extends AbstractRecipeBuilder<Smithi
         return this;
     }
 
-    public SmithingTransformBuilder noAddition() {
-        addition = null;
-        return this;
-    }
-
     @Override
     protected void validate() {
+        if (template == null) {
+            throw new IllegalStateException("Smithing transform recipe %s has no template".formatted(defaultIdPath()));
+        }
         if (base == null) {
             throw new IllegalStateException("Smithing transform recipe %s has no base".formatted(defaultIdPath()));
+        }
+        if (addition == null) {
+            throw new IllegalStateException("Smithing transform recipe %s has no addition".formatted(defaultIdPath()));
         }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceLocation id) {
         Ingredient baseIngredient = base.resolve(context().items());
-        Ingredient templateIngredient = template != null
-                ? template.resolve(context().items())
-                : Ingredient.EMPTY;
-        Ingredient additionIngredient = addition != null
-                ? addition.resolve(context().items())
-                : Ingredient.EMPTY;
+        Ingredient templateIngredient = template.resolve(context().items());
+        Ingredient additionIngredient = addition.resolve(context().items());
         ItemStack resultStack = result();
 
         SmithingTransformRecipe recipe = new SmithingTransformRecipe(

@@ -11,6 +11,7 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public final class ElectrolysisBuilder extends AbstractMekanismRecipeBuilder<ElectrolysisBuilder> {
     private Object fluidInput;
+    private int fluidInputAmount = 1;
     private Object leftOutput;
     private int leftAmount = 1;
     private Object rightOutput;
@@ -36,7 +37,12 @@ public final class ElectrolysisBuilder extends AbstractMekanismRecipeBuilder<Ele
     }
 
     public ElectrolysisBuilder fluidInput(Object source) {
+        return fluidInput(source, fluidInputAmount);
+    }
+
+    public ElectrolysisBuilder fluidInput(Object source, int amount) {
         this.fluidInput = Objects.requireNonNull(source, "fluidInput");
+        this.fluidInputAmount = amount;
         return this;
     }
 
@@ -71,12 +77,21 @@ public final class ElectrolysisBuilder extends AbstractMekanismRecipeBuilder<Ele
         if (rightOutput == null) {
             throw new IllegalStateException("requires a right chemical output");
         }
+        if (fluidInputAmount < 1) {
+            throw new IllegalArgumentException("fluid input amount must be positive");
+        }
+        if (leftAmount < 1) {
+            throw new IllegalArgumentException("left output amount must be positive");
+        }
+        if (rightAmount < 1) {
+            throw new IllegalArgumentException("right output amount must be positive");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceLocation id) {
         ElectrolysisRecipeBuilder.separating(
-                        fluidIngredient(fluidInput, 1),
+                        fluidIngredient(fluidInput, fluidInputAmount),
                         chemicalStack(leftOutput, leftAmount),
                         chemicalStack(rightOutput, rightAmount))
                 .build(output, id);
