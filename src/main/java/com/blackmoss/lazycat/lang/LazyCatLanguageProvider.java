@@ -30,7 +30,7 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
     protected void addCreativeModeTab(CreativeModeTab tab, String translations) {
         Identifier key = BuiltInRegistries.CREATIVE_MODE_TAB.getKey(tab);
         if (key != null) {
-            add("itemGroup." + key.toLanguageKey(), translations);
+            add("item_group." + key.toLanguageKey(), translations);
         }
     }
 
@@ -52,7 +52,7 @@ public abstract class LazyCatLanguageProvider extends LanguageProvider {
     }
 
     protected void addResearchCategory(ResourceKey<IResearchCategory> category, String translations) {
-        addResearchCategory(category.registry().getPath(), translations);
+        addResearchCategory(category.registry().getNamespace(), translations);
     }
 
     protected void addResearchMeme(String researchId, String translations) {
