@@ -59,6 +59,7 @@ public final class BlockModelBuilder extends AbstractModelBuilder<BlockModelBuil
     }
 
     public BlockModelBuilder onlyState() {
+        this.writeModel = false;
         this.writeItem = false;
         return this;
     }
