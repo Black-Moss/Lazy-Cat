@@ -38,6 +38,7 @@ public final class RecipeGroupBuilder {
     }
 
     public RecipeGroupBuilder group(String group) {
+        Objects.requireNonNull(group, "group");
         for (AbstractRecipeBuilder<?> builder : builders) {
             builder.group(group);
         }

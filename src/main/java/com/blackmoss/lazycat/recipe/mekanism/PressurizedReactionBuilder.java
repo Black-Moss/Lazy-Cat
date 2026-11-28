@@ -109,6 +109,18 @@ public final class PressurizedReactionBuilder extends AbstractMekanismRecipeBuil
         if (chemicalOutput == null) {
             throw new IllegalStateException("requires a chemical output");
         }
+        if (duration < 1) {
+            throw new IllegalArgumentException("duration must be positive");
+        }
+        if (fluidAmount < 1) {
+            throw new IllegalArgumentException("fluid input amount must be positive");
+        }
+        if (chemicalAmount < 1) {
+            throw new IllegalArgumentException("chemical input amount must be positive");
+        }
+        if (chemicalOutputAmount < 1) {
+            throw new IllegalArgumentException("chemical output amount must be positive");
+        }
     }
 
     @Override

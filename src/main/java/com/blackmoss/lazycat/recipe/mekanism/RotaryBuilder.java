@@ -14,7 +14,9 @@ import java.util.Objects;
 public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBuilder> {
     private final RotaryType type;
     private Object fluidInput;
+    private int fluidInputAmount = 1;
     private Object chemicalInput;
+    private int chemicalInputAmount = 1;
     private Object chemicalOutput;
     private int chemicalOutputAmount = 1;
     private Object fluidOutput;
@@ -45,12 +47,22 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
     }
 
     public RotaryBuilder fluidInput(Object source) {
+        return fluidInput(source, fluidInputAmount);
+    }
+
+    public RotaryBuilder fluidInput(Object source, int amount) {
         this.fluidInput = Objects.requireNonNull(source, "fluidInput");
+        this.fluidInputAmount = amount;
         return this;
     }
 
     public RotaryBuilder chemicalInput(Object source) {
+        return chemicalInput(source, chemicalInputAmount);
+    }
+
+    public RotaryBuilder chemicalInput(Object source, int amount) {
         this.chemicalInput = Objects.requireNonNull(source, "chemicalInput");
+        this.chemicalInputAmount = amount;
         return this;
     }
 
@@ -79,6 +91,12 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
         if (type == null) {
             throw new IllegalStateException("requires a rotary mode");
         }
+        if (fluidInputAmount < 1) {
+            throw new IllegalArgumentException("fluid input amount must be positive");
+        }
+        if (chemicalInputAmount < 1) {
+            throw new IllegalArgumentException("chemical input amount must be positive");
+        }
         if (type == RotaryType.FLUID_TO_CHEMICAL) {
             if (fluidInput == null) {
                 throw new IllegalStateException("requires a fluid input");
@@ -100,9 +118,11 @@ public final class RotaryBuilder extends AbstractMekanismRecipeBuilder<RotaryBui
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         RotaryRecipeBuilder builder = switch (type) {
             case FLUID_TO_CHEMICAL ->
-                    RotaryRecipeBuilder.rotary(fluidIngredient(fluidInput, 1), chemicalTemplate(chemicalOutput, chemicalOutputAmount));
+                    RotaryRecipeBuilder.rotary(fluidIngredient(fluidInput, fluidInputAmount),
+                            chemicalTemplate(chemicalOutput, chemicalOutputAmount));
             case CHEMICAL_TO_FLUID ->
-                    RotaryRecipeBuilder.rotary(chemicalIngredient(chemicalInput, 1), fluidTemplate(fluidOutput, fluidOutputAmount));
+                    RotaryRecipeBuilder.rotary(chemicalIngredient(chemicalInput, chemicalInputAmount),
+                            fluidTemplate(fluidOutput, fluidOutputAmount));
         };
         builder.save(output, key.identifier());
     }

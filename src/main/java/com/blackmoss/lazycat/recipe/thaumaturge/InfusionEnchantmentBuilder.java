@@ -42,6 +42,17 @@ public final class InfusionEnchantmentBuilder extends AbstractRecipeBuilder<Infu
         id("infusion_enchantment/" + this.enchantment.getSerializedName());
     }
 
+    public InfusionEnchantmentBuilder(
+            RecipeContext context,
+            Object enchantment,
+            Object displayCatalyst,
+            String recipeId) {
+        this(context, enchantment, displayCatalyst);
+        if (recipeId != null) {
+            id(recipeId);
+        }
+    }
+
     private static InfusionEnchantment resolveEnchantment(Object source) {
         Objects.requireNonNull(source, "enchantment");
         return switch (source) {
@@ -76,6 +87,9 @@ public final class InfusionEnchantmentBuilder extends AbstractRecipeBuilder<Infu
     }
 
     public InfusionEnchantmentBuilder component(Object source, int count) {
+        if (count < 1) {
+            throw new IllegalArgumentException("component count must be positive");
+        }
         for (int i = 0; i < count; i++) {
             components.add(LazyIngredient.from(source).resolve(context().items()));
         }

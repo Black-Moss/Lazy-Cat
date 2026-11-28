@@ -20,6 +20,9 @@ public abstract class LazyCatDataMapProvider extends DataMapProvider {
             String modid) {
         super(output, registries);
         this.modid = Objects.requireNonNull(modid, "modid");
+        if (this.modid.isBlank()) {
+            throw new IllegalArgumentException("modid must not be blank");
+        }
     }
 
     @Override

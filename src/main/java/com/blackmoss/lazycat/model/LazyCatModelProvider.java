@@ -21,6 +21,8 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 
+import java.util.Objects;
+
 @SuppressWarnings("unused")
 public abstract class LazyCatModelProvider extends ModelProvider {
     protected final String modid;
@@ -29,7 +31,10 @@ public abstract class LazyCatModelProvider extends ModelProvider {
     protected ItemModelGenerators itemModels;
 
     public LazyCatModelProvider(PackOutput output, String modid) {
-        super(output, modid);
+        super(output, Objects.requireNonNull(modid, "modid"));
+        if (modid.isBlank()) {
+            throw new IllegalArgumentException("modid must not be blank");
+        }
         this.modid = modid;
     }
 

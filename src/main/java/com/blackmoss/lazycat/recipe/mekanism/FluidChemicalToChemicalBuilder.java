@@ -12,7 +12,9 @@ import java.util.Objects;
 @SuppressWarnings("unused")
 public final class FluidChemicalToChemicalBuilder extends AbstractMekanismRecipeBuilder<FluidChemicalToChemicalBuilder> {
     private Object fluidInput;
+    private int fluidInputAmount = 1;
     private Object chemicalInput;
+    private int chemicalInputAmount = 1;
     private Object output;
     private int outputAmount = 1;
 
@@ -36,12 +38,22 @@ public final class FluidChemicalToChemicalBuilder extends AbstractMekanismRecipe
     }
 
     public FluidChemicalToChemicalBuilder fluidInput(Object source) {
+        return fluidInput(source, fluidInputAmount);
+    }
+
+    public FluidChemicalToChemicalBuilder fluidInput(Object source, int amount) {
         this.fluidInput = Objects.requireNonNull(source, "fluidInput");
+        this.fluidInputAmount = amount;
         return this;
     }
 
     public FluidChemicalToChemicalBuilder chemicalInput(Object source) {
+        return chemicalInput(source, chemicalInputAmount);
+    }
+
+    public FluidChemicalToChemicalBuilder chemicalInput(Object source, int amount) {
         this.chemicalInput = Objects.requireNonNull(source, "chemicalInput");
+        this.chemicalInputAmount = amount;
         return this;
     }
 
@@ -66,12 +78,23 @@ public final class FluidChemicalToChemicalBuilder extends AbstractMekanismRecipe
         if (output == null) {
             throw new IllegalStateException("requires a chemical output");
         }
+        if (fluidInputAmount < 1) {
+            throw new IllegalArgumentException("fluid input amount must be positive");
+        }
+        if (chemicalInputAmount < 1) {
+            throw new IllegalArgumentException("chemical input amount must be positive");
+        }
+        if (outputAmount < 1) {
+            throw new IllegalArgumentException("chemical output amount must be positive");
+        }
     }
 
     @Override
     protected void build(RecipeOutput output, ResourceKey<Recipe<?>> key) {
         FluidChemicalToChemicalRecipeBuilder.washing(
-                        fluidIngredient(fluidInput, 1), chemicalIngredient(chemicalInput, 1), chemicalTemplate(this.output, outputAmount))
+                        fluidIngredient(fluidInput, fluidInputAmount),
+                        chemicalIngredient(chemicalInput, chemicalInputAmount),
+                        chemicalTemplate(this.output, outputAmount))
                 .save(output, key.identifier());
     }
 }

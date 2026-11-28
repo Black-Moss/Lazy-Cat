@@ -70,7 +70,13 @@ public final class ExtremeCraftingShapedBuilder extends AbstractRecipeBuilder<Ex
         if (patterns.isEmpty()) {
             throw new IllegalStateException("Extreme shaped recipe requires at least one pattern row");
         }
+        if (patterns.size() > 9) {
+            throw new IllegalStateException("Extreme shaped recipe exceeds 9 rows");
+        }
         int width = patterns.getFirst().length();
+        if (width == 0 || width > 9) {
+            throw new IllegalStateException("Extreme shaped recipe width must be between 1 and 9");
+        }
         for (String row : patterns) {
             if (row.length() != width) {
                 throw new IllegalStateException("Extreme shaped recipe has rows of different width");
